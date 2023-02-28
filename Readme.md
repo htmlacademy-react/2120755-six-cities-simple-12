@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов (простой)»
 
-* Студент: [Ярослав Новик](https://up.htmlacademy.ru/react/12/user/2120755).
-* Наставник: `Неизвестно`.
+- Студент: [Ярослав Новик](https://up.htmlacademy.ru/react/12/user/2120755).
+- Наставник: [Артём Рудов](https://htmlacademy.ru/profile/artrudov).
 
 ---
 
