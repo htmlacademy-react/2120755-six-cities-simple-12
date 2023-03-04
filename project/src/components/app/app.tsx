@@ -1,4 +1,5 @@
 import Main from '../../pages/main';
+import Header from '../header/header';
 // import Login from '../../pages/login';
 // import Room from '../../pages/room';
 
@@ -8,9 +9,13 @@ type AppScreenProps = {
 
 function App({offer}: AppScreenProps): JSX.Element {
   return (
-    <Main offer={offer} />
-    // <Room />
-    // <Login />
+    <>
+      <Header />
+      <Main offer={offer} />
+      {/* <Room />
+    <Login /> */}
+    </>
+
   );
 }
 
