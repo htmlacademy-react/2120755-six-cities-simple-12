@@ -1,12 +1,16 @@
 import Main from '../../pages/main';
+// import Login from '../../pages/login';
+// import Room from '../../pages/room';
 
 type AppScreenProps = {
-  offers: number;
+  offer: number;
 }
 
-function App({offers}: AppScreenProps ): JSX.Element {
+function App({offer}: AppScreenProps): JSX.Element {
   return (
-    <Main offersCount = {offers}/>
+    <Main offer={offer} />
+    // <Room />
+    // <Login />
   );
 }
 

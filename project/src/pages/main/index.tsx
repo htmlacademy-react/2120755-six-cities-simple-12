@@ -1,10 +1,13 @@
 import Card from '../../components/card';
+import Navigation from '../../components/navigation';
+import { cityList } from '../../utils/data';
 
 type mainScreenProps = {
- offersCount: number;
+ offer: number;
 }
 
-function Main({offersCount}: mainScreenProps): JSX.Element {
+function Main({ offer }: mainScreenProps): JSX.Element {
+
   return (
     <>
       <header className="header">
@@ -39,36 +42,7 @@ function Main({offersCount}: mainScreenProps): JSX.Element {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="/">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="/">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="/">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active" href="/">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="/">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="/">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
+              {cityList.map((value) => <Navigation city={value} key={value}/>)}
             </ul>
           </section>
         </div>
@@ -76,7 +50,7 @@ function Main({offersCount}: mainScreenProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersCount} places to stay in Amsterdam</b>
+              <b className="places__found">{offer} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -93,11 +67,15 @@ function Main({offersCount}: mainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
+                {
+                  (() => {
+                    const cards = [];
+                    for (let i = 0; i < offer; i++) {
+                      cards.push(<Card />);
+                    }
+                    return cards;
+                  })()
+                }
               </div>
             </section>
             <div className="cities__right-section">
