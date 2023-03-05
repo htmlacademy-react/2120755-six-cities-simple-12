@@ -1,5 +1,5 @@
 import Main from '../../pages/main';
-import Header from '../header/header';
+import Header from '../header';
 // import Login from '../../pages/login';
 // import Room from '../../pages/room';
 

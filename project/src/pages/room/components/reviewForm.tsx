@@ -19,7 +19,6 @@ function ReviewForm(): JSX.Element {
               stars.push(
                 <React.Fragment key={value}>
                   <input
-                    key={`${value}-input`}
                     className="form__rating-input visually-hidden"
                     name="rating"
                     value={key}
@@ -27,7 +26,6 @@ function ReviewForm(): JSX.Element {
                     type="radio"
                   />
                   <label
-                    key={`${value}-lable`}
                     htmlFor={`${key}-stars`}
                     className="reviews__rating-label form__rating-label"
                     title={value}
