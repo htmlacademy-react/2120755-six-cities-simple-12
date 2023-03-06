@@ -3,7 +3,7 @@ import Suggestions from './components/suggestions';
 import Overview from './components/overview';
 import Reviews from './components/reviews';
 import ReviewForm from './components/reviewForm';
-import { roomOptions } from '../../utils/data';
+import { options } from '../../utils/data';
 
 function Room() {
   return (
@@ -12,7 +12,7 @@ function Room() {
         <div className="property__container container">
           <Gallery />
           <div className="property__wrapper">
-            <Overview roomOptions={roomOptions}/>
+            <Overview roomOptions={options}/>
             <section className="property__reviews reviews">
               <h2 className="reviews__title">
                   Reviews &middot; <span className="reviews__amount">1</span>

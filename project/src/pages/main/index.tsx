@@ -1,12 +1,12 @@
 import Card from '../../components/card';
 import Navigation from '../../components/navigation';
-import { cityList } from '../../utils/data';
+import { cities } from '../../utils/data';
 
 type mainScreenProps = {
- offer: number;
+  displayedOffersCount: number;
 }
 
-function Main({ offer }: mainScreenProps): JSX.Element {
+function Main({ displayedOffersCount }: mainScreenProps): JSX.Element {
 
   return (
     <main className="page__main page__main--index">
@@ -14,7 +14,7 @@ function Main({ offer }: mainScreenProps): JSX.Element {
       <div className="tabs">
         <section className="locations container">
           <ul className="locations__list tabs__list">
-            {cityList.map((value) => <Navigation city={value} key={value}/>)}
+            {cities.map((value) => <Navigation city={value} key={value}/>)}
           </ul>
         </section>
       </div>
@@ -22,7 +22,7 @@ function Main({ offer }: mainScreenProps): JSX.Element {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{offer} places to stay in Amsterdam</b>
+            <b className="places__found">{displayedOffersCount} places to stay in Amsterdam</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={0}>
@@ -40,13 +40,7 @@ function Main({ offer }: mainScreenProps): JSX.Element {
             </form>
             <div className="cities__places-list places__list tabs__content">
               {
-                (() => {
-                  const cards: JSX.Element[] = [];
-                  for (let i = 0; i < offer; i++) {
-                    cards.push(<Card key={i}/>);
-                  }
-                  return cards;
-                })()
+                [Array.from({length: displayedOffersCount}).map((_, i) => i).map((index) => <Card key={index} />)]
               }
             </div>
           </section>

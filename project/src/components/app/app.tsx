@@ -4,16 +4,16 @@ import Header from '../header';
 // import Room from '../../pages/room';
 
 type AppScreenProps = {
-  offer: number;
+  amountOfOffers: number;
 }
 
-function App({offer}: AppScreenProps): JSX.Element {
+function App({amountOfOffers}: AppScreenProps): JSX.Element {
   return (
     <>
       <Header />
-      <Main offer={offer} />
-      {/* <Room />
-    <Login /> */}
+      <Main displayedOffersCount={amountOfOffers} />
+      {/* <Room /> */}
+      {/* <Login /> */}
     </>
 
   );
