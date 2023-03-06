@@ -12,33 +12,25 @@ function ReviewForm(): JSX.Element {
       </label>
       <div className="reviews__rating-form form__rating">
         {
-          (() => {
-            const stars:JSX.Element[] = [];
-            rating.forEach((value: string, key: number, map) =>
-            {
-              stars.push(
-                <React.Fragment key={value}>
-                  <input
-                    className="form__rating-input visually-hidden"
-                    name="rating"
-                    value={key}
-                    id={`${key}-stars`}
-                    type="radio"
-                  />
-                  <label
-                    htmlFor={`${key}-stars`}
-                    className="reviews__rating-label form__rating-label"
-                    title={value}
-                  >
-                    <svg className="form__star-image" width="37" height="33">
-                      <use xlinkHref="#icon-star" ></use>
-                    </svg>
-                  </label>
-                </React.Fragment>
-              );
-            });
-            return stars;
-          })()
+          [Object.entries(rating).reverse().map(([key, value]) => (
+            <React.Fragment key={value}>
+              <input
+                className="form__rating-input visually-hidden"
+                name="rating"
+                value={key}
+                id={`${key}-stars`}
+                type="radio"
+              />
+              <label
+                htmlFor={`${key}-stars`}
+                className="reviews__rating-label form__rating-label"
+                title={value}
+              >
+                <svg className="form__star-image" width="37" height="33">
+                  <use xlinkHref="#icon-star" ></use>
+                </svg>
+              </label>
+            </React.Fragment>))]
         }
       </div>
       <textarea

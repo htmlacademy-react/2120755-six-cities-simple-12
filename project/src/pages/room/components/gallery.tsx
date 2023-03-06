@@ -1,6 +1,4 @@
-// Когда будет понимание по приходу данных, я переделаю в отрисовку циклом.
 import { photosSources } from '../../../utils/data';
-
 
 function Gallery(): JSX.Element {
   return (
