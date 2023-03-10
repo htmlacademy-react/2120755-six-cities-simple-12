@@ -1,6 +1,6 @@
-import Card from '../../components/card';
-import Navigation from '../../components/navigation';
-import { cities } from '../../utils/data';
+import Card from '@components/card';
+import Navigation from '@components/navigation';
+import { cities } from '@utils/data';
 
 type mainScreenProps = {
   displayedOffersCount: number;

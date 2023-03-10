@@ -21,7 +21,7 @@
     "vscode-pets.petType": "rubber-duck",
     "vscode-pets.theme": "forest",
     "vscode-pets.throwBallWithMouse": true,
-    "window.zoomLevel": 1,
+    "window.zoomLevel": 0,
     "vscodeGoogleTranslate.preferredLanguage": "English",
     "[javascriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"

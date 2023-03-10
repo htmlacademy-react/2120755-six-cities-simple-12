@@ -1,5 +1,5 @@
 import React from 'react';
-import { rating } from '../../../utils/data';
+import { rating } from '@utils/data';
 
 function ReviewForm(): JSX.Element {
   return (

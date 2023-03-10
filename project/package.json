@@ -14,8 +14,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start": "craco start",
     "build": "react-scripts build",
+    "build": "craco build",
     "test": "react-scripts test --passWithNoTests",
+    "test": "craco test",
     "eject": "react-scripts eject",
     "lint": "eslint --ext .tsx --ext .ts src/"
   },

@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
+
+const id = '1';
+
 function Card(): JSX.Element {
   return (
-    <Link to="/offer/:id">
+    <Link to={`/offer/${id}`}>
       <article className="cities__card place-card">
         <div className="place-card__mark">
           <span>Premium</span>
