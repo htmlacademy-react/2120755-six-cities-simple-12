@@ -1,11 +1,15 @@
 // тут будет рендериться Header без email и sign-out
 import { Link } from 'react-router-dom';
-// import Header from '@components/header';
+import Header from '@components/header';
 
-function Login(): JSX.Element {
+type LoginProps = {
+  currentPath: string;
+}
+
+function Login({currentPath}: LoginProps): JSX.Element {
   return (
     <div className="page page--gray page--login">
-      {/* <Header /> */}
+      { currentPath === '/login' ? <Header currentLocation={'/login'} /> : ''}
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
