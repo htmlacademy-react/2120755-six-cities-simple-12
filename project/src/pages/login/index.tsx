@@ -9,7 +9,7 @@ type LoginProps = {
 function Login({currentPath}: LoginProps): JSX.Element {
   return (
     <div className="page page--gray page--login">
-      { currentPath === '/login' ? <Header currentLocation={'/login'} /> : ''}
+      { currentPath === '/login' ? <Header currentLocation={currentPath} /> : ''}
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
