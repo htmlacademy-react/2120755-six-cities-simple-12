@@ -1,4 +1,4 @@
-import { photosSources } from '../../../utils/data';
+import { photosSources } from '@utils/data';
 
 function Gallery(): JSX.Element {
   return (

@@ -1,4 +1,3 @@
-// Когда будет понимание по приходу данных, я переделаю в отрисовку циклом.
 function Reviews(): JSX.Element {
   return (
     <li className="reviews__item">
