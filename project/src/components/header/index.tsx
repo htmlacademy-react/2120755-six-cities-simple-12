@@ -1,10 +1,8 @@
-// email и Sing out уберу когда будет стейт isLogedIn.
 import { Link } from 'react-router-dom';
 
 type HeaderProps = {
   currentLocation: string;
 }
-
 function Header({currentLocation}: HeaderProps): JSX.Element {
   return (
     <header className="header">
@@ -30,7 +28,7 @@ function Header({currentLocation}: HeaderProps): JSX.Element {
                   </Link>
                 </li>
               </ul>
-            </nav> : ''}
+            </nav> : null}
         </div>
       </div>
     </header>

@@ -1,16 +1,18 @@
-import { photosSources } from '@utils/data';
+type GalleryProps = {
+  imagesCollection: [...string[]];
+}
 
-function Gallery(): JSX.Element {
+function Gallery({imagesCollection}: GalleryProps): JSX.Element {
   return (
     <div className="property__gallery-container container">
       <div className="property__gallery">
         {
-          photosSources.map((photosSource) =>
+          imagesCollection.map((images) =>
             (
-              <div key={photosSource} className="property__image-wrapper">
+              <div key={images} className="property__image-wrapper">
                 <img
                   className="property__image"
-                  src={photosSource}
+                  src={images}
                   alt="studio"
                 />
               </div>)

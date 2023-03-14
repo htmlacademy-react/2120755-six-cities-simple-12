@@ -1,13 +1,16 @@
+import { Link } from 'react-router-dom';
+
 type navigationProps = {
   city: string;
+  onCityClick: (param: string) => void;
  }
-function Navigation({city}: navigationProps): JSX.Element {
+function Navigation({city, onCityClick}: navigationProps): JSX.Element {
 
   return (
     <li className="locations__item">
-      <a className="locations__item-link tabs__item" href="/">
+      <Link className="locations__item-link tabs__item" to="/" onClick={() => onCityClick(city)}>
         <span>{city}</span>
-      </a>
+      </Link>
     </li> );
 }
 

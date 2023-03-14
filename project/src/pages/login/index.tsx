@@ -1,4 +1,3 @@
-// тут будет рендериться Header без email и sign-out
 import { Link } from 'react-router-dom';
 import Header from '@components/header';
 
@@ -9,7 +8,7 @@ type LoginProps = {
 function Login({currentPath}: LoginProps): JSX.Element {
   return (
     <div className="page page--gray page--login">
-      { currentPath === '/login' ? <Header currentLocation={currentPath} /> : ''}
+      { currentPath === '/login' ? <Header currentLocation={currentPath} /> : null}
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
@@ -38,5 +37,4 @@ function Login({currentPath}: LoginProps): JSX.Element {
     </div>
   );
 }
-
 export default Login;
