@@ -1,12 +1,20 @@
-import Card from '@components/card';
+import {useState} from 'react';
+import OffersList from '@components/offersList/OffersList';
 import Navigation from '@components/navigation';
 import { cities } from '@utils/data';
+import { Offer } from 'mocks/offers';
 
 type mainScreenProps = {
-  displayedOffersCount: number;
+  displayedOffers: [Offer, Offer, Offer, Offer, ...Offer[]];
+  onCardClick: (param: Offer) => void;
 }
 
-function Main({ displayedOffersCount }: mainScreenProps): JSX.Element {
+function Main({ displayedOffers, onCardClick }: mainScreenProps): JSX.Element {
+  const [chosenCity, setChosenCity] = useState('Amsterdam');
+
+  const handleCityClick = (data: string) => {
+    setChosenCity(data);
+  };
 
   return (
     <main className="page__main page__main--index">
@@ -14,36 +22,13 @@ function Main({ displayedOffersCount }: mainScreenProps): JSX.Element {
       <div className="tabs">
         <section className="locations container">
           <ul className="locations__list tabs__list">
-            {cities.map((value) => <Navigation city={value} key={value}/>)}
+            {cities.map((value) => <Navigation city={value} key={value} onCityClick={(chosen) => handleCityClick(chosen)}/>)}
           </ul>
         </section>
       </div>
       <div className="cities">
         <div className="cities__places-container container">
-          <section className="cities__places places">
-            <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{displayedOffersCount} places to stay in Amsterdam</b>
-            <form className="places__sorting" action="#" method="get">
-              <span className="places__sorting-caption">Sort by</span>
-              <span className="places__sorting-type" tabIndex={0}>
-                Popular
-                <svg className="places__sorting-arrow" width="7" height="4">
-                  <use xlinkHref="#icon-arrow-select"></use>
-                </svg>
-              </span>
-              <ul className="places__options places__options--custom places__options--opened">
-                <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-                <li className="places__option" tabIndex={0}>Price: low to high</li>
-                <li className="places__option" tabIndex={0}>Price: high to low</li>
-                <li className="places__option" tabIndex={0}>Top rated first</li>
-              </ul>
-            </form>
-            <div className="cities__places-list places__list tabs__content">
-              {
-                [Array.from({length: displayedOffersCount}).map((_, i) => i).map((index) => <Card key={index} />)]
-              }
-            </div>
-          </section>
+          <OffersList offersToShow = {displayedOffers} onCardClick={(chosen) => onCardClick(chosen)} choseenCity={chosenCity}/>
           <div className="cities__right-section">
             <section className="cities__map map"></section>
           </div>
