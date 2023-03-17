@@ -1,5 +1,5 @@
 // Как ревью привязать к предложению, я не понимаю.
-type Review = {
+export type Review = {
   comment: string;
   date: string;
   id: number;
@@ -11,7 +11,7 @@ type Review = {
   name: string;
   };}
 
-const reviewList: [Review, ...Review[]] = [
+export const reviewList: [Review, ...Review[]] = [
   {
     'id': 1,
     'user': {
@@ -25,17 +25,16 @@ const reviewList: [Review, ...Review[]] = [
     'date': '2023-02-19T07:31:24.880Z'
   },
   {
-    'id': 1,
+    'id': 2,
     'user': {
       'id': 13,
       'isPro': false,
       'name': 'Zak',
       'avatarUrl': 'https://12.react.pages.academy/static/avatar/4.jpg'
     },
-    'rating': 5,
-    'comment': 'Bathed in the nature. Completely unplugged. Unforgettable.',
+    'rating': 1,
+    'comment': 'Ugly place',
     'date': '2023-02-09T07:31:24.881Z'
   }
 ];
 
-export default reviewList;

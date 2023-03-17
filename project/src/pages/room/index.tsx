@@ -4,6 +4,7 @@ import Overview from './components/overview';
 import Reviews from './components/reviews';
 import ReviewForm from './components/reviewForm';
 import { Offer } from 'mocks/offers';
+import { reviewList } from 'mocks/review';
 
 
 type RoomProps = {
@@ -20,10 +21,10 @@ function Room({chosenOffer}: RoomProps) {
             <Overview roomData={chosenOffer}/>
             <section className="property__reviews reviews">
               <h2 className="reviews__title">
-                  Reviews &middot; <span className="reviews__amount">1</span>
+                  Reviews &middot; <span className="reviews__amount">{reviewList.length}</span>
               </h2>
               <ul className="reviews__list">
-                <Reviews />
+                {reviewList.map((review) => <Reviews key={review.id} reviewData={review}/>)}
               </ul>
               <ReviewForm />
             </section>
