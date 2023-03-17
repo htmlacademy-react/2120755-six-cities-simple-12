@@ -8,7 +8,15 @@ function NotFoundPage(): JSX.Element {
       </h1>
       <p style={{ fontSize: '26px' }}>
       Unfortunately, this page is not available.
-      Please procced to <a href="/" style={{color: '#3443eb', fontWeight: 'bold', cursor: 'pointer'}}>Main page</a>
+      Please procced to
+        <a href="/"
+          style={{
+            color: '#3443eb',
+            fontWeight: 'bold',
+            cursor: 'pointer'}}
+        >
+        Main page
+        </a>
       </p>
     </div>
   );

@@ -8,7 +8,11 @@ function Navigation({city, onCityClick}: navigationProps): JSX.Element {
 
   return (
     <li className="locations__item">
-      <Link className="locations__item-link tabs__item" to="/" onClick={() => onCityClick(city)}>
+      <Link
+        className="locations__item-link tabs__item"
+        to="/"
+        onClick={() => onCityClick(city)}
+      >
         <span>{city}</span>
       </Link>
     </li> );

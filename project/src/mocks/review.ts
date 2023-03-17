@@ -13,16 +13,29 @@ type Review = {
 
 const reviewList: [Review, ...Review[]] = [
   {
-    'comment': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
-    'date': 'Tue Mar 14 2023 12:53:35 GMT+0200 (Израиль, стандартное время)',
     'id': 1,
-    'rating': 4,
     'user': {
-      'avatarUrl': 'img/1.png',
-      'id': 1,
+      'id': 15,
       'isPro': false,
-      'name': 'Oliver.conner'
-    }}
+      'name': 'Kendall',
+      'avatarUrl': 'https://12.react.pages.academy/static/avatar/6.jpg'
+    },
+    'rating': 2,
+    'comment': 'Bathed in the nature. Completely unplugged. Unforgettable.',
+    'date': '2023-02-19T07:31:24.880Z'
+  },
+  {
+    'id': 1,
+    'user': {
+      'id': 13,
+      'isPro': false,
+      'name': 'Zak',
+      'avatarUrl': 'https://12.react.pages.academy/static/avatar/4.jpg'
+    },
+    'rating': 5,
+    'comment': 'Bathed in the nature. Completely unplugged. Unforgettable.',
+    'date': '2023-02-09T07:31:24.881Z'
+  }
 ];
 
 export default reviewList;

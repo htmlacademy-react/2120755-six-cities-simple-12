@@ -3,7 +3,6 @@ import Suggestions from './components/suggestions';
 import Overview from './components/overview';
 import Reviews from './components/reviews';
 import ReviewForm from './components/reviewForm';
-// import { options } from '@utils/data';
 import { Offer } from 'mocks/offers';
 
 

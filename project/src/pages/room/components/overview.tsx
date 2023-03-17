@@ -63,12 +63,6 @@ function Overview({roomData}: overviewProps): JSX.Element {
           <p className="property__text">
             {roomData.description}
           </p>
-          {/* У меня в массиве предложений вроде всегда 1 discription. Зачем тут второй параграф? */}
-          {/* <p className="property__text">
-                    An independent House, strategically located between Rembrand
-                    Square and National Opera, but where the bustle of the city
-                    comes to rest in this alley flowery and colorful.
-          </p> */}
         </div>
       </div>
     </>

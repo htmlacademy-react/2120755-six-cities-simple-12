@@ -9,12 +9,21 @@ type cardProps = {
 
 function Card({offerData, onCardHover, onCardClick}: cardProps): JSX.Element {
   return (
-    <Link to={`/offer/${offerData.id}`} onMouseOver = {() => onCardHover(offerData.id)} onClick={() => onCardClick(offerData)}>
+    <Link
+      to={`/offer/${offerData.id}`}
+      onMouseOver = {() => onCardHover(offerData.id)}
+      onClick={() => onCardClick(offerData)}
+    >
       <article className="cities__card place-card">
         {offerData.isPremium ? <div className="place-card__mark"><span>Premium</span> </div> : null}
         <div className="cities__image-wrapper place-card__image-wrapper">
           <div>
-            <img className="place-card__image" src={offerData.previewImage} width="260" height="200" alt="Place" />
+            <img
+              className="place-card__image"
+              src={offerData.previewImage}
+              width="260" height="200"
+              alt="Place"
+            />
           </div>
         </div>
         <div className="place-card__info">

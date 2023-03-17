@@ -8,7 +8,7 @@ import NotFoundPage from '@pages/notFound';
 import { Offer } from 'mocks/offers';
 
 type AppScreenProps = {
-  availibleOffers: [Offer, Offer, Offer, Offer, ...Offer[]];
+  availibleOffers: Offer[];
 }
 
 function App({availibleOffers}: AppScreenProps): JSX.Element {

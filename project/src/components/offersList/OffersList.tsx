@@ -3,16 +3,14 @@ import Card from '@components/card';
 import { Offer } from 'mocks/offers';
 
 type offersProps = {
-  offersToShow: [Offer, Offer, Offer, Offer, ...Offer[]];
+  offersToShow: Offer[];
   onCardClick: (param: Offer) => void;
   choseenCity: string;
 }
 
 function OffersList({ offersToShow, onCardClick, choseenCity }: offersProps): JSX.Element {
-  const [activeCard, setActiveCard] = useState(0);
-  // activeCard Некуда использовать на данный момент.
-  // eslint-disable-next-line no-console
-  console.log(activeCard);
+  const [, setActiveCard] = useState(0);
+
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
@@ -34,7 +32,14 @@ function OffersList({ offersToShow, onCardClick, choseenCity }: offersProps): JS
       </form>
       <div className="cities__places-list places__list tabs__content">
         {
-          offersToShow.map((offer) => <Card key={offer.id} offerData={offer} onCardHover={(id) => setActiveCard(id)} onCardClick={(chosenOffer) => onCardClick(chosenOffer)}/>)
+          offersToShow.map((offer) =>
+            (
+              <Card key={offer.id}
+                offerData={offer}
+                onCardHover={(id) => setActiveCard(id)}
+                onCardClick={(chosenOffer) => onCardClick(chosenOffer)}
+              />
+            ))
         }
       </div>
     </section>

@@ -2,21 +2,19 @@ import { Fragment, useState, ChangeEvent, FormEvent } from 'react';
 import { rating } from '@utils/data';
 
 function ReviewForm(): JSX.Element {
-  const [formData, setFormData] = useState('');
+  const [, setFormData] = useState('');
 
   const formFillHandle = (event: ChangeEvent<{ value: string }>) => {
     setFormData(event.target.value);
   };
   const formSubmitHandle = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    // formData Некуда использовать на данный момент.
-    // eslint-disable-next-line no-console
-    console.log(formData);
+  // Здесь будет отправка в массив отзывов
   };
 
   return (
     <form className="reviews__form form" action="#" method="post"
-      onSubmit={(e) => formSubmitHandle(e)}
+      onSubmit={formSubmitHandle}
     >
       <label
         className="reviews__label form__label"
