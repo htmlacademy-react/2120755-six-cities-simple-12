@@ -3,22 +3,28 @@ import Suggestions from './components/suggestions';
 import Overview from './components/overview';
 import Reviews from './components/reviews';
 import ReviewForm from './components/reviewForm';
-import { options } from '@utils/data';
+import { Offer } from 'mocks/offers';
+import { reviewList } from 'mocks/review';
 
-function Room() {
+
+type RoomProps = {
+  chosenOffer: Offer;
+}
+
+function Room({chosenOffer}: RoomProps) {
   return (
     <main className="page__main page__main--property">
       <section className="property">
         <div className="property__container container">
-          <Gallery />
+          <Gallery imagesCollection = {chosenOffer.images}/>
           <div className="property__wrapper">
-            <Overview roomOptions={options}/>
+            <Overview roomData={chosenOffer}/>
             <section className="property__reviews reviews">
               <h2 className="reviews__title">
-                  Reviews &middot; <span className="reviews__amount">1</span>
+                  Reviews &middot; <span className="reviews__amount">{reviewList.length}</span>
               </h2>
               <ul className="reviews__list">
-                <Reviews />
+                {reviewList.map((review) => <Reviews key={review.id} reviewData={review}/>)}
               </ul>
               <ReviewForm />
             </section>

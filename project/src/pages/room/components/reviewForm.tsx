@@ -1,9 +1,21 @@
-import React from 'react';
+import { Fragment, useState, ChangeEvent, FormEvent } from 'react';
 import { rating } from '@utils/data';
 
 function ReviewForm(): JSX.Element {
+  const [, setFormData] = useState('');
+
+  const formFillHandle = (event: ChangeEvent<{ value: string }>) => {
+    setFormData(event.target.value);
+  };
+  const formSubmitHandle = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+  // Здесь будет отправка в массив отзывов
+  };
+
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form className="reviews__form form" action="#" method="post"
+      onSubmit={formSubmitHandle}
+    >
       <label
         className="reviews__label form__label"
         htmlFor="review"
@@ -13,7 +25,7 @@ function ReviewForm(): JSX.Element {
       <div className="reviews__rating-form form__rating">
         {
           [Object.entries(rating).reverse().map(([key, value]) => (
-            <React.Fragment key={value}>
+            <Fragment key={value}>
               <input
                 className="form__rating-input visually-hidden"
                 name="rating"
@@ -30,7 +42,7 @@ function ReviewForm(): JSX.Element {
                   <use xlinkHref="#icon-star" ></use>
                 </svg>
               </label>
-            </React.Fragment>))]
+            </Fragment>))]
         }
       </div>
       <textarea
@@ -38,6 +50,7 @@ function ReviewForm(): JSX.Element {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
+        onChange={formFillHandle}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -49,7 +62,7 @@ function ReviewForm(): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled
+
         >
                       Submit
         </button>
