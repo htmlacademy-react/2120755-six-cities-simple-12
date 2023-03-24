@@ -3,7 +3,7 @@ import { Offer } from 'mocks/offers';
 
 type cardProps = {
   offerData: Offer;
-  onCardHover: (param: number) => void;
+  onCardHover: (param: Offer) => void;
   onCardClick: (param: Offer) => void;
 }
 
@@ -11,7 +11,7 @@ function Card({offerData, onCardHover, onCardClick}: cardProps): JSX.Element {
   return (
     <Link
       to={`/offer/${offerData.id}`}
-      onMouseOver = {() => onCardHover(offerData.id)}
+      onMouseOver = {() => onCardHover(offerData)}
       onClick={() => onCardClick(offerData)}
     >
       <article className="cities__card place-card">

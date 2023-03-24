@@ -5,11 +5,14 @@ import { Offer } from 'mocks/offers';
 type offersProps = {
   offersToShow: Offer[];
   onCardClick: (param: Offer) => void;
+  onCardHover: (param: Offer) => void;
   choseenCity: string;
 }
 
-function OffersList({ offersToShow, onCardClick, choseenCity }: offersProps): JSX.Element {
-  const [, setActiveCard] = useState(0);
+function OffersList({ offersToShow, onCardClick, onCardHover, choseenCity }: offersProps): JSX.Element {
+  const [activeCard, setActiveCard] = useState(offersToShow[-1]);
+
+  onCardHover(activeCard);
 
   return (
     <section className="cities__places places">
