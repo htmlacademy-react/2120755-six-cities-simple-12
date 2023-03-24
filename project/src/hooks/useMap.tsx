@@ -4,15 +4,15 @@ import {Map} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Offer } from 'mocks/offers';
 
-// Я добавил в мок еще 1 город. Париж.
-// Когда выбираю его, список предложений меняется. Но вот карта не обновляется.
-// Зависимость в эффекте я выставил. Но код после проверки  if (mapRef.current !== null && !isRenderedRef.current) не срабатывает.
-// Попробовал исправить, но упираюсь в ошибку иницициализации карты.
-// Не доконца понимаю как это все работает.
-
 function useMap(mapRef: MutableRefObject<HTMLElement | null>, cityToShow: Offer[]): Map | null {
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef(false);
+
+  useEffect(() => {
+    if (map !== null) {
+      map.setView([cityToShow[0].city.location.latitude, cityToShow[0].city.location.longitude], 13);
+    }
+  }, [cityToShow]);
 
   useEffect(() => {
     if (mapRef.current !== null && !isRenderedRef.current) {
