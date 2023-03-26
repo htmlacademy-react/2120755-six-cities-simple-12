@@ -14,13 +14,8 @@ function Main({ displayedOffers, onCardClick }: mainScreenProps): JSX.Element {
   const [chosenCity, setChosenCity] = useState('Amsterdam');
   const [hoveredOffer, setHoveredOffer] = useState(displayedOffers[0]);
   const offersToShow = displayedOffers.filter((offer) => offer.city.name === chosenCity);
-
-  const handleCityClick = (data: string) => {
-    setChosenCity(data);
-  };
-  const handleHoveredOffer = (chosenOffer: Offer) => {
-    setHoveredOffer(chosenOffer);
-  };
+  const handleCityClick = (data: string) => setChosenCity(data);
+  const handleHoveredOffer = (chosenOffer: Offer) => setHoveredOffer(chosenOffer);
 
   return (
     <main className="page__main page__main--index">

@@ -10,19 +10,18 @@ type mapProps = {
   offerToMark: Offer;
 }
 
+function choseIcon(Url: string) {
+  return leaflet.icon({
+    iconUrl: Url,
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+  });
+}
+
 function Map ({offersToShow, offerToMark}: mapProps): JSX.Element {
+  const cityToShow = offersToShow[0];
   const mapRef = useRef(null);
-  const map = useMap(mapRef, offersToShow);
-  const defaultCustomIcon = leaflet.icon({
-    iconUrl: URL_MARKER_DEFAULT,
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-  });
-  const currentCustomIcon = leaflet.icon({
-    iconUrl: URL_MARKER_CURRENT,
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-  });
+  const map = useMap(mapRef, cityToShow);
 
   useEffect(() => {
     if (map) {
@@ -33,17 +32,16 @@ function Map ({offersToShow, offerToMark}: mapProps): JSX.Element {
             lng: offer.location.longitude,
           }, {
             icon: (offer === offerToMark)
-              ? currentCustomIcon
-              : defaultCustomIcon
+              ? choseIcon(URL_MARKER_CURRENT)
+              : choseIcon(URL_MARKER_DEFAULT)
           })
           .addTo(map);
       });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, [map, offersToShow, offerToMark]);
 
-  return <section style={{height: '100%', width: '100%'}} ref={mapRef}></section>;
-
+  return <section style={{height: '100%', width: '100%'}} ref={mapRef}/>;
 }
 
 export default Map;

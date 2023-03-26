@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import Card from '@components/card';
 import { Offer } from 'mocks/offers';
 
@@ -10,9 +9,6 @@ type offersProps = {
 }
 
 function OffersList({ offersToShow, onCardClick, onCardHover, choseenCity }: offersProps): JSX.Element {
-  const [activeCard, setActiveCard] = useState(offersToShow[-1]);
-
-  onCardHover(activeCard);
 
   return (
     <section className="cities__places places">
@@ -39,7 +35,7 @@ function OffersList({ offersToShow, onCardClick, onCardHover, choseenCity }: off
             (
               <Card key={offer.id}
                 offerData={offer}
-                onCardHover={(id) => setActiveCard(id)}
+                onCardHover={(id) => onCardHover(id)}
                 onCardClick={(chosenOffer) => onCardClick(chosenOffer)}
               />
             ))
