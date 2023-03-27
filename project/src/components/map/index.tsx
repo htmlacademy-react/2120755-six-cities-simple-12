@@ -7,7 +7,7 @@ import { URL_MARKER_DEFAULT,URL_MARKER_CURRENT } from '@utils/const';
 
 type mapProps = {
   offersToShow: Offer[];
-  offerToMark: Offer;
+  offerToMark: Offer | null;
 }
 
 function choseIcon(Url: string) {
@@ -41,7 +41,17 @@ function Map ({offersToShow, offerToMark}: mapProps): JSX.Element {
 
   }, [map, offersToShow, offerToMark]);
 
-  return <section style={{height: '100%', width: '100%'}} ref={mapRef}/>;
+  return (
+    <section style={
+      {
+        height: '100%',
+        width: `${window.location.pathname.includes('/offer/') ? '1144px' : '100%'}`,
+        margin: `${window.location.pathname.includes('/offer/') ? 'auto' : ''}`}
+    }
+    ref={mapRef}
+    />);
 }
 
 export default Map;
+
+

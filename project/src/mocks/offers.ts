@@ -308,7 +308,7 @@ export const offersList: [Offer, Offer, Offer, Offer, ...Offer[]] = [
       'longitude': 2.369499,
       'zoom': 16
     },
-    'id': 1
+    'id': 5
   },];
 
 // export default offersList;

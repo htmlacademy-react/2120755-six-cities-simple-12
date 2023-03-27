@@ -3,16 +3,14 @@ import { Offer } from 'mocks/offers';
 
 type cardProps = {
   offerData: Offer;
-  onCardHover: (param: Offer) => void;
-  onCardClick: (param: Offer) => void;
+  onCardHover: (param: Offer) => void | null;
 }
 
-function Card({offerData, onCardHover, onCardClick}: cardProps): JSX.Element {
+function Card({offerData, onCardHover}: cardProps): JSX.Element {
   return (
     <Link
       to={`/offer/${offerData.id}`}
       onMouseOver = {() => onCardHover(offerData)}
-      onClick={() => onCardClick(offerData)}
     >
       <article className="cities__card place-card">
         {offerData.isPremium ? <div className="place-card__mark"><span>Premium</span> </div> : null}
