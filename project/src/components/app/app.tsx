@@ -12,7 +12,7 @@ type AppScreenProps = {
 }
 
 function App({availibleOffers}: AppScreenProps): JSX.Element {
-  const [chosenOffer, setChosenOffer] = useState(availibleOffers[0]);
+  const [chosenOffer, setChosenOffer] = useState(availibleOffers[-1]);
   const location = useLocation();
 
   const handleChosenOffer = (clickedOffer: Offer) => {

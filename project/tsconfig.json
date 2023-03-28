@@ -5,6 +5,7 @@
       "@utils/*":["utils/*"],
       "@components/*":["components/*"],
       "@pages/*":["pages/*"],
+      "@hooks/*":["hooks/*"],
     },
     "target": "es2020",
     "lib": [
