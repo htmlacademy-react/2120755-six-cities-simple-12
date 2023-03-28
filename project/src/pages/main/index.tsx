@@ -48,7 +48,6 @@ function Main({ displayedOffers }: mainScreenProps): JSX.Element {
         </div>
       </div>
     </main>
-
   );
 }
 
