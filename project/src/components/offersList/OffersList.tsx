@@ -3,12 +3,11 @@ import { Offer } from 'mocks/offers';
 
 type offersProps = {
   offersToShow: Offer[];
-  onCardClick: (param: Offer) => void;
   onCardHover: (param: Offer) => void;
   choseenCity: string;
 }
 
-function OffersList({ offersToShow, onCardClick, onCardHover, choseenCity }: offersProps): JSX.Element {
+function OffersList({ offersToShow, onCardHover, choseenCity }: offersProps): JSX.Element {
 
   return (
     <section className="cities__places places">
@@ -36,7 +35,6 @@ function OffersList({ offersToShow, onCardClick, onCardHover, choseenCity }: off
               <Card key={offer.id}
                 offerData={offer}
                 onCardHover={(id) => onCardHover(id)}
-                onCardClick={(chosenOffer) => onCardClick(chosenOffer)}
               />
             ))
         }

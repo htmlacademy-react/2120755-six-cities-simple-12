@@ -1,5 +1,4 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
-import {useState} from 'react';
 import Main from '@pages/main';
 import Header from '../header';
 import Login from '@pages/login';
@@ -12,20 +11,15 @@ type AppScreenProps = {
 }
 
 function App({availibleOffers}: AppScreenProps): JSX.Element {
-  const [chosenOffer, setChosenOffer] = useState(availibleOffers[-1]);
   const location = useLocation();
-
-  const handleChosenOffer = (clickedOffer: Offer) => {
-    setChosenOffer(clickedOffer);
-  };
 
   return (
     <>
       {location.pathname !== '/login' ? <Header currentLocation={location.pathname}/> : null}
       <Routes>
         <Route path="/login" element={<Login currentPath={location.pathname}/>} />
-        <Route path="/" element={<Main displayedOffers={availibleOffers} onCardClick={handleChosenOffer}/>} />
-        <Route path="/offer/:id" element={<Room chosenOffer={chosenOffer}/>} />
+        <Route path="/" element={<Main displayedOffers={availibleOffers}/>} />
+        <Route path="/offer/:id" element={<Room availibleOffers={availibleOffers}/>} />
         <Route path="*" element={<NotFoundPage/>} />
       </Routes>
     </>
@@ -33,3 +27,7 @@ function App({availibleOffers}: AppScreenProps): JSX.Element {
 }
 
 export default App;
+
+// напоминалка
+// // eslint-disable-next-line no-console
+// console.log();

@@ -7,12 +7,11 @@ import { Offer } from 'mocks/offers';
 
 type mainScreenProps = {
   displayedOffers: Offer[];
-  onCardClick: (param: Offer) => void;
 }
 
-function Main({ displayedOffers, onCardClick }: mainScreenProps): JSX.Element {
+function Main({ displayedOffers }: mainScreenProps): JSX.Element {
   const [chosenCity, setChosenCity] = useState('Amsterdam');
-  const [hoveredOffer, setHoveredOffer] = useState(displayedOffers[0]);
+  const [hoveredOffer, setHoveredOffer] = useState(displayedOffers[-1]);
   const offersToShow = displayedOffers.filter((offer) => offer.city.name === chosenCity);
   const handleCityClick = (data: string) => setChosenCity(data);
   const handleHoveredOffer = (chosenOffer: Offer) => setHoveredOffer(chosenOffer);
@@ -38,7 +37,6 @@ function Main({ displayedOffers, onCardClick }: mainScreenProps): JSX.Element {
         <div className="cities__places-container container">
           <OffersList
             offersToShow = {offersToShow}
-            onCardClick={(chosen) => onCardClick(chosen)}
             onCardHover={(hovered) => handleHoveredOffer(hovered)}
             choseenCity={chosenCity}
           />
@@ -50,7 +48,6 @@ function Main({ displayedOffers, onCardClick }: mainScreenProps): JSX.Element {
         </div>
       </div>
     </main>
-
   );
 }
 
