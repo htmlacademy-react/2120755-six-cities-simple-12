@@ -27,7 +27,3 @@ function App({availibleOffers}: AppScreenProps): JSX.Element {
 }
 
 export default App;
-
-// напоминалка
-// // eslint-disable-next-line no-console
-// console.log();

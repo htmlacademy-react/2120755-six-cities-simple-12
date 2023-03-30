@@ -16,6 +16,7 @@ type RoomProps = {
 function Room({availibleOffers}: RoomProps) {
   const offerId = Number(window.location.pathname.replace('/offer/', ''));
   const offerToDisplay = availibleOffers.find(chooseOfferById) || availibleOffers[0];
+
   function chooseOfferById(offer: Offer) {
     if (offerId && offer.id === offerId ) {
       return offer;

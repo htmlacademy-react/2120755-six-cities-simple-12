@@ -2,28 +2,28 @@ export type Offer =
   {
     bedrooms: number;
     city: {
-    location: {
-    latitude: number;
-    longitude: number;
-    zoom: number;
+      location: {
+        latitude: number;
+        longitude: number;
+        zoom: number;
     };
-    name: string;
+      name: string;
     };
     description: string;
     goods: [...string[]];
     host: {
-    avatarUrl: string;
-    id: number;
-    isPro: boolean;
-    name: string;
+      avatarUrl: string;
+      id: number;
+      isPro: boolean;
+      name: string;
     };
     id: number;
     images: [...string[]];
     isPremium: boolean;
     location: {
-    latitude: number;
-    longitude: number;
-    zoom: number;
+      latitude: number;
+      longitude: number;
+      zoom: number;
     };
     maxAdults: number;
     previewImage: string;
@@ -33,7 +33,7 @@ export type Offer =
     type: string;
     }
 
-export const offersList: [Offer, Offer, Offer, Offer, ...Offer[]] = [
+export const offersList: [...Offer[]] = [
   {
     'city': {
       'name': 'Amsterdam',

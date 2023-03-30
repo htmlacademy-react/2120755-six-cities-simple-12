@@ -4,17 +4,20 @@ import Navigation from '@components/navigation';
 import Map from '@components/map';
 import { cities } from '@utils/data';
 import { Offer } from 'mocks/offers';
+import { store } from 'store';
 
 type mainScreenProps = {
   displayedOffers: Offer[];
 }
 
 function Main({ displayedOffers }: mainScreenProps): JSX.Element {
-  const [chosenCity, setChosenCity] = useState('Amsterdam');
+  const state = store.getState();
+  // const [chosenCity, setChosenCity] = useState('Amsterdam');
   const [hoveredOffer, setHoveredOffer] = useState(displayedOffers[-1]);
-  const offersToShow = displayedOffers.filter((offer) => offer.city.name === chosenCity);
-  const handleCityClick = (data: string) => setChosenCity(data);
+  const offersToShow = displayedOffers.filter((offer) => offer.city.name === state.city);
+  // const handleCityClick = (data: string) => setChosenCity(data);
   const handleHoveredOffer = (chosenOffer: Offer) => setHoveredOffer(chosenOffer);
+
 
   return (
     <main className="page__main page__main--index">
@@ -27,8 +30,8 @@ function Main({ displayedOffers }: mainScreenProps): JSX.Element {
                 <Navigation
                   city={value}
                   key={value}
-                  choseenCity={chosenCity}
-                  onCityClick={(chosen) => handleCityClick(chosen)}
+                  // choseenCity={chosenCity}
+                  // onCityClick={(chosen) => handleCityClick(chosen)}
                 />))}
           </ul>
         </section>
@@ -38,7 +41,7 @@ function Main({ displayedOffers }: mainScreenProps): JSX.Element {
           <OffersList
             offersToShow = {offersToShow}
             onCardHover={(hovered) => handleHoveredOffer(hovered)}
-            choseenCity={chosenCity}
+            choseenCity={state.city}
           />
           <div className="cities__right-section">
             <Map offersToShow={offersToShow}
