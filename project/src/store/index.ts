@@ -1,4 +1,4 @@
 import {configureStore} from '@reduxjs/toolkit';
-import { offerListUpdate } from './reducer';
+import { storeUpdate } from './reducer';
 
-export const store = configureStore({ reducer: offerListUpdate,});
+export const store = configureStore({ reducer: storeUpdate,});

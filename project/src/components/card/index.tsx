@@ -1,16 +1,17 @@
 import { Link } from 'react-router-dom';
 import { Offer } from 'mocks/offers';
+import { store } from 'store';
+import { markOfferOnCard } from 'store/action';
 
 type cardProps = {
   offerData: Offer;
-  onCardHover: (param: Offer) => void | null;
 }
 
-function Card({offerData, onCardHover}: cardProps): JSX.Element {
+function Card({offerData}: cardProps): JSX.Element {
   return (
     <Link
       to={`/offer/${offerData.id}`}
-      onMouseOver = {() => onCardHover(offerData)}
+      onMouseOver = {() => store.dispatch(markOfferOnCard(offerData))}
     >
       <article className="cities__card place-card">
         {offerData.isPremium ? <div className="place-card__mark"><span>Premium</span> </div> : null}

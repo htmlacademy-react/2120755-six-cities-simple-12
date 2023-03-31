@@ -1,13 +1,16 @@
 import {useRef, useEffect} from 'react';
-import useMap from '@hooks/useMap';
+import { useSelector } from 'react-redux';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import useMap from '@hooks/useMap';
 import { Offer } from 'mocks/offers';
 import { URL_MARKER_DEFAULT,URL_MARKER_CURRENT } from '@utils/const';
 
-type mapProps = {
-  offersToShow: Offer[];
-  offerToMark: Offer | null;
+
+type cityOffers = {
+  city: string;
+  offers: Offer[];
+  hoveredOffer: Offer;
 }
 
 function choseIcon(Url: string) {
@@ -18,8 +21,10 @@ function choseIcon(Url: string) {
   });
 }
 
-function Map ({offersToShow, offerToMark}: mapProps): JSX.Element {
-  const cityToShow = offersToShow[0];
+function Map (): JSX.Element {
+  const offersToShow = useSelector((state: cityOffers) => state.offers);
+  const cityToShow: Offer = useSelector((state: cityOffers) => state.offers[0]);
+  const offerToMark = useSelector((state: cityOffers) => state.hoveredOffer);
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityToShow);
 
@@ -37,9 +42,7 @@ function Map ({offersToShow, offerToMark}: mapProps): JSX.Element {
           })
           .addTo(map);
       });
-    }
-
-  }, [map, offersToShow, offerToMark]);
+    } }, [map, offersToShow, offerToMark]);
 
   return (
     <section style={

@@ -1,18 +1,13 @@
 import Card from '@components/card';
-import { Offer } from 'mocks/offers';
+import { store } from 'store';
 
-type offersProps = {
-  offersToShow: Offer[];
-  onCardHover: (param: Offer) => void;
-  choseenCity: string;
-}
-
-function OffersList({ offersToShow, onCardHover, choseenCity }: offersProps): JSX.Element {
+function OffersList(): JSX.Element {
+  const state = store.getState();
 
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
-      <b className="places__found">{offersToShow.length} places to stay in {choseenCity}</b>
+      <b className="places__found">{state.offers.length} places to stay in {state.city}</b>
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
         <span className="places__sorting-type" tabIndex={0}>
@@ -30,11 +25,10 @@ function OffersList({ offersToShow, onCardHover, choseenCity }: offersProps): JS
       </form>
       <div className="cities__places-list places__list tabs__content">
         {
-          offersToShow.map((offer) =>
+          state.offers.map((offer) =>
             (
               <Card key={offer.id}
                 offerData={offer}
-                onCardHover={(id) => onCardHover(id)}
               />
             ))
         }

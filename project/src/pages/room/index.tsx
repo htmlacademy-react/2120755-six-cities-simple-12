@@ -3,26 +3,22 @@ import Suggestions from './components/suggestions';
 import Overview from './components/overview';
 import Reviews from './components/reviews';
 import ReviewForm from './components/reviewForm';
+import Map from '@components/map';
 import { Offer } from 'mocks/offers';
 import { reviewList } from 'mocks/review';
 import { offersNearby } from 'mocks/offersNearby';
-import Map from '@components/map';
+import { store } from 'store';
 
-
-type RoomProps = {
-  availibleOffers: Offer[];
-}
-
-function Room({availibleOffers}: RoomProps) {
+function Room() {
+  const state = store.getState();
   const offerId = Number(window.location.pathname.replace('/offer/', ''));
-  const offerToDisplay = availibleOffers.find(chooseOfferById) || availibleOffers[0];
+  const offerToDisplay = state.offers.find(chooseOfferById) || state.offers[0];
 
   function chooseOfferById(offer: Offer) {
     if (offerId && offer.id === offerId ) {
       return offer;
     }
   }
-
   // useEffect запроса на сервер для получения предложений рядом с id выбранной комнаты.
 
   return (
@@ -45,7 +41,7 @@ function Room({availibleOffers}: RoomProps) {
 
         </div>
         <section className="property__map map">
-          <Map offersToShow = { offersNearby } offerToMark={null}/>
+          <Map/>
         </section>
       </section>
       <Suggestions offersNearby={offersNearby } />

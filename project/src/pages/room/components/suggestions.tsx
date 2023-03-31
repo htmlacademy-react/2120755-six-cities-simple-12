@@ -16,7 +16,6 @@ function Suggestions({offersNearby}: SuggestionsProps): JSX.Element {
               (
                 <Card key={offer.id}
                   offerData={offer}
-                  onCardHover={() => null}
                 />
               ))
           }

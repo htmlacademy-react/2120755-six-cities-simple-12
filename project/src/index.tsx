@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import {Provider} from 'react-redux';
 import App from './components/app/app';
-import {offersList } from 'mocks/offers';
 import {store} from './store';
 
 const root = ReactDOM.createRoot(
@@ -14,7 +13,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App availibleOffers={offersList} />
+        <App />
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,
