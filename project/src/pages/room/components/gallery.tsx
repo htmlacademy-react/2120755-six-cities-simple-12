@@ -1,8 +1,9 @@
-type GalleryProps = {
-  imagesCollection: [...string[]];
-}
+import { useSelector } from 'react-redux';
+import { InitialState } from '@customTypes/store';
 
-function Gallery({imagesCollection}: GalleryProps): JSX.Element {
+function Gallery(): JSX.Element {
+  const imagesCollection = useSelector((state: InitialState) => state.offerToShow.images);
+
   return (
     <div className="property__gallery-container container">
       <div className="property__gallery">

@@ -1,11 +1,8 @@
-import { Offer } from 'mocks/offers';
+import { useSelector } from 'react-redux';
+import { InitialState } from '@customTypes/store';
 
-type overviewProps = {
-  roomData: Offer;
-}
-
-function Overview({roomData}: overviewProps): JSX.Element {
-
+function Overview(): JSX.Element {
+  const roomData = useSelector((state: InitialState) => state.offerToShow);
   return (
     <>
       {roomData.isPremium ? <div className="property__mark"><span>Premium</span> </div> : null}

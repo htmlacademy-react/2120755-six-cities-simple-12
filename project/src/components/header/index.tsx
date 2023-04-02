@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 type HeaderProps = {
   currentLocation: string;
 }
+
 function Header({currentLocation}: HeaderProps): JSX.Element {
   return (
     <header className="header">
@@ -36,3 +37,4 @@ function Header({currentLocation}: HeaderProps): JSX.Element {
 }
 
 export default Header;
+

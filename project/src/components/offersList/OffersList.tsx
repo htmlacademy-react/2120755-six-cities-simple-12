@@ -1,13 +1,15 @@
+import { useSelector } from 'react-redux';
 import Card from '@components/card';
-import { store } from 'store';
+import { InitialState } from '@customTypes/store';
 
 function OffersList(): JSX.Element {
-  const state = store.getState();
+  const choosenCity = useSelector((state: InitialState) => state.city);
+  const offersOfChoosenCity = useSelector((state: InitialState) => state.offers.filter(({city}) => city.name === state.city));
 
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
-      <b className="places__found">{state.offers.length} places to stay in {state.city}</b>
+      <b className="places__found">{offersOfChoosenCity.length} places to stay in {choosenCity}</b>
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
         <span className="places__sorting-type" tabIndex={0}>
@@ -25,7 +27,7 @@ function OffersList(): JSX.Element {
       </form>
       <div className="cities__places-list places__list tabs__content">
         {
-          state.offers.map((offer) =>
+          offersOfChoosenCity.map((offer) =>
             (
               <Card key={offer.id}
                 offerData={offer}

@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
-import { Offer } from 'mocks/offers';
+import { Offer } from '@customTypes/index';
 import { store } from 'store';
 import { markOfferOnCard } from 'store/action';
 
-type cardProps = {
+type CardProps = {
   offerData: Offer;
 }
 
-function Card({offerData}: cardProps): JSX.Element {
+function Card({offerData}:CardProps): JSX.Element {
   return (
     <Link
       to={`/offer/${offerData.id}`}

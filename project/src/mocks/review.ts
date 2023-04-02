@@ -1,17 +1,7 @@
 // Как ревью привязать к предложению, я не понимаю.
-export type Review = {
-  comment: string;
-  date: string;
-  id: number;
-  rating: number;
-  user: {
-  avatarUrl: string;
-  id: number;
-  isPro: boolean;
-  name: string;
-  };}
+import { ReviewObject} from '@customTypes/index';
 
-export const reviewList: [Review, ...Review[]] = [
+export const mockReviewList: [ReviewObject, ...ReviewObject[]] = [
   {
     'id': 1,
     'user': {

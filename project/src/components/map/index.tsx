@@ -1,17 +1,10 @@
-import {useRef, useEffect} from 'react';
+import { useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '@hooks/useMap';
-import { Offer } from 'mocks/offers';
+import { InitialState } from '@customTypes/store';
 import { URL_MARKER_DEFAULT,URL_MARKER_CURRENT } from '@utils/const';
-
-
-type cityOffers = {
-  city: string;
-  offers: Offer[];
-  hoveredOffer: Offer;
-}
 
 function choseIcon(Url: string) {
   return leaflet.icon({
@@ -22,11 +15,17 @@ function choseIcon(Url: string) {
 }
 
 function Map (): JSX.Element {
-  const offersToShow = useSelector((state: cityOffers) => state.offers);
-  const cityToShow: Offer = useSelector((state: cityOffers) => state.offers[0]);
-  const offerToMark = useSelector((state: cityOffers) => state.hoveredOffer);
+  const offersToShow = useSelector((state: InitialState) => state.offers);
+  const cityToShow = useSelector((state: InitialState) => state.offers[0]);
+  const cityToShow1 = useSelector((state: InitialState) => state.offers.find((offer) => offer.city.name === state.city));
+  const offerToMark = useSelector((state: InitialState) => state.hoveredOffer);
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityToShow);
+
+  // eslint-disable-next-line no-console
+  console.log(cityToShow1);
+  // eslint-disable-next-line no-console
+  // console.log(cityToShow);
 
   useEffect(() => {
     if (map) {

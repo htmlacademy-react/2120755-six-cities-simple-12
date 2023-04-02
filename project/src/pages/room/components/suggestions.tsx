@@ -1,11 +1,9 @@
-import { Offer } from 'mocks/offers';
+import { useSelector } from 'react-redux';
 import Card from '@components/card';
+import { InitialState } from '@customTypes/store';
 
-type SuggestionsProps = {
-  offersNearby: Offer[];
-}
-
-function Suggestions({offersNearby}: SuggestionsProps): JSX.Element {
+function Suggestions(): JSX.Element {
+  const offersNearby = useSelector((state: InitialState) => state.offersNearby);
   return (
     <div className="container">
       <section className="near-places places">

@@ -1,10 +1,10 @@
-import {useEffect, useState, MutableRefObject, useRef} from 'react';
+import { useEffect, useState, MutableRefObject, useRef } from 'react';
 import leaflet from 'leaflet';
-import {Map} from 'leaflet';
+import { Map } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { Offer } from 'mocks/offers';
+import { Offer } from '@customTypes/index';
 
-function useMap(mapRef: MutableRefObject<HTMLElement | null>, cityToShow: Offer): Map | null {
+export function useMap(mapRef: MutableRefObject<HTMLElement | null>, cityToShow: Offer): Map | null {
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef(false);
 
