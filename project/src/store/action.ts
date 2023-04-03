@@ -6,7 +6,8 @@ export const Action = {
   MARK_OFFER_ON_CARD: 'MARK_OFFER_ON_CARD',
   FIND_OFFER_BY_ID: 'FIND_OFFER_BY_ID',
   FIND_OFFER_NEARBY: 'FIND_OFFER_NEARBY',
-  FIND_OFFER_REVIEW: 'FIND_OFFER_REVIEW'
+  FIND_OFFER_REVIEW: 'FIND_OFFER_REVIEW',
+  CHANGE_SORT_TYPE: 'CHANGE_SORT_TYPE'
 };
 
 export const changeCity = createAction(Action.CHANGE_CITY, (value: string) => ({
@@ -26,5 +27,9 @@ export const findOfferNearby = createAction(Action.FIND_OFFER_NEARBY, (value: nu
 }));
 
 export const findOfferReviews = createAction(Action.FIND_OFFER_REVIEW, (value: number) => ({
+  payload: value,
+}));
+
+export const changeSortType = createAction(Action.CHANGE_SORT_TYPE, (value: string) => ({
   payload: value,
 }));

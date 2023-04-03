@@ -1,3 +1,4 @@
+// import { Link, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Offer } from '@customTypes/index';
 import { store } from 'store';
@@ -8,10 +9,13 @@ type CardProps = {
 }
 
 function Card({offerData}:CardProps): JSX.Element {
+  // const urlParams = useParams();
+
   return (
     <Link
       to={`/offer/${offerData.id}`}
       onMouseOver = {() => store.dispatch(markOfferOnCard(offerData))}
+      // onMouseOver = {'id' in urlParams ? undefined : () => store.dispatch(markOfferOnCard(offerData))}
     >
       <article className="cities__card place-card">
         {offerData.isPremium ? <div className="place-card__mark"><span>Premium</span> </div> : null}

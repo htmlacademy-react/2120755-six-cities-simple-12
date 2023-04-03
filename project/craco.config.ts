@@ -9,5 +9,6 @@ export const webpack = {
     '@pages': resolvePath( 'src/pages'),
     '@hooks': resolvePath( 'src/hooks'),
     '@customTypes': resolvePath( 'src/types'),
+    '@img': resolvePath( 'src/img'),
   },
 };

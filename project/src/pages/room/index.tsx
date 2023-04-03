@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import Gallery from './components/gallery';
 import Suggestions from './components/suggestions';
 import Overview from './components/overview';
 import ReviewList from './components/reviewsList';
 import Map from '@components/map';
-import NotFoundPage from '@pages/notFound';
 import { findOfferById, findOfferNearby, findOfferReviews } from 'store/action';
 import { InitialState } from '@customTypes/store';
+// import NotFoundPage from '@pages/notFound';
 
 function Room() {
   const dispatch = useDispatch();
@@ -23,7 +23,8 @@ function Room() {
   });
 
   if (offerToDisplay === undefined) {
-    return <NotFoundPage/>;
+    return <Navigate to="NotFound"/>;
+    // // return <NotFoundPage>
   }
 
   return (

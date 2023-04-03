@@ -15,7 +15,7 @@ function NotFoundPage(): JSX.Element {
             fontWeight: 'bold',
             cursor: 'pointer'}}
         >
-        Main page
+         Main page
         </a>
       </p>
     </div>
