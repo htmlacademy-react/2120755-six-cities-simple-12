@@ -3,7 +3,6 @@ import { Offer } from '@customTypes/index';
 
 export const Action = {
   CHANGE_CITY: 'CHANGE_CITY',
-  FILL_OFFERS_LIST: 'FILL_OFFERS_LIST',
   MARK_OFFER_ON_CARD: 'MARK_OFFER_ON_CARD',
   FIND_OFFER_BY_ID: 'FIND_OFFER_BY_ID',
   FIND_OFFER_NEARBY: 'FIND_OFFER_NEARBY',
@@ -13,8 +12,6 @@ export const Action = {
 export const changeCity = createAction(Action.CHANGE_CITY, (value: string) => ({
   payload: value,
 }));
-
-export const fillOfferList = createAction(Action.FILL_OFFERS_LIST);
 
 export const markOfferOnCard = createAction(Action.MARK_OFFER_ON_CARD, (value: Offer) => ({
   payload: value,

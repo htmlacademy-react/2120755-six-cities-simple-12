@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeCity, fillOfferList } from 'store/action';
+import { changeCity } from 'store/action';
 import { InitialState } from '@customTypes/store';
 
 type navigationProps = {
@@ -16,7 +16,7 @@ function Navigation({city}: navigationProps): JSX.Element {
       <Link
         className={`locations__item-link tabs__item ${choosenCity === city ? 'tabs__item--active' : ''}`}
         to="/"
-        onClick={() => {dispatch(changeCity(city)); dispatch(fillOfferList());}}
+        onClick={() => {dispatch(changeCity(city));}}
       >
         <span>{city}</span>
       </Link>

@@ -16,16 +16,11 @@ function choseIcon(Url: string) {
 
 function Map (): JSX.Element {
   const offersToShow = useSelector((state: InitialState) => state.offers);
-  const cityToShow = useSelector((state: InitialState) => state.offers[0]);
-  const cityToShow1 = useSelector((state: InitialState) => state.offers.find((offer) => offer.city.name === state.city));
+
+  const cityToShow = useSelector((state: InitialState) => state.offers.find((offer) => offer.city.name === state.city));
   const offerToMark = useSelector((state: InitialState) => state.hoveredOffer);
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityToShow);
-
-  // eslint-disable-next-line no-console
-  console.log(cityToShow1);
-  // eslint-disable-next-line no-console
-  // console.log(cityToShow);
 
   useEffect(() => {
     if (map) {
