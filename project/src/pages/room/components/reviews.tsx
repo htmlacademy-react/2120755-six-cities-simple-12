@@ -1,10 +1,10 @@
-import { Review } from 'mocks/review';
+import { ReviewObject } from '@customTypes/index';
 
 type RoomReviewsProps = {
-  reviewData: Review;
+  reviewData: ReviewObject;
 }
 
-function Reviews({ reviewData }: RoomReviewsProps): JSX.Element {
+function Review({ reviewData }: RoomReviewsProps): JSX.Element {
   const date = new Date(reviewData.date);
   const formatter = new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
@@ -43,4 +43,4 @@ function Reviews({ reviewData }: RoomReviewsProps): JSX.Element {
   );
 }
 
-export default Reviews;
+export default Review;

@@ -8,5 +8,6 @@ export const webpack = {
     '@components': resolvePath('src/components'),
     '@pages': resolvePath( 'src/pages'),
     '@hooks': resolvePath( 'src/hooks'),
+    '@customTypes': resolvePath( 'src/types'),
   },
 };

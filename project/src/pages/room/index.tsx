@@ -1,55 +1,49 @@
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import Gallery from './components/gallery';
 import Suggestions from './components/suggestions';
 import Overview from './components/overview';
-import Reviews from './components/reviews';
-import ReviewForm from './components/reviewForm';
-import { Offer } from 'mocks/offers';
-import { reviewList } from 'mocks/review';
-import { offersNearby } from 'mocks/offersNearby';
+import ReviewList from './components/reviewsList';
 import Map from '@components/map';
+import NotFoundPage from '@pages/notFound';
+import { findOfferById, findOfferNearby, findOfferReviews } from 'store/action';
+import { InitialState } from '@customTypes/store';
 
+function Room() {
+  const dispatch = useDispatch();
+  const urlParams = useParams();
+  const offerId = Number(urlParams.id);
+  const offerToDisplay = useSelector((state: InitialState) => state.offerToShow);
 
-type RoomProps = {
-  availibleOffers: Offer[];
-}
+  useEffect(() => {
+    dispatch(findOfferById(offerId));
+    dispatch(findOfferNearby(offerId));
+    dispatch(findOfferReviews(offerId));
+  });
 
-function Room({availibleOffers}: RoomProps) {
-  const offerId = Number(window.location.pathname.replace('/offer/', ''));
-  const offerToDisplay = availibleOffers.find(chooseOfferById) || availibleOffers[0];
-  function chooseOfferById(offer: Offer) {
-    if (offerId && offer.id === offerId ) {
-      return offer;
-    }
+  if (offerToDisplay === undefined) {
+    return <NotFoundPage/>;
   }
-
-  // useEffect запроса на сервер для получения предложений рядом с id выбранной комнаты.
 
   return (
     <main className="page__main page__main--property">
       <section className="property">
         <div className="property__container container">
-          <Gallery imagesCollection = {offerToDisplay.images}/>
+          <Gallery/>
           <div className="property__wrapper">
-            <Overview roomData={offerToDisplay}/>
-            <section className="property__reviews reviews">
-              <h2 className="reviews__title">
-                  Reviews &middot; <span className="reviews__amount">{reviewList.length}</span>
-              </h2>
-              <ul className="reviews__list">
-                {reviewList.map((review) => <Reviews key={review.id} reviewData={review}/>)}
-              </ul>
-              <ReviewForm />
-            </section>
+            <Overview/>
+            <ReviewList/>
           </div>
-
         </div>
         <section className="property__map map">
-          <Map offersToShow = { offersNearby } offerToMark={null}/>
+          <Map/>
         </section>
       </section>
-      <Suggestions offersNearby={offersNearby } />
+      <Suggestions/>
     </main>
   );
+
 }
 
 export default Room;

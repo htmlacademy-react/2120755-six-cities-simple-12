@@ -1,21 +1,21 @@
-import {useEffect, useState, MutableRefObject, useRef} from 'react';
+import { useEffect, useState, MutableRefObject, useRef } from 'react';
 import leaflet from 'leaflet';
-import {Map} from 'leaflet';
+import { Map } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { Offer } from 'mocks/offers';
+import { Offer } from '@customTypes/index';
 
-function useMap(mapRef: MutableRefObject<HTMLElement | null>, cityToShow: Offer): Map | null {
+export function useMap(mapRef: MutableRefObject<HTMLElement | null>, cityToShow: Offer | undefined): Map | null {
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef(false);
 
   useEffect(() => {
-    if (map !== null) {
+    if (map !== null && cityToShow !== undefined) {
       map.setView([cityToShow.city.location.latitude, cityToShow.city.location.longitude], 13);
     }
   }, [map, cityToShow]);
 
   useEffect(() => {
-    if (mapRef.current !== null && !isRenderedRef.current) {
+    if (mapRef.current !== null && !isRenderedRef.current && cityToShow !== undefined) {
       const instance = leaflet.map(mapRef.current, {
         center: {
           lat: cityToShow.city.location.latitude,
