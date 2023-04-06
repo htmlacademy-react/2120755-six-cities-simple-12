@@ -12,7 +12,19 @@ export const fetchOffers = createAsyncThunk<void, undefined, {
   state: InitialState;
   extra: AxiosInstance;
 }>(
-  'data/fetchOffers',
+  'hotels/',
+  async (_arg, {dispatch, extra: api}) => {
+    const {data} = await api.get<Offer[]>(ApiRoutes.offers);
+    dispatch(loadOffers(data));
+  },
+);
+
+export const fetchOffer = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: InitialState;
+  extra: AxiosInstance;
+}>(
+  'hotels/:id',
   async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.get<Offer[]>(ApiRoutes.offers);
     dispatch(loadOffers(data));
