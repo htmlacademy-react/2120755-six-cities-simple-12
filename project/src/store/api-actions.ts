@@ -1,5 +1,5 @@
-import {AxiosInstance} from 'axios';
-import {createAsyncThunk} from '@reduxjs/toolkit';
+import { AxiosInstance } from 'axios';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ApiRoutes } from '@utils/const';
 import { loadOffers } from './action';
 import { Offer } from '@customTypes/index';
