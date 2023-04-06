@@ -4,7 +4,8 @@ import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '@hooks/useMap';
 import { InitialState } from '@customTypes/store';
-import { URL_MARKER_DEFAULT,URL_MARKER_CURRENT } from '@utils/const';
+import currentMarker from '@img/pin-active.svg';
+import defaultMarker from '@img/pin.svg';
 
 function choseIcon(Url: string) {
   return leaflet.icon({
@@ -16,7 +17,6 @@ function choseIcon(Url: string) {
 
 function Map (): JSX.Element {
   const offersToShow = useSelector((state: InitialState) => state.offers);
-
   const cityToShow = useSelector((state: InitialState) => state.offers.find((offer) => offer.city.name === state.city));
   const offerToMark = useSelector((state: InitialState) => state.hoveredOffer);
   const mapRef = useRef(null);
@@ -30,9 +30,7 @@ function Map (): JSX.Element {
             lat: offer.location.latitude,
             lng: offer.location.longitude,
           }, {
-            icon: (offer === offerToMark)
-              ? choseIcon(URL_MARKER_CURRENT)
-              : choseIcon(URL_MARKER_DEFAULT)
+            icon: choseIcon(offer === offerToMark ? currentMarker : defaultMarker)
           })
           .addTo(map);
       });

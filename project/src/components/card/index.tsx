@@ -1,17 +1,19 @@
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Offer } from '@customTypes/index';
-import { store } from 'store';
 import { markOfferOnCard } from 'store/action';
 
 type CardProps = {
   offerData: Offer;
 }
 
-function Card({offerData}:CardProps): JSX.Element {
+function Card({offerData}: CardProps): JSX.Element {
+  const dispatch = useDispatch();
+
   return (
     <Link
       to={`/offer/${offerData.id}`}
-      onMouseOver = {() => store.dispatch(markOfferOnCard(offerData))}
+      onMouseOver={() => dispatch(markOfferOnCard(offerData))}
     >
       <article className="cities__card place-card">
         {offerData.isPremium ? <div className="place-card__mark"><span>Premium</span> </div> : null}
