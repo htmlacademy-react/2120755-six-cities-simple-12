@@ -8,7 +8,7 @@ import ReviewList from './components/reviewsList';
 import Map from '@components/map';
 import { findOfferById, findOfferNearby, findOfferReviews } from 'store/action';
 import { InitialState } from '@customTypes/store';
-// import NotFoundPage from '@pages/notFound';
+
 
 function Room() {
   const dispatch = useDispatch();
@@ -23,8 +23,7 @@ function Room() {
   });
 
   if (offerToDisplay === undefined) {
-    return <Navigate to="NotFound"/>;
-    // // return <NotFoundPage>
+    return <Navigate to="not-found"/>;
   }
 
   return (
