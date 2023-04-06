@@ -30,6 +30,6 @@ export const findOfferReviews = createAction(Action.FIND_OFFER_REVIEW, (value: n
   payload: value,
 }));
 
-export const changeSortType = createAction(Action.CHANGE_SORT_TYPE, (value: string) => ({
+export const changeSortType = createAction(Action.CHANGE_SORT_TYPE, (value: string | null) => ({
   payload: value,
 }));

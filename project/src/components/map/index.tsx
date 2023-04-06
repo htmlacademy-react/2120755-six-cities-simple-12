@@ -30,9 +30,7 @@ function Map (): JSX.Element {
             lat: offer.location.latitude,
             lng: offer.location.longitude,
           }, {
-            icon: (offer === offerToMark)
-              ? choseIcon(currentMarker)
-              : choseIcon(defaultMarker)
+            icon: choseIcon(offer === offerToMark ? currentMarker : defaultMarker)
           })
           .addTo(map);
       });

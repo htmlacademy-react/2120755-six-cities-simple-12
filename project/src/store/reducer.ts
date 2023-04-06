@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { changeCity, markOfferOnCard, findOfferById, findOfferNearby, findOfferReviews, changeSortType } from './action';
 import { mockOffersList } from 'mocks/offers';
-import { mockOfferToShow } from 'mocks/offerToShow';
+// import { mockOfferToShow } from 'mocks/offerToShow';
 import { mockOffersNearby } from 'mocks/offersNearby';
 import { mockReviewList } from 'mocks/review';
 import { InitialState } from '@customTypes/store';
@@ -57,7 +57,7 @@ export const storeUpdate = createReducer(initialState, (builder) => {
       state.hoveredOffer = action.payload;
     })
     .addCase(findOfferById, (state, action) => {
-      state.offerToShow = mockOfferToShow;
+      state.offerToShow = mockOffersList[-1];
     })
     .addCase(findOfferNearby, (state, action) => {
       state.offersNearby = mockOffersNearby ;

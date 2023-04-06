@@ -1,6 +1,7 @@
 
 const options = ['Wi-Fi', 'Washing machine', 'Towels', 'Heating', 'Coffee machine', 'Baby seat', 'Kitchen', 'Dishwasher', 'Cabel TV', 'Fridge'];
 const cities = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+const sortTypes = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
 const rating = {
   1:'terribly',
   2:'badly',
@@ -15,6 +16,7 @@ const photosSources = [
 export {
   options,
   cities,
+  sortTypes,
   rating,
   photosSources
 };
