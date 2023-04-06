@@ -9,7 +9,6 @@ import Map from '@components/map';
 import { findOfferById, findOfferNearby, findOfferReviews } from 'store/action';
 import { InitialState } from '@customTypes/store';
 
-
 function Room() {
   const dispatch = useDispatch();
   const urlParams = useParams();
