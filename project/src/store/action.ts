@@ -11,7 +11,7 @@ export const Action = {
   CHANGE_SORT_TYPE: 'CHANGE_SORT_TYPE'
 };
 
-export const loadOffers = createAction(Action.CHANGE_CITY, (value: string) => ({
+export const loadOffers = createAction(Action.LOAD_OFFERS, (value: Offer[]) => ({
   payload: value,
 }));
 

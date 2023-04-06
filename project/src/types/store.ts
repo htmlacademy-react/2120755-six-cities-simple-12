@@ -1,3 +1,4 @@
+import { store } from 'store';
 import { Offer, ReviewObject } from './index';
 
 export type InitialState = {
@@ -9,3 +10,5 @@ export type InitialState = {
   offerReviews: ReviewObject[];
   hoveredOffer: Offer;
 }
+
+export type AppDispatch = typeof store.dispatch;

@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, markOfferOnCard, findOfferById, findOfferNearby, findOfferReviews, changeSortType } from './action';
+import { changeCity, markOfferOnCard, findOfferById, findOfferNearby, findOfferReviews, changeSortType, loadOffers } from './action';
 import { mockOffersList } from 'mocks/offers';
-// import { mockOfferToShow } from 'mocks/offerToShow';
+import { mockOfferToShow } from 'mocks/offerToShow';
 import { mockOffersNearby } from 'mocks/offersNearby';
 import { mockReviewList } from 'mocks/review';
 import { InitialState } from '@customTypes/store';
@@ -10,7 +10,7 @@ import { Offer } from '@customTypes/index';
 const initialState: InitialState = {
   city: 'Paris',
   sortType: 'Popular',
-  offers: mockOffersList,
+  offers: [],
   offerToShow: mockOffersList[-1],
   offersNearby: mockOffersList,
   offerReviews: mockReviewList,
@@ -50,6 +50,9 @@ function topRaiting(a: Offer, b: Offer) {
 
 export const storeUpdate = createReducer(initialState, (builder) => {
   builder
+    .addCase(loadOffers, (state, action) => {
+      state.offers = action.payload;
+    })
     .addCase(changeCity, (state, action) => {
       state.city = action.payload;
     })
@@ -57,7 +60,7 @@ export const storeUpdate = createReducer(initialState, (builder) => {
       state.hoveredOffer = action.payload;
     })
     .addCase(findOfferById, (state, action) => {
-      state.offerToShow = mockOffersList[-1];
+      state.offerToShow = mockOfferToShow;
     })
     .addCase(findOfferNearby, (state, action) => {
       state.offersNearby = mockOffersNearby ;
