@@ -27,7 +27,7 @@ export const fetchOffer = createAsyncThunk<void, number, {
 export const fetchOffersNearby = createAsyncThunk<void, number, {
   extra: AxiosInstance;
 }>(
-  'hotels/:id',
+  'hotels/:id/nearby',
   async (id, {dispatch, extra: api}) => {
     const {data} = await api.get<Offer[]>(`${ApiRoutes.offer}${id}/nearby`);
     // eslint-disable-next-line no-console
@@ -39,7 +39,7 @@ export const fetchOffersNearby = createAsyncThunk<void, number, {
 export const fetchOfferReviews = createAsyncThunk<void, number, {
   extra: AxiosInstance;
 }>(
-  'hotels/:id',
+  'hotels/comments/:id',
   async (id, {dispatch, extra: api}) => {
     const {data} = await api.get<ReviewObject[]>(`${ApiRoutes.offerReview}${id}`);
     // eslint-disable-next-line no-console

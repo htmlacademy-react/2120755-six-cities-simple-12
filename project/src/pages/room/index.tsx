@@ -20,9 +20,12 @@ function Room() {
     dispatch(fetchOffer(offerId));
     dispatch(fetchOffersNearby(offerId));
     dispatch(fetchOfferReviews (offerId));
+    window.scrollTo(0, 0);
   }, [dispatch, offerId]);
 
   if (offerToDisplay === undefined) {
+    // eslint-disable-next-line no-console
+    console.log(offerToDisplay);
     return <Navigate to="not-found"/>;
   }
 
