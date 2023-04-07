@@ -1,25 +1,20 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import OffersList from '@components/offersList/OffersList';
 import Navigation from '@components/navigation';
 import Map from '@components/map';
 import Spinner from '@components/spinner/spinner';
 import { fetchOffers } from 'store/api-actions';
 import { AppDispatch } from '@customTypes/store';
-import { InitialState } from '@customTypes/store';
 import { cities } from '@utils/data';
 
 function Main(): JSX.Element {
   const dispatch: AppDispatch = useDispatch();
-  const offers = useSelector((state: InitialState ) => state.offers);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchOffers());
-    if (offers !== undefined) {
-      setIsLoaded(true);
-    }
-  }, [isLoaded, dispatch, offers]);
+    dispatch(fetchOffers()).then(() => setIsLoaded(true));
+  }, [dispatch]);
 
   return (
     <main className="page__main page__main--index">

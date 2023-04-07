@@ -25,7 +25,6 @@ export const fetchOfferData = createAsyncThunk<
     api.get<Offer[]>(`${ApiRoutes.offer}${id}/nearby`),
     api.get<ReviewObject[]>(`${ApiRoutes.offerReview}${id}`)
   ]);
-
   dispatch(findOfferById(offerResponse.data));
   dispatch(findOfferNearby(nearbyResponse.data));
   dispatch(findOfferReviews(reviewResponse.data));
