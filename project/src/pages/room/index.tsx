@@ -6,20 +6,21 @@ import Suggestions from './components/suggestions';
 import Overview from './components/overview';
 import ReviewList from './components/reviewsList';
 import Map from '@components/map';
-import { findOfferById, findOfferNearby, findOfferReviews } from 'store/action';
+import { fetchOffer, fetchOffersNearby, fetchOfferReviews } from 'store/api-actions';
+import { AppDispatch } from '@customTypes/store';
 import { InitialState } from '@customTypes/store';
 
 function Room() {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const urlParams = useParams();
   const offerId = Number(urlParams.id);
   const offerToDisplay = useSelector((state: InitialState) => state.offerToShow);
 
   useEffect(() => {
-    dispatch(findOfferById(offerId));
-    dispatch(findOfferNearby(offerId));
-    dispatch(findOfferReviews(offerId));
-  });
+    dispatch(fetchOffer(offerId));
+    dispatch(fetchOffersNearby(offerId));
+    dispatch(fetchOfferReviews (offerId));
+  }, [dispatch, offerId]);
 
   if (offerToDisplay === undefined) {
     return <Navigate to="not-found"/>;

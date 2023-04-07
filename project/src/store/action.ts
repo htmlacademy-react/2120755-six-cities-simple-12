@@ -1,5 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
-import { Offer } from '@customTypes/index';
+import { Offer, ReviewObject } from '@customTypes/index';
+
 
 export const Action = {
   LOAD_OFFERS: 'LOAD_OFFERS',
@@ -23,15 +24,15 @@ export const markOfferOnCard = createAction(Action.MARK_OFFER_ON_CARD, (value: O
   payload: value,
 }));
 
-export const findOfferById = createAction(Action.FIND_OFFER_BY_ID, (value: number) => ({
+export const findOfferById = createAction(Action.FIND_OFFER_BY_ID, (value: Offer) => ({
   payload: value,
 }));
 
-export const findOfferNearby = createAction(Action.FIND_OFFER_NEARBY, (value: number) => ({
+export const findOfferNearby = createAction(Action.FIND_OFFER_NEARBY, (value: Offer[]) => ({
   payload: value,
 }));
 
-export const findOfferReviews = createAction(Action.FIND_OFFER_REVIEW, (value: number) => ({
+export const findOfferReviews = createAction(Action.FIND_OFFER_REVIEW, (value: ReviewObject[]) => ({
   payload: value,
 }));
 

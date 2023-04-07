@@ -1,8 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { changeCity, markOfferOnCard, findOfferById, findOfferNearby, findOfferReviews, changeSortType, loadOffers } from './action';
 import { mockOffersList } from 'mocks/offers';
-import { mockOfferToShow } from 'mocks/offerToShow';
-import { mockOffersNearby } from 'mocks/offersNearby';
+// import { mockOfferToShow } from 'mocks/offerToShow';
+// import { mockOffersNearby } from 'mocks/offersNearby';
 import { mockReviewList } from 'mocks/review';
 import { InitialState } from '@customTypes/store';
 import { Offer } from '@customTypes/index';
@@ -60,13 +60,13 @@ export const storeUpdate = createReducer(initialState, (builder) => {
       state.hoveredOffer = action.payload;
     })
     .addCase(findOfferById, (state, action) => {
-      state.offerToShow = mockOfferToShow;
+      state.offerToShow = action.payload;
     })
     .addCase(findOfferNearby, (state, action) => {
-      state.offersNearby = mockOffersNearby ;
+      state.offersNearby = action.payload;
     })
     .addCase(findOfferReviews, (state, action) => {
-      state.offersNearby = mockOffersNearby ;
+      state.offerReviews = action.payload;
     })
     .addCase(changeSortType, (state, action) => {
       state.sortType = action.payload;
