@@ -1,19 +1,16 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { changeCity, markOfferOnCard, findOfferById, findOfferNearby, findOfferReviews, changeSortType, loadOffers } from './action';
 import { mockOffersList } from 'mocks/offers';
-// import { mockOfferToShow } from 'mocks/offerToShow';
-// import { mockOffersNearby } from 'mocks/offersNearby';
-import { mockReviewList } from 'mocks/review';
 import { InitialState } from '@customTypes/store';
 import { Offer } from '@customTypes/index';
 
 const initialState: InitialState = {
   city: 'Paris',
   sortType: 'Popular',
-  offers: [],
-  offerToShow: mockOffersList[-1],
-  offersNearby: mockOffersList,
-  offerReviews: mockReviewList,
+  offers: undefined,
+  offerToShow: undefined,
+  offersNearby: undefined,
+  offerReviews: undefined,
   hoveredOffer: mockOffersList[-1],
 };
 
@@ -71,13 +68,13 @@ export const storeUpdate = createReducer(initialState, (builder) => {
     .addCase(changeSortType, (state, action) => {
       state.sortType = action.payload;
       if (action.payload === 'Price: high to low') {
-        state.offers = state.offers.sort(priceHighToLow);
+        state.offers = state.offers?.sort(priceHighToLow);
       }
       if (action.payload === 'Price: low to high') {
-        state.offers = state.offers.sort(priceLowToHigh);
+        state.offers = state.offers?.sort(priceLowToHigh);
       }
       if (action.payload === 'Top rated first') {
-        state.offers = state.offers.sort(topRaiting);
+        state.offers = state.offers?.sort(topRaiting);
       }
       if (action.payload === 'Popular') {
         state.offers = mockOffersList;

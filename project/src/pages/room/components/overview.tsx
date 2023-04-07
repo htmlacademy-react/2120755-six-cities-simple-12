@@ -3,6 +3,11 @@ import { InitialState } from '@customTypes/store';
 
 function Overview(): JSX.Element {
   const roomData = useSelector((state: InitialState) => state.offerToShow);
+
+  if (roomData === undefined) {
+    return <div></div>;
+  }
+
   return (
     <>
       {roomData.isPremium ? <div className="property__mark"><span>Premium</span> </div> : null}

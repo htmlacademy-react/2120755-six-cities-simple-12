@@ -16,10 +16,10 @@ function Main(): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchOffers());
-    if (offers.length !== 0) {
+    if (offers !== undefined) {
       setIsLoaded(true);
     }
-  }, [isLoaded, dispatch, offers.length]);
+  }, [isLoaded, dispatch, offers]);
 
   return (
     <main className="page__main page__main--index">

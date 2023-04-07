@@ -17,14 +17,14 @@ function choseIcon(Url: string) {
 
 function Map (): JSX.Element {
   const offersToShow = useSelector((state: InitialState) => state.offers);
-  const cityToShow = useSelector((state: InitialState) => state.offers.find((offer) => offer.city.name === state.city));
+  const cityToShow = useSelector((state: InitialState) => state.offers?.find((offer) => offer.city.name === state.city));
   const offerToMark = useSelector((state: InitialState) => state.hoveredOffer);
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityToShow);
 
   useEffect(() => {
     if (map) {
-      offersToShow.forEach((offer) => {
+      offersToShow?.forEach((offer) => {
         leaflet
           .marker({
             lat: offer.location.latitude,

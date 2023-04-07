@@ -10,7 +10,7 @@ function Suggestions(): JSX.Element {
         <h2 className="near-places__title">Other places in the neighbourhood</h2>
         <div className="near-places__list places__list">
           {
-            offersNearby.map((offer) =>
+            offersNearby?.map((offer) =>
               (
                 <Card key={offer.id}
                   offerData={offer}

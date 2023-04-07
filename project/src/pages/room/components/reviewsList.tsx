@@ -8,10 +8,10 @@ function ReviewList(): JSX.Element {
   return (
     <section className="property__reviews reviews">
       <h2 className="reviews__title">
-      Reviews &middot; <span className="reviews__amount">{reviewList.length}</span>
+      Reviews &middot; <span className="reviews__amount">{reviewList?.length}</span>
       </h2>
       <ul className="reviews__list">
-        {reviewList.map((review) => <Review key={review.id} reviewData={review}/>)}
+        {reviewList?.map((review) => <Review key={review.id} reviewData={review}/>)}
       </ul>
       <ReviewForm />
     </section>
