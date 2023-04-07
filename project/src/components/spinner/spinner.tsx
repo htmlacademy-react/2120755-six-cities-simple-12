@@ -1,8 +1,10 @@
+import LoadingIcon from '@img/loading-icon.svg';
+
 function Spinner(): JSX.Element {
   return (
     <div style={{ padding: '100px', textAlign: 'center' }}>
-      <h1 style={{ fontSize: '44px' }}>
-        <span>⬛⬛⬛⬜⬜</span>
+      <h1 style={{ fontSize: '33px' }}>
+        <img style={{ width: '100px', height: '100px' }} src={LoadingIcon} alt='LoadingIndicator'/>
         <br />
       Loading in progress
       </h1>
