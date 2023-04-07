@@ -22,7 +22,7 @@ function Room() {
   });
 
   if (offerToDisplay === undefined) {
-    return <Navigate to="not-found"/>;
+    return <Navigate to="/not-found"/>;
   }
 
   return (
