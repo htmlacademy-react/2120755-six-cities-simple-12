@@ -45,7 +45,8 @@ function Main(): JSX.Element {
                 <Map />
               </div>
             </div>
-          </div> : <Spinner/>
+          </div>
+          : <Spinner/>
       }
     </main>
   );
