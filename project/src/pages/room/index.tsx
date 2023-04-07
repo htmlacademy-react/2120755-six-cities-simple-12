@@ -6,7 +6,8 @@ import Suggestions from './components/suggestions';
 import Overview from './components/overview';
 import ReviewList from './components/reviewsList';
 import Map from '@components/map';
-import { findOfferById } from 'store/action';
+import { fetchOffer, fetchOffersNearby, fetchOfferReviews } from 'store/api-actions';
+import { AppDispatch } from '@customTypes/store';
 import { InitialState } from '@customTypes/store';
 
 function Room() {
@@ -16,12 +17,18 @@ function Room() {
   const offerToDisplay = useSelector((state: InitialState) => state.offerToShow);
 
   useEffect(() => {
-    dispatch(findOfferById(offerId));
-  });
+    dispatch(fetchOffer(offerId));
+    dispatch(fetchOffersNearby(offerId));
+    dispatch(fetchOfferReviews (offerId));
+    window.scrollTo(0, 0);
+  }, [dispatch, offerId]);
 
   if (offerToDisplay === undefined) {
-    return <Navigate to="/not-found"/>;
+    return <Navigate to="not-found"/>;
   }
+
+  // eslint-disable-next-line no-console
+  console.log();
 
   return (
     <main className="page__main page__main--property">
