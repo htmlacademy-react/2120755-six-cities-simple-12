@@ -6,7 +6,7 @@ import Suggestions from './components/suggestions';
 import Overview from './components/overview';
 import ReviewList from './components/reviewsList';
 import Map from '@components/map';
-import { findOfferById, findOfferNearby, findOfferReviews } from 'store/action';
+import { findOfferById } from 'store/action';
 import { InitialState } from '@customTypes/store';
 
 function Room() {
@@ -17,12 +17,10 @@ function Room() {
 
   useEffect(() => {
     dispatch(findOfferById(offerId));
-    dispatch(findOfferNearby(offerId));
-    dispatch(findOfferReviews(offerId));
   });
 
   if (offerToDisplay === undefined) {
-    return <Navigate to="not-found"/>;
+    return <Navigate to="/not-found"/>;
   }
 
   return (
