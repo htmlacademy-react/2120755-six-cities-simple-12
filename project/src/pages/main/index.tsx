@@ -1,9 +1,26 @@
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import OffersList from '@components/offersList/OffersList';
 import Navigation from '@components/navigation';
 import Map from '@components/map';
+import Spinner from '@components/spinner/spinner';
+import { fetchOffers } from 'store/api-actions';
+import { AppDispatch } from '@customTypes/store';
+import { InitialState } from '@customTypes/store';
 import { cities } from '@utils/data';
 
 function Main(): JSX.Element {
+  const dispatch: AppDispatch = useDispatch();
+  const offers = useSelector((state: InitialState ) => state.offers);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    dispatch(fetchOffers());
+    if (offers.length !== 0) {
+      setIsLoaded(true);
+    }
+  }, [isLoaded, dispatch, offers.length]);
+
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -19,14 +36,17 @@ function Main(): JSX.Element {
           </ul>
         </section>
       </div>
-      <div className="cities">
-        <div className="cities__places-container container">
-          <OffersList />
-          <div className="cities__right-section">
-            <Map />
-          </div>
-        </div>
-      </div>
+      {
+        isLoaded ?
+          <div className="cities">
+            <div className="cities__places-container container">
+              <OffersList />
+              <div className="cities__right-section">
+                <Map />
+              </div>
+            </div>
+          </div> : <Spinner/>
+      }
     </main>
   );
 }

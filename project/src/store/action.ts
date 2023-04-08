@@ -2,6 +2,7 @@ import { createAction } from '@reduxjs/toolkit';
 import { Offer } from '@customTypes/index';
 
 export const Action = {
+  LOAD_OFFERS: 'LOAD_OFFERS',
   CHANGE_CITY: 'CHANGE_CITY',
   MARK_OFFER_ON_CARD: 'MARK_OFFER_ON_CARD',
   FIND_OFFER_BY_ID: 'FIND_OFFER_BY_ID',
@@ -9,6 +10,10 @@ export const Action = {
   FIND_OFFER_REVIEW: 'FIND_OFFER_REVIEW',
   CHANGE_SORT_TYPE: 'CHANGE_SORT_TYPE'
 };
+
+export const loadOffers = createAction(Action.LOAD_OFFERS, (value: Offer[]) => ({
+  payload: value,
+}));
 
 export const changeCity = createAction(Action.CHANGE_CITY, (value: string) => ({
   payload: value,
