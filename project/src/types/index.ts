@@ -44,3 +44,8 @@ export type ReviewObject = {
       isPro: boolean;
       name: string;
       };}
+
+export type AuthorizationObject = {
+  email: string;
+  password: string;
+}

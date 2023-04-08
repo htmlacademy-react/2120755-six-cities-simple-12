@@ -1,8 +1,9 @@
 import { createAction } from '@reduxjs/toolkit';
-import { Offer, ReviewObject } from '@customTypes/index';
+import { Offer, ReviewObject, AuthorizationObject } from '@customTypes/index';
 
 
 export const Action = {
+  LOGIN: 'LOGIN',
   LOAD_OFFERS: 'LOAD_OFFERS',
   CHANGE_CITY: 'CHANGE_CITY',
   MARK_OFFER_ON_CARD: 'MARK_OFFER_ON_CARD',
@@ -11,6 +12,10 @@ export const Action = {
   FIND_OFFER_REVIEW: 'FIND_OFFER_REVIEW',
   CHANGE_SORT_TYPE: 'CHANGE_SORT_TYPE'
 };
+
+export const login = createAction(Action.LOGIN, (value: AuthorizationObject) => ({
+  payload: value,
+}));
 
 export const loadOffers = createAction(Action.LOAD_OFFERS, (value: Offer[]) => ({
   payload: value,

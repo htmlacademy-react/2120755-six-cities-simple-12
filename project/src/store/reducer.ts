@@ -5,6 +5,7 @@ import { InitialState } from '@customTypes/store';
 import { Offer } from '@customTypes/index';
 
 const initialState: InitialState = {
+  authorizationStatus: false,
   city: 'Paris',
   sortType: 'Popular',
   offers: undefined,
