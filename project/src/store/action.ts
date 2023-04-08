@@ -4,7 +4,7 @@ import { Offer, ReviewObject } from '@customTypes/index';
 
 export const Action = {
   HANDLE_LOADING: 'HANDLE_LOADING',
-  // LOGIN: 'LOGIN',
+  CHECK_AUTHORIZATION: 'CHECK_AUTHORIZATION',
   LOAD_OFFERS: 'LOAD_OFFERS',
   CHANGE_CITY: 'CHANGE_CITY',
   MARK_OFFER_ON_CARD: 'MARK_OFFER_ON_CARD',
@@ -14,7 +14,7 @@ export const Action = {
   CHANGE_SORT_TYPE: 'CHANGE_SORT_TYPE'
 };
 
-// export const login = createAction(Action.LOGIN, (value: AuthorizationObject) => ({
+// export const login = createAction(Action.CHECK_AUTHORIZATION, (value: boolean) => ({
 //   payload: value,
 // }));
 
