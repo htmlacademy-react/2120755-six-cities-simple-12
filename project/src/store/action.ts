@@ -1,9 +1,10 @@
 import { createAction } from '@reduxjs/toolkit';
-import { Offer, ReviewObject, AuthorizationObject } from '@customTypes/index';
+import { Offer, ReviewObject } from '@customTypes/index';
 
 
 export const Action = {
-  LOGIN: 'LOGIN',
+  HANDLE_LOADING: 'HANDLE_LOADING',
+  // LOGIN: 'LOGIN',
   LOAD_OFFERS: 'LOAD_OFFERS',
   CHANGE_CITY: 'CHANGE_CITY',
   MARK_OFFER_ON_CARD: 'MARK_OFFER_ON_CARD',
@@ -13,7 +14,11 @@ export const Action = {
   CHANGE_SORT_TYPE: 'CHANGE_SORT_TYPE'
 };
 
-export const login = createAction(Action.LOGIN, (value: AuthorizationObject) => ({
+// export const login = createAction(Action.LOGIN, (value: AuthorizationObject) => ({
+//   payload: value,
+// }));
+
+export const handleLoadingStatus = createAction(Action.HANDLE_LOADING, (value: boolean) => ({
   payload: value,
 }));
 

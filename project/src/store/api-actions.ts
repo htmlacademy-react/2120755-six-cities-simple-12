@@ -1,33 +1,33 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ApiRoutes } from '@utils/const';
-import { loadOffers, findOfferById, findOfferNearby, findOfferReviews, login } from './action';
-import { Offer, ReviewObject, AuthorizationObject } from '@customTypes/index';
+import { loadOffers, findOfferById, findOfferNearby, findOfferReviews } from './action';
+import { Offer, ReviewObject} from '@customTypes/index';
 
-export const checkAuthAction = createAsyncThunk<void, undefined, {
-  extra: AxiosInstance;
-}>(
-  'user/checkAuth',
-  async (_arg, {dispatch, extra: api}) => {
-    try {
-      await api.get(ApiRoutes.login);
-      dispatch(login(AuthorizationStatus.Auth));
-    } catch {
-      dispatch(login(AuthorizationStatus.NoAuth));
-    }
-  },
-);
+// export const checkAuthAction = createAsyncThunk<void, undefined, {
+//   extra: AxiosInstance;
+// }>(
+//   'user/checkAuth',
+//   async (_arg, {dispatch, extra: api}) => {
+//     try {
+//       await api.get(ApiRoutes.login);
+//       dispatch(login(AuthorizationStatus.Auth));
+//     } catch {
+//       dispatch(login(AuthorizationStatus.NoAuth));
+//     }
+//   },
+// );
 
-export const loginAction = createAsyncThunk<void, AuthorizationObject , {
-  extra: AxiosInstance;
-}>(
-  'user/login',
-  async ({email, password}, {dispatch, extra: api}) => {
-    const {data: {token}} = await api.post<AuthorizationObject>(ApiRoutes.login, {email, password});
-    saveToken(token);
-    dispatch(login(AuthorizationStatus.Auth));
-  },
-);
+// export const loginAction = createAsyncThunk<void, AuthorizationObject , {
+//   extra: AxiosInstance;
+// }>(
+//   'user/login',
+//   async ({email, password}, {dispatch, extra: api}) => {
+//     const {data: {token}} = await api.post<AuthorizationObject>(ApiRoutes.login, {email, password});
+//     saveToken(token);
+//     dispatch(login(AuthorizationStatus.Auth));
+//   },
+// );
 
 // export const logoutAction = createAsyncThunk<void, undefined, {
 //   extra: AxiosInstance;

@@ -2,6 +2,7 @@ import { store } from 'store';
 import { Offer, ReviewObject } from './index';
 
 export type InitialState = {
+  isLoaded: boolean;
   authorizationStatus: boolean;
   city: string;
   sortType: string | null;

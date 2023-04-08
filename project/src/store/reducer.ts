@@ -1,10 +1,11 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, markOfferOnCard, findOfferById, findOfferNearby, findOfferReviews, changeSortType, loadOffers } from './action';
+import { changeCity, markOfferOnCard, findOfferById, findOfferNearby, findOfferReviews, changeSortType, loadOffers, handleLoadingStatus } from './action';
 import { mockOffersList } from 'mocks/offers';
 import { InitialState } from '@customTypes/store';
 import { Offer } from '@customTypes/index';
 
 const initialState: InitialState = {
+  isLoaded: false,
   authorizationStatus: false,
   city: 'Paris',
   sortType: 'Popular',
@@ -48,6 +49,9 @@ function topRaiting(a: Offer, b: Offer) {
 
 export const storeUpdate = createReducer(initialState, (builder) => {
   builder
+    .addCase(handleLoadingStatus, (state, action) => {
+      state.isLoaded = action.payload;
+    })
     .addCase(loadOffers, (state, action) => {
       state.offers = action.payload;
     })
