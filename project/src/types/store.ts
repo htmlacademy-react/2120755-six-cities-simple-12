@@ -10,7 +10,7 @@ export type InitialState = {
   offerToShow: Offer | undefined;
   offersNearby: Offer[] | undefined;
   offerReviews: ReviewObject[] | undefined;
-  hoveredOffer: Offer;
+  hoveredOffer: Offer | undefined;
 }
 
 export type AppDispatch = typeof store.dispatch;

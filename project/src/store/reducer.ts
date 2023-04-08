@@ -13,7 +13,7 @@ const initialState: InitialState = {
   offerToShow: undefined,
   offersNearby: undefined,
   offerReviews: undefined,
-  hoveredOffer: mockOffersList[-1],
+  hoveredOffer: undefined,
 };
 
 function priceHighToLow(a: Offer, b: Offer) {
