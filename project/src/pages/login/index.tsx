@@ -1,13 +1,17 @@
 import { Link } from 'react-router-dom';
-import { useState, ChangeEvent, FormEvent} from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
+import { useDispatch } from 'react-redux';
 import Header from '@components/header';
+import { login } from 'store/api-actions';
+import { AppDispatch } from '@customTypes/store';
 
 type LoginProps = {
   currentPath: string;
 }
 
 function Login({currentPath}: LoginProps): JSX.Element {
-  const [loginData, setLoginData] = useState({});
+  const dispatch: AppDispatch = useDispatch();
+  const [loginData, setLoginData] = useState({email: '', password: ''});
 
   function handleLoginData(event: ChangeEvent<{ value: string; name: string }>) {
     const target = event.target;
@@ -18,8 +22,7 @@ function Login({currentPath}: LoginProps): JSX.Element {
 
   function fetchLoginData(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault();
-    // eslint-disable-next-line no-console
-    console.log(loginData);
+    dispatch(login(loginData));
   }
 
   return (

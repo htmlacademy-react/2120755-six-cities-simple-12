@@ -1,4 +1,4 @@
-import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
+import axios, {AxiosInstance, AxiosRequestConfig, AxiosError} from 'axios';
 import { getToken } from './token';
 
 const BACKEND_URL = 'https://12.react.pages.academy/six-cities-simple';
@@ -18,6 +18,17 @@ export const createAPI = (): AxiosInstance => {
         config.headers['x-token'] = token;
       }
       return config;
+    }
+  );
+
+  api.interceptors.response.use(
+    (response) => response,
+    (error: AxiosError<{error: string}>) => {
+      if (error.response) {
+        // eslint-disable-next-line no-console
+        console.log(error.response.data.error);
+      }
+      throw error;
     }
   );
 

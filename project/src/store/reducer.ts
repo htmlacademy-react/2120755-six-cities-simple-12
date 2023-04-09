@@ -1,12 +1,12 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, markOfferOnCard, findOfferById, findOfferNearby, findOfferReviews, changeSortType, loadOffers, handleLoadingStatus } from './action';
+import { changeCity, markOfferOnCard, findOfferById, findOfferNearby, findOfferReviews, changeSortType, loadOffers, handleLoadingStatus, checkAuthorization } from './action';
 import { mockOffersList } from 'mocks/offers';
 import { InitialState } from '@customTypes/store';
 import { Offer } from '@customTypes/index';
 
 const initialState: InitialState = {
   isLoaded: false,
-  authorizationStatus: false,
+  authorized: false,
   city: 'Paris',
   sortType: 'Popular',
   offers: undefined,
@@ -51,6 +51,9 @@ export const storeUpdate = createReducer(initialState, (builder) => {
   builder
     .addCase(handleLoadingStatus, (state, action) => {
       state.isLoaded = action.payload;
+    })
+    .addCase(checkAuthorization, (state, action) => {
+      state.authorized = action.payload;
     })
     .addCase(loadOffers, (state, action) => {
       state.offers = action.payload;

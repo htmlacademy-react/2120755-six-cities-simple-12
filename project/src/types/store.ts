@@ -3,7 +3,7 @@ import { Offer, ReviewObject } from './index';
 
 export type InitialState = {
   isLoaded: boolean;
-  authorizationStatus: boolean;
+  authorized: boolean;
   city: string;
   sortType: string | null;
   offers: Offer[] | undefined;

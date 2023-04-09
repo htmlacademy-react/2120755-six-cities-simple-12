@@ -1,7 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 import { Offer, ReviewObject } from '@customTypes/index';
 
-
 export const Action = {
   HANDLE_LOADING: 'HANDLE_LOADING',
   CHECK_AUTHORIZATION: 'CHECK_AUTHORIZATION',
@@ -14,9 +13,9 @@ export const Action = {
   CHANGE_SORT_TYPE: 'CHANGE_SORT_TYPE'
 };
 
-// export const login = createAction(Action.CHECK_AUTHORIZATION, (value: boolean) => ({
-//   payload: value,
-// }));
+export const checkAuthorization = createAction(Action.CHECK_AUTHORIZATION, (value: boolean) => ({
+  payload: value,
+}));
 
 export const handleLoadingStatus = createAction(Action.HANDLE_LOADING, (value: boolean) => ({
   payload: value,
