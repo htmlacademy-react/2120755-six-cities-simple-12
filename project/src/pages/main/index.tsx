@@ -4,17 +4,18 @@ import OffersList from '@components/offersList/OffersList';
 import Navigation from '@components/navigation';
 import Map from '@components/map';
 import Spinner from '@components/spinner/spinner';
-import { handleLoadingStatus } from 'store/action';
+import { changeLoadingStatus } from 'store/action';
 import { fetchOffers } from 'store/api-actions';
-import { AppDispatch, InitialState } from '@customTypes/store';
 import { cities } from '@utils/data';
+import { AppDispatch, InitialState } from '@customTypes/store';
+
 
 function Main(): JSX.Element {
   const dispatch: AppDispatch = useDispatch();
   const isLoaded = useSelector((state: InitialState) => state.isLoaded);
 
   useEffect(() => {
-    dispatch(fetchOffers()).finally(() => dispatch(handleLoadingStatus(true)));
+    dispatch(fetchOffers()).finally(() => dispatch(changeLoadingStatus(true)));
   }, [dispatch]);
 
   return (

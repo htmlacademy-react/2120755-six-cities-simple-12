@@ -1,4 +1,5 @@
 import axios, {AxiosInstance, AxiosRequestConfig, AxiosError} from 'axios';
+import { toast } from 'react-toastify';
 import { getToken } from './token';
 
 const BACKEND_URL = 'https://12.react.pages.academy/six-cities-simple';
@@ -13,7 +14,6 @@ export const createAPI = (): AxiosInstance => {
   api.interceptors.request.use(
     (config: AxiosRequestConfig) => {
       const token = getToken();
-
       if (token && config.headers) {
         config.headers['x-token'] = token;
       }
@@ -25,8 +25,10 @@ export const createAPI = (): AxiosInstance => {
     (response) => response,
     (error: AxiosError<{error: string}>) => {
       if (error.response) {
-        // eslint-disable-next-line no-console
-        console.log(error.response.data.error);
+        toast.info(error.response.data.error, {
+          position: toast.POSITION.TOP_CENTER,
+          toastId: 1
+        });
       }
       throw error;
     }

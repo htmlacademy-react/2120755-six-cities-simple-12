@@ -1,9 +1,10 @@
 import { createAction } from '@reduxjs/toolkit';
-import { Offer, ReviewObject } from '@customTypes/index';
+import { Offer, ReviewObject, UserData } from '@customTypes/index';
 
 export const Action = {
-  HANDLE_LOADING: 'HANDLE_LOADING',
+  CHANGE_LOADING_STATUS: 'HANDLE_LOADING',
   CHECK_AUTHORIZATION: 'CHECK_AUTHORIZATION',
+  LOAD_USER_DATA: 'LOAD_USER_DATA',
   LOAD_OFFERS: 'LOAD_OFFERS',
   CHANGE_CITY: 'CHANGE_CITY',
   MARK_OFFER_ON_CARD: 'MARK_OFFER_ON_CARD',
@@ -17,7 +18,11 @@ export const checkAuthorization = createAction(Action.CHECK_AUTHORIZATION, (valu
   payload: value,
 }));
 
-export const handleLoadingStatus = createAction(Action.HANDLE_LOADING, (value: boolean) => ({
+export const loadUserData = createAction(Action.LOAD_USER_DATA, (value: UserData) => ({
+  payload: value,
+}));
+
+export const changeLoadingStatus = createAction(Action.CHANGE_LOADING_STATUS, (value: boolean) => ({
   payload: value,
 }));
 

@@ -1,5 +1,4 @@
-export type Offer =
-  {
+export type Offer = {
     bedrooms: number;
     city: {
       location: {

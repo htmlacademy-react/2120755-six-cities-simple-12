@@ -7,7 +7,7 @@ import Suggestions from './components/suggestions';
 import Overview from './components/overview';
 import ReviewList from './components/reviewsList';
 import Map from '@components/map';
-import { handleLoadingStatus } from 'store/action';
+import { changeLoadingStatus } from 'store/action';
 import { fetchOfferData } from 'store/api-actions';
 import { AppDispatch } from '@customTypes/store';
 import { InitialState } from '@customTypes/store';
@@ -20,9 +20,9 @@ function Room() {
   const isLoaded = useSelector((state: InitialState) => state.isLoaded);
 
   useEffect(() => {
-    dispatch(handleLoadingStatus(false));
+    dispatch(changeLoadingStatus(false));
     dispatch(fetchOfferData(offerId))
-      .finally(() => dispatch(handleLoadingStatus(true)));
+      .finally(() => dispatch(changeLoadingStatus(true)));
     window.scrollTo(0, 0);
   }, [dispatch, offerId]);
 

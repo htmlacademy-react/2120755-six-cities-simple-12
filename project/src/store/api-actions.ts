@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { loadOffers, findOfferById, findOfferNearby, findOfferReviews, checkAuthorization } from './action';
+import { loadOffers, findOfferById, findOfferNearby, findOfferReviews, checkAuthorization, loadUserData } from './action';
 import { ApiRoutes } from '@utils/const';
 import { saveToken, removeToken } from '@utils/token';
 import { Offer, ReviewObject, LoginData, UserData} from '@customTypes/index';
@@ -12,8 +12,9 @@ undefined,
 >('GET to /login',
   async (_arg, {dispatch, extra: api}) => {
     try {
-      await api.get(ApiRoutes.login);
+      const {data} = await api.get<UserData>(ApiRoutes.login);
       dispatch(checkAuthorization(true));
+      dispatch(loadUserData(data));
     } catch {
       dispatch(checkAuthorization(false));
     }
@@ -26,8 +27,9 @@ LoginData,
 {extra: AxiosInstance}
 >('POST to /login',
   async ({email, password}, {dispatch, extra: api}) => {
-    const {data: {token}} = await api.post<UserData>(ApiRoutes.login, {email, password});
-    saveToken(token);
+    const {data} = await api.post<UserData>(ApiRoutes.login, {email, password});
+    saveToken(data.token);
+    dispatch(loadUserData(data));
     dispatch(checkAuthorization(true));
   },
 );
@@ -51,7 +53,6 @@ undefined,
 >('GET to /hotels',
   async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.get<Offer[]>(ApiRoutes.offers);
-
     dispatch(loadOffers(data));
   },
 );

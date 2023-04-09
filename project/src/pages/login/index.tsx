@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useState, ChangeEvent, FormEvent } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Header from '@components/header';
 import { login } from 'store/api-actions';
-import { AppDispatch } from '@customTypes/store';
+import { AppDispatch, InitialState } from '@customTypes/store';
 
 type LoginProps = {
   currentPath: string;
@@ -12,11 +13,11 @@ type LoginProps = {
 function Login({currentPath}: LoginProps): JSX.Element {
   const dispatch: AppDispatch = useDispatch();
   const [loginData, setLoginData] = useState({email: '', password: ''});
+  const authorized = useSelector((state: InitialState) => state.authorized);
+  const navigate = useNavigate();
 
   function handleLoginData(event: ChangeEvent<{ value: string; name: string }>) {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value;
+    const { name, value } = event.target;
     setLoginData({ ...loginData, [name]: value });
   }
 
@@ -24,6 +25,13 @@ function Login({currentPath}: LoginProps): JSX.Element {
     evt.preventDefault();
     dispatch(login(loginData));
   }
+
+  useEffect(() => {
+    if (authorized) {
+      navigate('/');
+    }
+  }, [authorized, navigate]);
+
 
   return (
     <div className="page page--gray page--login">

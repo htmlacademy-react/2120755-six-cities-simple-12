@@ -11,6 +11,7 @@ type HeaderProps = {
 function Header({currentLocation}: HeaderProps): JSX.Element {
   const dispatch: AppDispatch = useDispatch();
   const authorized = useSelector((state: InitialState) => state.authorized);
+  const userData = useSelector((state: InitialState) => state.userData);
 
   return (
     <header className="header">
@@ -27,7 +28,7 @@ function Header({currentLocation}: HeaderProps): JSX.Element {
                 <li className="header__nav-item user">
                   <div className="header__nav-profile">
                     <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    <span className="header__user-name user__name">{ authorized ? 'Oliver.conner@gmail.com' : ''}</span>
+                    <span className="header__user-name user__name">{ authorized && userData ? `${userData.email}` : ''}</span>
                   </div>
                 </li>
                 <li className="header__nav-item">
