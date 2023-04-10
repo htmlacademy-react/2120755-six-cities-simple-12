@@ -44,6 +44,12 @@ export type ReviewObject = {
       name: string;
       };}
 
+export type Review = {
+        comment: string;
+        rating: string;
+        id: number;
+        };
+
 export type LoginData = {
   email: string;
   password: string;

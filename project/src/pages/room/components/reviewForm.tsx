@@ -1,16 +1,29 @@
 import { Fragment, useState, ChangeEvent, FormEvent } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { postReview} from 'store/api-actions';
 import { rating } from '@utils/data';
+import { AppDispatch, InitialState } from '@customTypes/store';
 
 function ReviewForm(): JSX.Element {
-  const [, setFormData] = useState('');
+  const dispatch: AppDispatch = useDispatch();
+  const urlParams = useParams();
+  const offerId = Number(urlParams.id);
+  const [reviewData, setFormData] = useState({comment: '', rating: '', id: offerId});
+  const authorized = useSelector((state: InitialState) => state.authorized);
 
-  const formFillHandle = (event: ChangeEvent<{ value: string }>) => {
-    setFormData(event.target.value);
+  const formFillHandle = (event: ChangeEvent<{ value: string; name: string }>) => {
+    const { name, value } = event.target;
+    setFormData({ ...reviewData, [name]: value });
   };
   const formSubmitHandle = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-  // Здесь будет отправка в массив отзывов
+    dispatch(postReview(reviewData));
   };
+
+  if (!authorized) {
+    return <> </>;
+  }
 
   return (
     <form className="reviews__form form" action="#" method="post"
@@ -32,6 +45,7 @@ function ReviewForm(): JSX.Element {
                 value={key}
                 id={`${key}-stars`}
                 type="radio"
+                onChange={formFillHandle}
               />
               <label
                 htmlFor={`${key}-stars`}
@@ -47,8 +61,8 @@ function ReviewForm(): JSX.Element {
       </div>
       <textarea
         className="reviews__textarea form__textarea"
-        id="review"
-        name="review"
+        id="comment"
+        name="comment"
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={formFillHandle}
       />
@@ -68,7 +82,6 @@ function ReviewForm(): JSX.Element {
         </button>
       </div>
     </form>
-  );
-}
+  );}
 
 export default ReviewForm;

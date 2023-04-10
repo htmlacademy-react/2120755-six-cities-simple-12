@@ -45,7 +45,8 @@ function Room() {
             <section className="property__map map">
               <Map />
             </section>
-          </section><Suggestions />
+          </section>
+          <Suggestions />
         </>
         : <Spinner/>}
     </main>

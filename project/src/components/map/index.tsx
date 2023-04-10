@@ -34,7 +34,7 @@ function Map (): JSX.Element {
           })
           .addTo(map);
       });
-    } }, [map, offersToShow, offerToMark]);
+    } }, [map, offersToShow, offerToMark, cityToShow]);
 
   return (
     <section style={

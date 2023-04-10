@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { loadOffers, findOfferById, findOfferNearby, findOfferReviews, checkAuthorization, loadUserData } from './action';
 import { ApiRoutes } from '@utils/const';
 import { saveToken, removeToken } from '@utils/token';
-import { Offer, ReviewObject, LoginData, UserData} from '@customTypes/index';
+import { Offer, Review, ReviewObject, LoginData, UserData} from '@customTypes/index';
 
 export const checkAuthAction = createAsyncThunk<
 void,
@@ -73,4 +73,13 @@ export const fetchOfferData = createAsyncThunk<
     dispatch(findOfferReviews(reviewResponse.data));
   });
 
-
+export const postReview = createAsyncThunk<
+  void,
+  Review,
+  {extra: AxiosInstance}
+>('POST to /comments/:id',
+  async ({comment, rating, id}: Review, {dispatch, extra: api}) => {
+    const {data} = await api.post<ReviewObject[]>(`${ApiRoutes.offerReview}${id}`, {comment, rating});
+    dispatch(findOfferReviews(data));
+  },
+);
