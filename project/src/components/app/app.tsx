@@ -6,7 +6,8 @@ import Header from '../header';
 import Login from '@pages/login';
 import Room from '@pages/room';
 import NotFoundPage from '@pages/notFound';
-import { checkAuthAction } from 'store/api-actions';
+import { changeLoadingStatus } from 'store/action';
+import { checkAuthAction, fetchOffers } from 'store/api-actions';
 import { AppDispatch } from '@customTypes/store';
 
 function App(): JSX.Element {
@@ -15,7 +16,8 @@ function App(): JSX.Element {
 
   useEffect(() => {
     dispatch(checkAuthAction());
-  });
+    dispatch(fetchOffers()).finally(() => dispatch(changeLoadingStatus(true)));
+  }, [dispatch]);
 
   return (
     <>

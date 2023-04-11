@@ -48,5 +48,3 @@ function Map (): JSX.Element {
 }
 
 export default Map;
-
-

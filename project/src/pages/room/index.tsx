@@ -51,7 +51,6 @@ function Room() {
         : <Spinner/>}
     </main>
   );
-
 }
 
 export default Room;
