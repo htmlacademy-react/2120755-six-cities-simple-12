@@ -76,7 +76,6 @@ function ReviewForm(): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-
         >
                       Submit
         </button>

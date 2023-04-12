@@ -1,6 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '@components/header';
 import { login } from 'store/api-actions';
@@ -80,4 +79,5 @@ function Login({currentPath}: LoginProps): JSX.Element {
     </div>
   );
 }
+
 export default Login;

@@ -5,7 +5,7 @@ function Overview(): JSX.Element {
   const roomData = useSelector((state: InitialState) => state.offerToShow);
 
   if (roomData === undefined) {
-    return <div></div>;
+    return <> </>;
   }
 
   return (

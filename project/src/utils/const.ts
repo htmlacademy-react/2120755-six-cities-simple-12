@@ -5,9 +5,3 @@ export const ApiRoutes = {
   login: '/login',
   logout: '/logout'
 };
-
-export const AuthorizationStatus = {
-  Auth: 'AUTH',
-  NoAuth: 'NO_AUTH',
-  Unknown: 'UNKNOWN',
-};

@@ -1,4 +1,5 @@
 function NotFoundPage(): JSX.Element {
+
   return (
     <div style={{ padding: '100px', textAlign: 'center' }}>
       <h1 style={{ fontSize: '88px' }}>

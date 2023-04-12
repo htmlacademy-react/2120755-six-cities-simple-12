@@ -1,8 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { changeCity, markOfferOnCard, findOfferById, findOfferNearby, findOfferReviews, changeSortType, loadOffers, changeLoadingStatus, checkAuthorization, loadUserData } from './action';
-import { mockOffersList } from 'mocks/offers';
+import { priceLowToHigh, priceHighToLow, topRaiting, idLowToHigh } from '@utils/sort-functions';
 import { InitialState } from '@customTypes/store';
-import { Offer } from '@customTypes/index';
 
 const initialState: InitialState = {
   isLoaded: false,
@@ -16,37 +15,6 @@ const initialState: InitialState = {
   offerReviews: undefined,
   hoveredOffer: undefined,
 };
-
-function priceHighToLow(a: Offer, b: Offer) {
-  if (a.price > b.price) {
-    return -1;
-  }
-  if (a.price < b.price) {
-    return 1;
-  }
-  return 0;
-}
-
-function priceLowToHigh(a: Offer, b: Offer) {
-  if (a.price > b.price) {
-    return 1;
-  }
-  if (a.price < b.price) {
-    return -1;
-  }
-  return 0;
-}
-
-function topRaiting(a: Offer, b: Offer) {
-  if (a.rating > b.rating) {
-    return -1;
-  }
-  if (a.price < b.price) {
-    return 1;
-  }
-  return 0;
-}
-
 
 export const storeUpdate = createReducer(initialState, (builder) => {
   builder
@@ -89,7 +57,7 @@ export const storeUpdate = createReducer(initialState, (builder) => {
         state.offers = state.offers?.sort(topRaiting);
       }
       if (action.payload === 'Popular') {
-        state.offers = mockOffersList;
+        state.offers = state.offers?.sort(idLowToHigh);
       }
     });
 });
