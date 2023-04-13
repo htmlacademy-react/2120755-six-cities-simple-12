@@ -3,7 +3,8 @@ import Card from '@components/card';
 import { InitialState } from '@customTypes/store';
 
 function Suggestions(): JSX.Element {
-  const offersNearby = useSelector((state: InitialState) => state.offersNearby);
+  const offersNearby = useSelector((state: InitialState) => state.chosenOffer.offersNearby);
+
   return (
     <div className="container">
       <section className="near-places places">

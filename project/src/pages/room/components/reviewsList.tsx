@@ -4,7 +4,8 @@ import Review from './reviews';
 import { InitialState } from '@customTypes/store';
 
 function ReviewList(): JSX.Element {
-  const reviewList = useSelector((state: InitialState) => state.offerReviews);
+  const reviewList = useSelector((state: InitialState) => state.chosenOffer.offerReviews);
+
   return (
     <section className="property__reviews reviews">
       <h2 className="reviews__title">

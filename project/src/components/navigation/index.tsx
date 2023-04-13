@@ -9,7 +9,7 @@ type navigationProps = {
 
 function Navigation({city}: navigationProps): JSX.Element {
   const dispatch = useDispatch();
-  const choosenCity = useSelector((state: InitialState) => state.city);
+  const choosenCity = useSelector((state: InitialState) => state.offers.city);
 
   return (
     <li className="locations__item">

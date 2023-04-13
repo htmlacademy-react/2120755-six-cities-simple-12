@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { InitialState } from '@customTypes/store';
 
 function Overview(): JSX.Element {
-  const roomData = useSelector((state: InitialState) => state.offerToShow);
+  const roomData = useSelector((state: InitialState) => state.chosenOffer.offerToShow);
 
   if (roomData === undefined) {
     return <> </>;

@@ -7,7 +7,7 @@ import { cities } from '@utils/data';
 import { InitialState } from '@customTypes/store';
 
 function Main(): JSX.Element {
-  const isLoaded = useSelector((state: InitialState) => state.isLoaded);
+  const isLoaded = useSelector((state: InitialState) => state.loading.isLoaded);
 
   return (
     <main className="page__main page__main--index">

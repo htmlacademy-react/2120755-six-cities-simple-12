@@ -16,8 +16,8 @@ function Room() {
   const dispatch: AppDispatch = useDispatch();
   const urlParams = useParams();
   const offerId = Number(urlParams.id);
-  const offerToDisplay = useSelector((state: InitialState) => state.offerToShow);
-  const isLoaded = useSelector((state: InitialState) => state.isLoaded);
+  const offerToDisplay = useSelector((state: InitialState) => state.chosenOffer.offerToShow);
+  const isLoaded = useSelector((state: InitialState) => state.loading.isLoaded);
 
   useEffect(() => {
     dispatch(changeLoadingStatus(false));

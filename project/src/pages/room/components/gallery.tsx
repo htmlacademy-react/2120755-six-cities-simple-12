@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { InitialState } from '@customTypes/store';
 
 function Gallery(): JSX.Element {
-  const imagesCollection = useSelector((state: InitialState) => state.offerToShow?.images);
+  const imagesCollection = useSelector((state: InitialState) => state.chosenOffer.offerToShow?.images);
 
   return (
     <div className="property__gallery-container container">

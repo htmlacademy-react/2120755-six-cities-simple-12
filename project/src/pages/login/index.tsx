@@ -12,7 +12,7 @@ type LoginProps = {
 function Login({currentPath}: LoginProps): JSX.Element {
   const dispatch: AppDispatch = useDispatch();
   const [loginData, setLoginData] = useState({email: '', password: ''});
-  const authorized = useSelector((state: InitialState) => state.authorized);
+  const authorized = useSelector((state: InitialState) => state.authorization.authorized);
   const navigate = useNavigate();
 
   function handleLoginData(event: ChangeEvent<{ value: string; name: string }>) {

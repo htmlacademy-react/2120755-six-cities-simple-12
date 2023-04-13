@@ -4,8 +4,8 @@ import Sort from '@components/sort/sort';
 import { InitialState } from '@customTypes/store';
 
 function OffersList(): JSX.Element {
-  const choosenCity = useSelector((state: InitialState) => state.city);
-  const offersOfChoosenCity = useSelector((state: InitialState) => state.offers?.filter(({city}) => city.name === state.city));
+  const choosenCity = useSelector((state: InitialState) => state.offers.city);
+  const offersOfChoosenCity = useSelector((state: InitialState) => state.offers.offers?.filter(({city}) => city.name === state.offers.city));
 
   return (
     <section className="cities__places places">

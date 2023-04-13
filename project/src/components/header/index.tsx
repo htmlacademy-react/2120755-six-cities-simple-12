@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { logout } from 'store/api-actions';
@@ -10,8 +11,8 @@ type HeaderProps = {
 
 function Header({currentLocation}: HeaderProps): JSX.Element {
   const dispatch: AppDispatch = useDispatch();
-  const authorized = useSelector((state: InitialState) => state.authorized);
-  const userData = useSelector((state: InitialState) => state.userData);
+  const authorized = useSelector((state: InitialState) => state.authorization.authorized);
+  const userData = useSelector((state: InitialState) => state.authorization.userData);
 
   return (
     <header className="header">
@@ -46,4 +47,4 @@ function Header({currentLocation}: HeaderProps): JSX.Element {
   );
 }
 
-export default Header;
+export default memo(Header);

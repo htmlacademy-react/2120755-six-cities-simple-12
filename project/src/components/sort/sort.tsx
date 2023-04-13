@@ -7,7 +7,7 @@ import { InitialState } from '@customTypes/store';
 
 function Sort(): JSX.Element {
   const dispatch = useDispatch();
-  const sortType = useSelector((state: InitialState) => state.sortType);
+  const sortType = useSelector((state: InitialState) => state.offers.sortType);
   const [isVisible, setIsVisible] = useState(false);
   const cn = classNames;
 
