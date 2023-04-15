@@ -53,21 +53,6 @@ export const fetchOffers = createAsyncThunkTeamplate<undefined>()(
   },
 );
 
-// export const fetchOfferData = createAsyncThunkTeamplate<number>()(
-//   'GET to /hotels/:id',
-//   async (id, { dispatch, extra: api }) => {
-//     const [offerResponse, nearbyResponse, reviewResponse] = await Promise.all([
-//       api.get<Offer>(`${ApiRoutes.offer}${id}`),
-//       api.get<Offer[]>(`${ApiRoutes.offer}${id}/nearby`),
-//       api.get<ReviewObject[]>(`${ApiRoutes.offerReview}${id}`)
-//     ]);
-//     changeLoadingStatus(false);
-//     dispatch(findOfferById(offerResponse.data));
-//     dispatch(findOfferNearby(nearbyResponse.data));
-//     dispatch(findOfferReviews(reviewResponse.data));
-//     dispatch(changeLoadingStatus(true));
-//   });
-
 export const fetchOfferData = createAsyncThunkTeamplate<number>()(
   'GET to /hotels/:id',
   async (id, { dispatch, extra: api }) => {
