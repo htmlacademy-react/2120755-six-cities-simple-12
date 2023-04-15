@@ -8,7 +8,8 @@ import Overview from './components/overview';
 import ReviewList from './components/reviewsList';
 import Map from '@components/map';
 import { changeLoadingStatus } from 'store/action';
-import { fetchOfferData } from 'store/api-actions';
+import { findOfferById, findOfferNearby, findOfferReviews } from '../../store/action';
+import { fetchOfferData, fetchOffersNearby, fetchOffersReviews } from 'store/api-actions';
 import { AppDispatch } from '@customTypes/store';
 import { InitialState } from '@customTypes/store';
 
@@ -21,9 +22,14 @@ function Room() {
 
   useEffect(() => {
     dispatch(changeLoadingStatus(false));
-    dispatch(fetchOfferData(offerId))
-      .finally(() => dispatch(changeLoadingStatus(true)));
-    window.scrollTo(0, 0);
+    dispatch(fetchOffersNearby(offerId));
+    dispatch(fetchOffersReviews(offerId));
+    dispatch(fetchOfferData(offerId));
+    return () => {
+      dispatch(findOfferById(undefined));
+      dispatch(findOfferNearby(undefined));
+      dispatch(findOfferReviews(undefined));
+    };
   }, [dispatch, offerId]);
 
   if (isLoaded && offerToDisplay === undefined) {

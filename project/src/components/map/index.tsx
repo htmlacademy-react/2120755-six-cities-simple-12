@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '@hooks/useMap';
+import { citiesData } from '@utils/data';
 import { InitialState } from '@customTypes/store';
 import currentMarker from '@img/pin-active.svg';
 import defaultMarker from '@img/pin.svg';
@@ -16,15 +17,16 @@ function choseIcon(Url: string) {
 }
 
 function Map (): JSX.Element {
-  const offersToShow = useSelector((state: InitialState) => state.offers.offers);
-  const cityToShow = useSelector((state: InitialState) => state.offers.offers?.find((offer) => offer.city.name === state.offers.city));
-  const offerToMark = useSelector((state: InitialState) => state.chosenOffer.hoveredOffer);
+  const offersToShow = useSelector((state: InitialState) => state.offers);
+  const targetCity = useSelector((state: InitialState) => state.city);
+  const cityToShow = citiesData[targetCity];
+  const offerToMark = useSelector((state: InitialState) => state.hoveredOffer);
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityToShow);
 
   useEffect(() => {
-    if (map) {
-      offersToShow?.forEach((offer) => {
+    if (map && offersToShow) {
+      offersToShow.forEach((offer) => {
         leaflet
           .marker({
             lat: offer.location.latitude,

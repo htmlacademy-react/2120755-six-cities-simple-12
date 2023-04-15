@@ -27,7 +27,8 @@ export const createAPI = (): AxiosInstance => {
       if (error.response) {
         toast.info(error.response.data.error, {
           position: toast.POSITION.TOP_CENTER,
-          toastId: 1
+          toastId: 1,
+          delay: 45000
         });
       }
       throw error;

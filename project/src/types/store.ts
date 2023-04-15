@@ -13,10 +13,7 @@ export type authorizationState = {
 export type offersState = {
   city: string;
   sortType: string | null;
-  offers: Offer[] | undefined;
-}
-
-export type chosenOfferState = {
+  offers: Offer[];
   offerToShow: Offer | undefined;
   offersNearby: Offer[] | undefined;
   offerReviews: ReviewObject[] | undefined;

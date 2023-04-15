@@ -18,6 +18,10 @@ function Header({currentLocation}: HeaderProps): JSX.Element {
     dispatch(logout());
   }
 
+  function handleLoginClick() {
+    dispatch(logout());
+  }
+
   return (
     <header className="header">
       <div className="container">

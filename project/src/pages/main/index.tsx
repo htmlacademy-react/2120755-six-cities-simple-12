@@ -3,7 +3,7 @@ import OffersList from '@components/offersList/OffersList';
 import Navigation from '@components/navigation';
 import Map from '@components/map';
 import Spinner from '@components/spinner/spinner';
-import { cities } from '@utils/data';
+import { citiesData } from '@utils/data';
 import { InitialState } from '@customTypes/store';
 
 function Main(): JSX.Element {
@@ -17,7 +17,7 @@ function Main(): JSX.Element {
             <div className="tabs">
               <section className="locations container">
                 <ul className="locations__list tabs__list">
-                  {cities.map((value) => (
+                  {Object.keys(citiesData).map((value) => (
                     <Navigation
                       city={value}
                       key={value}

@@ -5,7 +5,7 @@ import { postReview} from 'store/api-actions';
 import { rating } from '@utils/data';
 import { AppDispatch, InitialState } from '@customTypes/store';
 
-function ReviewForm(): JSX.Element {
+function ReviewForm(): JSX.Element | null {
   const dispatch: AppDispatch = useDispatch();
   const urlParams = useParams();
   const offerId = Number(urlParams.id);
@@ -22,7 +22,7 @@ function ReviewForm(): JSX.Element {
   };
 
   if (!authorized) {
-    return <> </>;
+    return null;
   }
 
   return (
