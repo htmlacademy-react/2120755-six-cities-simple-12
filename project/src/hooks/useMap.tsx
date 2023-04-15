@@ -2,15 +2,15 @@ import { useEffect, useState, MutableRefObject, useRef } from 'react';
 import leaflet from 'leaflet';
 import { Map } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { Offer } from '@customTypes/index';
+import { CityLocation } from '@customTypes/index';
 
-export function useMap(mapRef: MutableRefObject<HTMLElement | null>, cityToShow: Offer | undefined): Map | null {
+export function useMap(mapRef: MutableRefObject<HTMLElement | null>, cityToShow: CityLocation | undefined): Map | null {
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef(false);
 
   useEffect(() => {
     if (map !== null && cityToShow !== undefined) {
-      map.setView([cityToShow.city.location.latitude, cityToShow.city.location.longitude], 13);
+      map.setView([cityToShow.latitude, cityToShow.longitude], 13);
     }
   }, [map, cityToShow]);
 
@@ -18,10 +18,10 @@ export function useMap(mapRef: MutableRefObject<HTMLElement | null>, cityToShow:
     if (mapRef.current !== null && !isRenderedRef.current && cityToShow !== undefined) {
       const instance = leaflet.map(mapRef.current, {
         center: {
-          lat: cityToShow.city.location.latitude,
-          lng: cityToShow.city.location.longitude,
+          lat: cityToShow.latitude,
+          lng: cityToShow.longitude,
         },
-        zoom: cityToShow.city.location.zoom,
+        zoom: cityToShow.zoom,
       });
 
       leaflet

@@ -1,13 +1,21 @@
 import { useSelector } from 'react-redux';
 import { InitialState } from '@customTypes/store';
 
-function Gallery(): JSX.Element {
+function Gallery(): JSX.Element | null {
   const imagesCollection = useSelector((state: InitialState) => state.offerToShow?.images);
+  enum PhotosCount {
+    Start = 0,
+    End = 6,
+  }
+
+  if (imagesCollection === undefined) {
+    return null;
+  }
 
   return (
     <div className="property__gallery-container container">
       <div className="property__gallery">
-        { imagesCollection?.slice(0).sort(() => Math.random() - 0.5).slice(0, 6).map((images) =>
+        { [...imagesCollection].slice(PhotosCount.Start, PhotosCount.End).map((images) =>
           (
             <div key={images} className="property__image-wrapper">
               <img

@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import Header from '@components/header';
 import { login } from 'store/api-actions';
 import { AppDispatch, InitialState } from '@customTypes/store';
@@ -20,9 +21,27 @@ function Login({currentPath}: LoginProps): JSX.Element {
     setLoginData({ ...loginData, [name]: value });
   }
 
-  function fetchLoginData(evt: FormEvent<HTMLFormElement>) {
+  function validatePassword (password: string) {
+    const minLength = 2;
+    const pattern = /^(?=.*[A-Za-z])(?=.*\d).+$/;
+    if (password.length === minLength && password.match(pattern)) {
+      return true;
+    }
+    else {
+      toast.warning(
+        'Password should contain at least 1 letter and 1 digit',
+        {
+          position: toast.POSITION.TOP_CENTER,
+          toastId: 2
+        });
+    }
+  }
+
+  function fetchLoginData(evt: FormEvent) {
     evt.preventDefault();
-    dispatch(login(loginData));
+    if (validatePassword(loginData.password)) {
+      dispatch(login(loginData));
+    }
   }
 
   useEffect(() => {
@@ -30,7 +49,6 @@ function Login({currentPath}: LoginProps): JSX.Element {
       navigate('/');
     }
   }, [authorized, navigate]);
-
 
   return (
     <div className="page page--gray page--login">
@@ -58,8 +76,6 @@ function Login({currentPath}: LoginProps): JSX.Element {
                   type="password"
                   name="password"
                   placeholder="Password"
-                  minLength={2}
-                  pattern='^(?=.*[A-Za-z])(?=.*\d).+$'
                   onChange={handleLoginData}
                   required
                 />

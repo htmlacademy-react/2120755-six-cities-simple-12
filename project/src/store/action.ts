@@ -38,15 +38,15 @@ export const markOfferOnCard = createAction(Action.MARK_OFFER_ON_CARD, (value: O
   payload: value,
 }));
 
-export const findOfferById = createAction(Action.FIND_OFFER_BY_ID, (value: Offer) => ({
+export const findOfferById = createAction(Action.FIND_OFFER_BY_ID, (value: Offer | undefined) => ({
   payload: value,
 }));
 
-export const findOfferNearby = createAction(Action.FIND_OFFER_NEARBY, (value: Offer[]) => ({
+export const findOfferNearby = createAction(Action.FIND_OFFER_NEARBY, (value: Offer[] | undefined) => ({
   payload: value,
 }));
 
-export const findOfferReviews = createAction(Action.FIND_OFFER_REVIEW, (value: ReviewObject[]) => ({
+export const findOfferReviews = createAction(Action.FIND_OFFER_REVIEW, (value: ReviewObject[] | undefined) => ({
   payload: value,
 }));
 

@@ -7,7 +7,7 @@ export type InitialState = {
   userData: UserData | undefined;
   city: string;
   sortType: string | null;
-  offers: Offer[] | undefined;
+  offers: Offer[];
   offerToShow: Offer | undefined;
   offersNearby: Offer[] | undefined;
   offerReviews: ReviewObject[] | undefined;

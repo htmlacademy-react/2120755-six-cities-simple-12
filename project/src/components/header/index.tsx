@@ -13,6 +13,10 @@ function Header({currentLocation}: HeaderProps): JSX.Element {
   const authorized = useSelector((state: InitialState) => state.authorized);
   const userData = useSelector((state: InitialState) => state.userData);
 
+  function handleLoginClick() {
+    dispatch(logout());
+  }
+
   return (
     <header className="header">
       <div className="container">
@@ -34,8 +38,18 @@ function Header({currentLocation}: HeaderProps): JSX.Element {
                 <li className="header__nav-item">
                   <Link to="/login" className="header__nav-link">
                     {authorized ?
-                      <span className="header__signout" onClick={() => {dispatch(logout());}}>Sign out</span> :
-                      <span className="header__signout">Sign in</span>}
+                      <span
+                        className="header__signout"
+                        onClick={handleLoginClick}
+                      >
+                        Sign out
+                      </span>
+                      :
+                      <span
+                        className="header__signout"
+                      >
+                        Sign in
+                      </span>}
                   </Link>
                 </li>
               </ul>

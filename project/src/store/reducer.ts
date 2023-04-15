@@ -9,7 +9,7 @@ const initialState: InitialState = {
   userData: undefined,
   city: 'Paris',
   sortType: 'Popular',
-  offers: undefined,
+  offers: [],
   offerToShow: undefined,
   offersNearby: undefined,
   offerReviews: undefined,
