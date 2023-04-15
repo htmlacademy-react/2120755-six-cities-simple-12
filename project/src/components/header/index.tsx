@@ -1,10 +1,22 @@
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { logout } from 'store/api-actions';
+import { AppDispatch , InitialState} from '@customTypes/store';
+import { useDispatch } from 'react-redux';
 
 type HeaderProps = {
   currentLocation: string;
 }
 
 function Header({currentLocation}: HeaderProps): JSX.Element {
+  const dispatch: AppDispatch = useDispatch();
+  const authorized = useSelector((state: InitialState) => state.authorized);
+  const userData = useSelector((state: InitialState) => state.userData);
+
+  function handleLoginClick() {
+    dispatch(logout());
+  }
+
   return (
     <header className="header">
       <div className="container">
@@ -20,12 +32,24 @@ function Header({currentLocation}: HeaderProps): JSX.Element {
                 <li className="header__nav-item user">
                   <div className="header__nav-profile">
                     <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                    <span className="header__user-name user__name">{ authorized && userData ? `${userData.email}` : ''}</span>
                   </div>
                 </li>
                 <li className="header__nav-item">
                   <Link to="/login" className="header__nav-link">
-                    <span className="header__signout">Sign out</span>
+                    {authorized ?
+                      <span
+                        className="header__signout"
+                        onClick={handleLoginClick}
+                      >
+                        Sign out
+                      </span>
+                      :
+                      <span
+                        className="header__signout"
+                      >
+                        Sign in
+                      </span>}
                   </Link>
                 </li>
               </ul>
@@ -37,4 +61,3 @@ function Header({currentLocation}: HeaderProps): JSX.Element {
 }
 
 export default Header;
-

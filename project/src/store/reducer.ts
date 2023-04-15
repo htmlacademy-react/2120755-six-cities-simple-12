@@ -1,55 +1,32 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, markOfferOnCard, findOfferById, findOfferNearby, findOfferReviews, changeSortType, loadOffers } from './action';
-import { mockOffersList } from 'mocks/offers';
-import { mockOfferToShow } from 'mocks/offerToShow';
-import { mockOffersNearby } from 'mocks/offersNearby';
-import { mockReviewList } from 'mocks/review';
+import { changeCity, markOfferOnCard, findOfferById, findOfferNearby, findOfferReviews, changeSortType, loadOffers, changeLoadingStatus, checkAuthorization, loadUserData } from './action';
+import { priceLowToHigh, priceHighToLow, topRaiting, idLowToHigh } from '@utils/sort-functions';
 import { InitialState } from '@customTypes/store';
-import { Offer } from '@customTypes/index';
 
 const initialState: InitialState = {
+  isLoaded: false,
+  authorized: false,
+  userData: undefined,
   city: 'Paris',
   sortType: 'Popular',
   offers: [],
-  offerToShow: mockOffersList[-1],
-  offersNearby: mockOffersList,
-  offerReviews: mockReviewList,
-  hoveredOffer: mockOffersList[-1],
+  offerToShow: undefined,
+  offersNearby: undefined,
+  offerReviews: undefined,
+  hoveredOffer: undefined,
 };
-
-function priceHighToLow(a: Offer, b: Offer) {
-  if (a.price > b.price) {
-    return -1;
-  }
-  if (a.price < b.price) {
-    return 1;
-  }
-  return 0;
-}
-
-function priceLowToHigh(a: Offer, b: Offer) {
-  if (a.price > b.price) {
-    return 1;
-  }
-  if (a.price < b.price) {
-    return -1;
-  }
-  return 0;
-}
-
-function topRaiting(a: Offer, b: Offer) {
-  if (a.rating > b.rating) {
-    return -1;
-  }
-  if (a.price < b.price) {
-    return 1;
-  }
-  return 0;
-}
-
 
 export const storeUpdate = createReducer(initialState, (builder) => {
   builder
+    .addCase(changeLoadingStatus, (state, action) => {
+      state.isLoaded = action.payload;
+    })
+    .addCase(checkAuthorization, (state, action) => {
+      state.authorized = action.payload;
+    })
+    .addCase(loadUserData, (state, action) => {
+      state.userData = action.payload;
+    })
     .addCase(loadOffers, (state, action) => {
       state.offers = action.payload;
     })
@@ -60,27 +37,27 @@ export const storeUpdate = createReducer(initialState, (builder) => {
       state.hoveredOffer = action.payload;
     })
     .addCase(findOfferById, (state, action) => {
-      state.offerToShow = mockOfferToShow;
+      state.offerToShow = action.payload;
     })
     .addCase(findOfferNearby, (state, action) => {
-      state.offersNearby = mockOffersNearby ;
+      state.offersNearby = action.payload;
     })
     .addCase(findOfferReviews, (state, action) => {
-      state.offersNearby = mockOffersNearby ;
+      state.offerReviews = action.payload;
     })
     .addCase(changeSortType, (state, action) => {
       state.sortType = action.payload;
       if (action.payload === 'Price: high to low') {
-        state.offers = state.offers.sort(priceHighToLow);
+        state.offers = state.offers?.sort(priceHighToLow);
       }
       if (action.payload === 'Price: low to high') {
-        state.offers = state.offers.sort(priceLowToHigh);
+        state.offers = state.offers?.sort(priceLowToHigh);
       }
       if (action.payload === 'Top rated first') {
-        state.offers = state.offers.sort(topRaiting);
+        state.offers = state.offers?.sort(topRaiting);
       }
       if (action.payload === 'Popular') {
-        state.offers = mockOffersList;
+        state.offers = state.offers?.sort(idLowToHigh);
       }
     });
 });

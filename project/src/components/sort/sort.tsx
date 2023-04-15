@@ -52,4 +52,5 @@ function Sort(): JSX.Element {
     </form>
   );
 }
+
 export default Sort;

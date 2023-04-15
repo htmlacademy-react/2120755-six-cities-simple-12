@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '@hooks/useMap';
+import { citiesData } from '@utils/data';
 import { InitialState } from '@customTypes/store';
 import currentMarker from '@img/pin-active.svg';
 import defaultMarker from '@img/pin.svg';
@@ -17,13 +18,14 @@ function choseIcon(Url: string) {
 
 function Map (): JSX.Element {
   const offersToShow = useSelector((state: InitialState) => state.offers);
-  const cityToShow = useSelector((state: InitialState) => state.offers.find((offer) => offer.city.name === state.city));
+  const targetCity = useSelector((state: InitialState) => state.city);
+  const cityToShow = citiesData[targetCity];
   const offerToMark = useSelector((state: InitialState) => state.hoveredOffer);
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityToShow);
 
   useEffect(() => {
-    if (map) {
+    if (map && offersToShow) {
       offersToShow.forEach((offer) => {
         leaflet
           .marker({
@@ -34,7 +36,7 @@ function Map (): JSX.Element {
           })
           .addTo(map);
       });
-    } }, [map, offersToShow, offerToMark]);
+    } }, [map, offersToShow, offerToMark, cityToShow]);
 
   return (
     <section style={
@@ -48,5 +50,3 @@ function Map (): JSX.Element {
 }
 
 export default Map;
-
-
