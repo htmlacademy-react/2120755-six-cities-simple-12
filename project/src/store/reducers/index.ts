@@ -1,14 +1,14 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import loadingReducer from './loading';
-import authorizationReducer from './authorization';
-import offersReducer from './offers';
-import chosenOfferReducer from './chosenOffer';
+import { loadingSlice } from './loading';
+import { authorizationSlice } from './authorization';
+import { OffersSlice } from './offers';
+import { chosenOfferSlice } from './chosenOffer';
 
 export const rootReducer = combineReducers({
-  loading: loadingReducer,
-  authorization: authorizationReducer,
-  offers: offersReducer,
-  chosenOffer: chosenOfferReducer
+  loading: loadingSlice.reducer,
+  authorization: authorizationSlice.reducer,
+  offers: OffersSlice.reducer,
+  chosenOffer: chosenOfferSlice.reducer
 });
 
 export default rootReducer;

@@ -1,19 +1,22 @@
 import { store } from 'store';
 import { Offer, ReviewObject, UserData } from './index';
 
-export type loadingState = {
+export type LoadingState = {
   isLoaded: boolean;
 }
 
-export type authorizationState = {
+export type AuthorizationState = {
   authorized: boolean;
   userData: UserData | undefined;
 }
 
-export type offersState = {
+export type OffersState = {
   city: string;
   sortType: string | null;
   offers: Offer[];
+}
+
+export type ChosenOfferState = {
   offerToShow: Offer | undefined;
   offersNearby: Offer[] | undefined;
   offerReviews: ReviewObject[] | undefined;
@@ -21,10 +24,10 @@ export type offersState = {
 }
 
 export type InitialState = {
-loading: loadingState;
-authorization: authorizationState;
-offers: offersState;
-chosenOffer: chosenOfferState;
+loading: LoadingState;
+authorization: AuthorizationState;
+offers: OffersState;
+chosenOffer: ChosenOfferState;
 }
 
 export type AppDispatch = typeof store.dispatch;

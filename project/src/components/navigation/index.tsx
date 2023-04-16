@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeCity } from 'store/action';
+import { changeCity } from 'store/reducers/offers';
 import { InitialState } from '@customTypes/store';
 
 type navigationProps = {
@@ -10,6 +10,8 @@ type navigationProps = {
 function Navigation({city}: navigationProps): JSX.Element {
   const dispatch = useDispatch();
   const choosenCity = useSelector((state: InitialState) => state.offers.city);
+  // eslint-disable-next-line no-console
+  console.log('Navigation');
 
   return (
     <li className="locations__item">

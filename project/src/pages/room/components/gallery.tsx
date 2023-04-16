@@ -2,11 +2,14 @@ import { useSelector } from 'react-redux';
 import { InitialState } from '@customTypes/store';
 
 function Gallery(): JSX.Element | null {
-  const imagesCollection = useSelector((state: InitialState) => state.offerToShow?.images);
+  const imagesCollection = useSelector((state: InitialState) => state.chosenOffer.offerToShow?.images);
   enum PhotosCount {
     Start = 0,
     End = 6,
   }
+
+  // eslint-disable-next-line no-console
+  console.log('Gallery');
 
   if (imagesCollection === undefined) {
     return null;

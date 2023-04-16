@@ -11,6 +11,9 @@ function Review({ reviewData }: RoomReviewsProps): JSX.Element {
     month: 'long',
   });
 
+  // eslint-disable-next-line no-console
+  console.log('Review');
+
   return (
     <li className="reviews__item">
       <div className="reviews__user user">

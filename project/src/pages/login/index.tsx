@@ -3,8 +3,9 @@ import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import Header from '@components/header';
+import { authorizationSelector } from 'store/reducers/authorization';
 import { login } from 'store/api-actions';
-import { AppDispatch, InitialState } from '@customTypes/store';
+import { AppDispatch } from '@customTypes/store';
 
 type LoginProps = {
   currentPath: string;
@@ -13,13 +14,16 @@ type LoginProps = {
 function Login({currentPath}: LoginProps): JSX.Element {
   const dispatch: AppDispatch = useDispatch();
   const [loginData, setLoginData] = useState({email: '', password: ''});
-  const authorized = useSelector((state: InitialState) => state.authorization.authorized);
+  const authorized = useSelector(authorizationSelector);
   const navigate = useNavigate();
 
   function handleLoginData(event: ChangeEvent<{ value: string; name: string }>) {
     const { name, value } = event.target;
     setLoginData({ ...loginData, [name]: value });
   }
+
+  // eslint-disable-next-line no-console
+  console.log('Login');
 
   function validatePassword (password: string) {
     const minLength = 2;

@@ -9,6 +9,9 @@ import { InitialState } from '@customTypes/store';
 function Main(): JSX.Element {
   const isLoaded = useSelector((state: InitialState) => state.loading.isLoaded);
 
+  // eslint-disable-next-line no-console
+  console.log('Main');
+
   return (
     <main className="page__main page__main--index">
       {

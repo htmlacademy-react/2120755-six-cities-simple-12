@@ -5,7 +5,7 @@ import { dateNewToOld } from '@utils/sort-functions';
 import { InitialState } from '@customTypes/store';
 
 function ReviewList(): JSX.Element | null {
-  const reviewList = useSelector((state: InitialState) => state.offerReviews);
+  const reviewList = useSelector((state: InitialState) => state.chosenOffer.offerReviews);
   enum ReviewsCount {
     Start = 0,
     End = 9,
@@ -14,6 +14,9 @@ function ReviewList(): JSX.Element | null {
   if (reviewList === undefined) {
     return null;
   }
+
+  // eslint-disable-next-line no-console
+  console.log('ReviewList');
 
   return (
     <section className="property__reviews reviews">

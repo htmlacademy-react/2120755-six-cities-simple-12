@@ -17,12 +17,15 @@ function choseIcon(Url: string) {
 }
 
 function Map (): JSX.Element {
-  const offersToShow = useSelector((state: InitialState) => state.offers);
-  const targetCity = useSelector((state: InitialState) => state.city);
+  const offersToShow = useSelector((state: InitialState) => state.offers.offers);
+  const targetCity = useSelector((state: InitialState) => state.offers.city);
   const cityToShow = citiesData[targetCity];
-  const offerToMark = useSelector((state: InitialState) => state.hoveredOffer);
+  const offerToMark = useSelector((state: InitialState) => state.chosenOffer.hoveredOffer);
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityToShow);
+
+  // eslint-disable-next-line no-console
+  console.log('Map');
 
   useEffect(() => {
     if (map && offersToShow) {

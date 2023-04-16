@@ -5,6 +5,9 @@ import { InitialState } from '@customTypes/store';
 function Suggestions(): JSX.Element {
   const offersNearby = useSelector((state: InitialState) => state.chosenOffer.offersNearby);
 
+  // eslint-disable-next-line no-console
+  console.log('Suggestion');
+
   return (
     <div className="container">
       <section className="near-places places">

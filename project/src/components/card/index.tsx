@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
+import { memo } from 'react';
 import { useDispatch } from 'react-redux';
 import { Offer } from '@customTypes/index';
-import { markOfferOnCard } from 'store/action';
+import { markOfferOnCard } from 'store/reducers/chosenOffer';
 
 type CardProps = {
   offerData: Offer;
@@ -9,6 +10,9 @@ type CardProps = {
 
 function Card({offerData}: CardProps): JSX.Element {
   const dispatch = useDispatch();
+
+  // eslint-disable-next-line no-console
+  console.log('Card');
 
   return (
     <Link
@@ -50,4 +54,4 @@ function Card({offerData}: CardProps): JSX.Element {
   );
 }
 
-export default Card;
+export default memo(Card);

@@ -2,11 +2,14 @@ import { useSelector } from 'react-redux';
 import { InitialState } from '@customTypes/store';
 
 function Overview(): JSX.Element | null {
-  const roomData = useSelector((state: InitialState) => state.offerToShow);
+  const roomData = useSelector((state: InitialState) => state.chosenOffer.offerToShow);
 
   if (roomData === undefined) {
     return null;
   }
+
+  // eslint-disable-next-line no-console
+  console.log('Overview');
 
   return (
     <>

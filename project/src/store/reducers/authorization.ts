@@ -1,8 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { checkAuthorization, loadUserData } from '../action';
-import { authorizationState } from '@customTypes/store';
+import { createSlice, createDraftSafeSelector } from '@reduxjs/toolkit';
+import { checkAuthAction, login, logout } from 'store/api-actions';
+import { AuthorizationState } from '@customTypes/store';
+import { InitialState } from '@customTypes/store';
+import { UserData } from '@customTypes/index';
 
-const authorizationSlice = createSlice({
+export const authorizationSlice = createSlice({
   name: 'authorization',
   initialState: {
     authorized: false,
@@ -11,13 +13,48 @@ const authorizationSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(checkAuthorization, (state: authorizationState , action) => {
-        state.authorized = action.payload;
-      })
-      .addCase(loadUserData, (state: authorizationState , action) => {
+      .addCase(checkAuthAction.fulfilled, (state: AuthorizationState, action) => {
         state.userData = action.payload;
+        state.authorized = true;
+      })
+      .addCase(checkAuthAction.rejected, (state: AuthorizationState) => {
+        state.authorized = false;
+      })
+      .addCase(login.fulfilled, (state: AuthorizationState, action) => {
+        state.userData = action.payload;
+        state.authorized = true;
+      })
+      .addCase(login.rejected, (state: AuthorizationState) => {
+        state.authorized = false;
+      })
+      .addCase(logout.fulfilled, (state: AuthorizationState) => {
+        state.authorized = false;
       });
   },
 });
 
-export default authorizationSlice.reducer;
+const selectAuthorization = (state: InitialState) => {
+  // eslint-disable-next-line no-console
+  console.log(state.authorization.authorized);
+  return state.authorization.authorized;
+};
+
+const selectUserData = (state: InitialState ) => {
+  // eslint-disable-next-line no-console
+  console.log(state.authorization.userData);
+  return state.authorization.userData;
+};
+
+const authorizationSelector = createDraftSafeSelector(
+  selectAuthorization,
+  (authorized: boolean) => authorized
+);
+
+const userDataSelector = createDraftSafeSelector(
+  selectUserData,
+  (userData: UserData | undefined) => userData
+);
+
+export {authorizationSelector, userDataSelector};
+
+// Попробуй обьединить драфты.
