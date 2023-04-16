@@ -9,7 +9,7 @@ export type Offer = {
       name: string;
     };
   description: string;
-  goods: [...string[]];
+  goods: string[];
   host: {
     avatarUrl: string;
     id: number;
@@ -17,7 +17,7 @@ export type Offer = {
     name: string;
     };
   id: number;
-  images: [...string[]];
+  images: string[];
   isPremium: boolean;
   location: {
     latitude: number;
@@ -72,4 +72,4 @@ export type CityLocation = {
 
 export type CityData = {
   [key: string]: CityLocation;
-  };
+};
