@@ -18,9 +18,6 @@ function App(): JSX.Element {
     dispatch(fetchOffers());
   }, [dispatch]);
 
-  // eslint-disable-next-line no-console
-  console.log('App');
-
   return (
     <>
       {location.pathname !== '/login' ? <Header currentLocation={location.pathname}/> : null}

@@ -22,9 +22,6 @@ function Login({currentPath}: LoginProps): JSX.Element {
     setLoginData({ ...loginData, [name]: value });
   }
 
-  // eslint-disable-next-line no-console
-  console.log('Login');
-
   function validatePassword (password: string) {
     const minLength = 2;
     const pattern = /^(?=.*[A-Za-z])(?=.*\d).+$/;

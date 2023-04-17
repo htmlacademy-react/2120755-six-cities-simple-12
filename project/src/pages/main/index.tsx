@@ -1,16 +1,21 @@
 import { useSelector } from 'react-redux';
+import EmptyMain from './empty-main';
 import OffersList from '@components/offersList/OffersList';
 import Navigation from '@components/navigation';
 import Map from '@components/map';
 import Spinner from '@components/spinner/spinner';
+import { loadingStatusSelector } from 'store/reducers/loading';
+import { offersSelector } from 'store/reducers/offers';
 import { citiesData } from '@utils/data';
-import { InitialState } from '@customTypes/store';
 
 function Main(): JSX.Element {
-  const isLoaded = useSelector((state: InitialState) => state.loading.isLoaded);
+  const isLoaded = useSelector(loadingStatusSelector);
+  const offers = useSelector(offersSelector);
 
-  // eslint-disable-next-line no-console
-  console.log('Main');
+  if (isLoaded && offers === undefined)
+  {
+    return <EmptyMain/>;
+  }
 
   return (
     <main className="page__main page__main--index">

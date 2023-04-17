@@ -11,9 +11,6 @@ type CardProps = {
 function Card({offerData}: CardProps): JSX.Element {
   const dispatch = useDispatch();
 
-  // eslint-disable-next-line no-console
-  console.log('Card');
-
   return (
     <Link
       to={`/offer/${offerData.id}`}

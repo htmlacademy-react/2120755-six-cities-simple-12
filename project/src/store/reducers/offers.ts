@@ -1,7 +1,8 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createDraftSafeSelector, createSlice } from '@reduxjs/toolkit';
 import { fetchOffers } from 'store/api-actions';
 import { priceLowToHigh, priceHighToLow, topRaiting, idLowToHigh } from '@utils/sort-functions';
-import { OffersState } from '@customTypes/store';
+import { InitialState, OffersState } from '@customTypes/store';
+import { Offer } from '@customTypes/index';
 
 export const OffersSlice = createSlice({
   name: 'offers',
@@ -41,4 +42,30 @@ export const OffersSlice = createSlice({
   },
 });
 
+const selectOffers = (state: InitialState) => state.offers.offers;
+const selectCity = (state: InitialState) => state.offers.city;
+const selectSortType = (state: InitialState) => state.offers.sortType;
+
+const offersSelector = createDraftSafeSelector(
+  selectOffers,
+  (offers: Offer[] | undefined) => offers
+);
+
+const citySelector = createDraftSafeSelector(
+  selectCity,
+  (city: string) => city
+);
+
+const sortTypeSelector = createDraftSafeSelector(
+  selectSortType,
+  (sortType: string | null) => sortType
+);
+
+const offersOfTargetCitySelector = createDraftSafeSelector(
+  selectOffers, selectCity,
+  (offers: Offer[] | undefined, chosenCity: string) => offers?.filter(({city}) => city.name === chosenCity)
+);
+
+
 export const { changeSortType, changeCity } = OffersSlice.actions;
+export { offersSelector, citySelector, sortTypeSelector, offersOfTargetCitySelector};

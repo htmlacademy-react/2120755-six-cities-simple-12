@@ -2,9 +2,6 @@ import LoadingIcon from '@img/loading-icon.svg';
 
 function Spinner(): JSX.Element {
 
-  // eslint-disable-next-line no-console
-  console.log('Spinner');
-
   return (
     <div style={{ padding: '100px', textAlign: 'center' }}>
       <h1 style={{ fontSize: '33px' }}>

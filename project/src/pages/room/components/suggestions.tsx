@@ -1,12 +1,9 @@
 import { useSelector } from 'react-redux';
 import Card from '@components/card';
-import { InitialState } from '@customTypes/store';
+import { offersNearbySelector } from 'store/reducers/chosenOffer';
 
 function Suggestions(): JSX.Element {
-  const offersNearby = useSelector((state: InitialState) => state.chosenOffer.offersNearby);
-
-  // eslint-disable-next-line no-console
-  console.log('Suggestion');
+  const offersNearby = useSelector(offersNearbySelector);
 
   return (
     <div className="container">

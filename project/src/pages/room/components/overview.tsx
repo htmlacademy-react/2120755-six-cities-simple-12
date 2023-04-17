@@ -1,15 +1,12 @@
 import { useSelector } from 'react-redux';
-import { InitialState } from '@customTypes/store';
+import { offerToShowSelector } from 'store/reducers/chosenOffer';
 
 function Overview(): JSX.Element | null {
-  const roomData = useSelector((state: InitialState) => state.chosenOffer.offerToShow);
+  const roomData = useSelector(offerToShowSelector);
 
   if (roomData === undefined) {
     return null;
   }
-
-  // eslint-disable-next-line no-console
-  console.log('Overview');
 
   return (
     <>

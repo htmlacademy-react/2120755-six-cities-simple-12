@@ -1,18 +1,14 @@
 import classNames from 'classnames';
 import { useState, useEffect, memo} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeSortType } from 'store/reducers/offers';
+import { changeSortType, sortTypeSelector } from 'store/reducers/offers';
 import { sortTypes } from '@utils/data';
-import { InitialState } from '@customTypes/store';
 
 function Sort(): JSX.Element {
   const dispatch = useDispatch();
-  const sortType = useSelector((state: InitialState) => state.offers.sortType);
+  const sortType = useSelector(sortTypeSelector);
   const [isVisible, setIsVisible] = useState(false);
   const cn = classNames;
-
-  // eslint-disable-next-line no-console
-  console.log('Sort');
 
   function handleClickOutside() {
     setIsVisible(false);

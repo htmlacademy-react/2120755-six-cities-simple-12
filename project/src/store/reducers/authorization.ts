@@ -33,17 +33,9 @@ export const authorizationSlice = createSlice({
   },
 });
 
-const selectAuthorization = (state: InitialState) => {
-  // eslint-disable-next-line no-console
-  console.log(state.authorization.authorized);
-  return state.authorization.authorized;
-};
+const selectAuthorization = (state: InitialState) => state.authorization.authorized;
+const selectUserData = (state: InitialState ) => state.authorization.userData;
 
-const selectUserData = (state: InitialState ) => {
-  // eslint-disable-next-line no-console
-  console.log(state.authorization.userData);
-  return state.authorization.userData;
-};
 
 const authorizationSelector = createDraftSafeSelector(
   selectAuthorization,
@@ -56,5 +48,3 @@ const userDataSelector = createDraftSafeSelector(
 );
 
 export {authorizationSelector, userDataSelector};
-
-// Попробуй обьединить драфты.

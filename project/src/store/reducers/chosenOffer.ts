@@ -1,8 +1,7 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-// import { findOfferById, findOfferNearby, findOfferReviews } from '../action';
+import { PayloadAction, createDraftSafeSelector, createSlice } from '@reduxjs/toolkit';
 import { fetchOfferData, fetchOffersNearby, fetchOffersReviews, postReview } from 'store/api-actions';
-import { ChosenOfferState } from '@customTypes/store';
-import { Offer } from '@customTypes/index';
+import { ChosenOfferState, InitialState } from '@customTypes/store';
+import { Offer, ReviewObject } from '@customTypes/index';
 
 export const chosenOfferSlice = createSlice({
   name: 'chosenOffer',
@@ -34,4 +33,36 @@ export const chosenOfferSlice = createSlice({
   },
 });
 
+const selectOfferToShow = (state: InitialState) => state.chosenOffer.offerToShow;
+const selectOffersNearby = (state: InitialState) => state.chosenOffer.offersNearby;
+const selectOffersReviews = (state: InitialState) => state.chosenOffer.offerReviews;
+const selectOffersToMark = (state: InitialState) => state.chosenOffer.hoveredOffer;
+
+
+const offerToShowSelector = createDraftSafeSelector(
+  selectOfferToShow,
+  (offerToShow: Offer | undefined) => offerToShow
+);
+
+const offersNearbySelector = createDraftSafeSelector(
+  selectOffersNearby,
+  (offersNearby: Offer[] | undefined) => offersNearby
+);
+
+const offersReviewsSelector = createDraftSafeSelector(
+  selectOffersReviews,
+  (offersReviews: ReviewObject[] | undefined) => offersReviews
+);
+
+const offerToMarkSelector = createDraftSafeSelector(
+  selectOffersToMark,
+  (hoveredOffer: Offer | undefined) => hoveredOffer
+);
+
+const offerToShowImagesSelector = createDraftSafeSelector(
+  selectOfferToShow,
+  (offerToShow: Offer | undefined) => offerToShow?.images
+);
+
 export const { markOfferOnCard } = chosenOfferSlice.actions;
+export { offerToShowSelector, offersNearbySelector, offersReviewsSelector, offerToMarkSelector, offerToShowImagesSelector };

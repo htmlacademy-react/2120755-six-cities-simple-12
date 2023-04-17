@@ -19,9 +19,6 @@ function Header({currentLocation}: HeaderProps): JSX.Element {
     dispatch(logout());
   }
 
-  // eslint-disable-next-line no-console
-  console.log('Header');
-
   return (
     <header className="header">
       <div className="container">

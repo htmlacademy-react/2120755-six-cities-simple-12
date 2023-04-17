@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux';
 import ReviewForm from './reviewForm';
 import Review from './reviews';
+import { offersReviewsSelector } from 'store/reducers/chosenOffer';
 import { dateNewToOld } from '@utils/sort-functions';
-import { InitialState } from '@customTypes/store';
 
 function ReviewList(): JSX.Element | null {
-  const reviewList = useSelector((state: InitialState) => state.chosenOffer.offerReviews);
+  const reviewList = useSelector(offersReviewsSelector);
   enum ReviewsCount {
     Start = 0,
     End = 9,
@@ -14,9 +14,6 @@ function ReviewList(): JSX.Element | null {
   if (reviewList === undefined) {
     return null;
   }
-
-  // eslint-disable-next-line no-console
-  console.log('ReviewList');
 
   return (
     <section className="property__reviews reviews">

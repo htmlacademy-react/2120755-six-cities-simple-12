@@ -26,9 +26,6 @@ function ReviewForm(): JSX.Element | null {
     return null;
   }
 
-  // eslint-disable-next-line no-console
-  console.log('ReviewForm');
-
   return (
     <form className="reviews__form form" action="#" method="post"
       onSubmit={formSubmitHandle}

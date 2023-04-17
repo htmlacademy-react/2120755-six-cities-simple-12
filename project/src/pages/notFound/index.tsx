@@ -1,8 +1,5 @@
 function NotFoundPage(): JSX.Element {
 
-  // eslint-disable-next-line no-console
-  console.log('NotFound');
-
   return (
     <div style={{ padding: '100px', textAlign: 'center' }}>
       <h1 style={{ fontSize: '88px' }}>

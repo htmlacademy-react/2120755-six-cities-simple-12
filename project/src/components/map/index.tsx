@@ -3,8 +3,9 @@ import { useSelector } from 'react-redux';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '@hooks/useMap';
+import { citySelector, offersSelector } from 'store/reducers/offers';
+import { offerToMarkSelector } from 'store/reducers/chosenOffer';
 import { citiesData } from '@utils/data';
-import { InitialState } from '@customTypes/store';
 import currentMarker from '@img/pin-active.svg';
 import defaultMarker from '@img/pin.svg';
 
@@ -17,15 +18,12 @@ function choseIcon(Url: string) {
 }
 
 function Map (): JSX.Element {
-  const offersToShow = useSelector((state: InitialState) => state.offers.offers);
-  const targetCity = useSelector((state: InitialState) => state.offers.city);
+  const offersToShow = useSelector(offersSelector);
+  const targetCity = useSelector(citySelector);
   const cityToShow = citiesData[targetCity];
-  const offerToMark = useSelector((state: InitialState) => state.chosenOffer.hoveredOffer);
+  const offerToMark = useSelector(offerToMarkSelector);
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityToShow);
-
-  // eslint-disable-next-line no-console
-  console.log('Map');
 
   useEffect(() => {
     if (map && offersToShow) {
