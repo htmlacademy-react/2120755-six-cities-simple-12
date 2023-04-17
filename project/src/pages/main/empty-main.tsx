@@ -34,4 +34,5 @@ function EmptyMain(): JSX.Element {
     </main>
   );
 }
+
 export default EmptyMain;

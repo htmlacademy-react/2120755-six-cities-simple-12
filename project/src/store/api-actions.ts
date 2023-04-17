@@ -82,5 +82,3 @@ export const postReview = createAsyncThunkTeamplate<ReviewObject[], Review>()(
     return data;
   },
 );
-
-
