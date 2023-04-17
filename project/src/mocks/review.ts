@@ -27,4 +27,3 @@ export const mockReviewList: [ReviewObject, ...ReviewObject[]] = [
     'date': '2023-02-09T07:31:24.881Z'
   }
 ];
-

@@ -1,13 +1,12 @@
 import classNames from 'classnames';
-import { useState, useEffect} from 'react';
+import { useState, useEffect, memo} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeSortType } from 'store/action';
+import { changeSortType, sortTypeSelector } from 'store/reducers/offers';
 import { sortTypes } from '@utils/data';
-import { InitialState } from '@customTypes/store';
 
 function Sort(): JSX.Element {
   const dispatch = useDispatch();
-  const sortType = useSelector((state: InitialState) => state.sortType);
+  const sortType = useSelector(sortTypeSelector);
   const [isVisible, setIsVisible] = useState(false);
   const cn = classNames;
 
@@ -53,4 +52,4 @@ function Sort(): JSX.Element {
   );
 }
 
-export default Sort;
+export default memo(Sort);

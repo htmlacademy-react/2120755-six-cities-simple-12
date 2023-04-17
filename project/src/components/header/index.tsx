@@ -1,8 +1,10 @@
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { logout } from 'store/api-actions';
-import { AppDispatch , InitialState} from '@customTypes/store';
+import { AppDispatch } from '@customTypes/store';
 import { useDispatch } from 'react-redux';
+import { authorizationSelector, userDataSelector } from 'store/reducers/authorization';
 
 type HeaderProps = {
   currentLocation: string;
@@ -10,8 +12,8 @@ type HeaderProps = {
 
 function Header({currentLocation}: HeaderProps): JSX.Element {
   const dispatch: AppDispatch = useDispatch();
-  const authorized = useSelector((state: InitialState) => state.authorized);
-  const userData = useSelector((state: InitialState) => state.userData);
+  const authorized = useSelector(authorizationSelector);
+  const userData = useSelector(userDataSelector);
 
   function handleLoginClick() {
     dispatch(logout());
@@ -60,4 +62,4 @@ function Header({currentLocation}: HeaderProps): JSX.Element {
   );
 }
 
-export default Header;
+export default memo(Header);

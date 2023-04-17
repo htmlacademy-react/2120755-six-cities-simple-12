@@ -1,11 +1,17 @@
 import { useSelector } from 'react-redux';
+import { memo } from 'react';
 import Card from '@components/card';
 import Sort from '@components/sort/sort';
-import { InitialState } from '@customTypes/store';
+import { citySelector, offersOfTargetCitySelector } from 'store/reducers/offers';
 
-function OffersList(): JSX.Element {
-  const choosenCity = useSelector((state: InitialState) => state.city);
-  const offersOfChoosenCity = useSelector((state: InitialState) => state.offers.filter(({city}) => city.name === state.city));
+function OffersList(): JSX.Element | null {
+  const choosenCity = useSelector(citySelector);
+  const offersOfChoosenCity = useSelector(offersOfTargetCitySelector);
+
+  if (offersOfChoosenCity === undefined)
+  {
+    return null;
+  }
 
   return (
     <section className="cities__places places">
@@ -26,4 +32,4 @@ function OffersList(): JSX.Element {
   );
 }
 
-export default OffersList;
+export default memo(OffersList);

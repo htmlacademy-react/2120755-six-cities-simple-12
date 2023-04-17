@@ -1,6 +1,7 @@
 import LoadingIcon from '@img/loading-icon.svg';
 
 function Spinner(): JSX.Element {
+
   return (
     <div style={{ padding: '100px', textAlign: 'center' }}>
       <h1 style={{ fontSize: '33px' }}>

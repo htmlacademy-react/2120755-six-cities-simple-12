@@ -1,16 +1,17 @@
-import { Fragment, useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { postReview} from 'store/api-actions';
+import { authorizationSelector } from 'store/reducers/authorization';
 import { rating } from '@utils/data';
-import { AppDispatch, InitialState } from '@customTypes/store';
+import { AppDispatch } from '@customTypes/store';
 
 function ReviewForm(): JSX.Element | null {
   const dispatch: AppDispatch = useDispatch();
   const urlParams = useParams();
   const offerId = Number(urlParams.id);
   const [reviewData, setFormData] = useState({comment: '', rating: '', id: offerId});
-  const authorized = useSelector((state: InitialState) => state.authorized);
+  const authorized = useSelector(authorizationSelector);
 
   const formFillHandle = (event: ChangeEvent<{ value: string; name: string }>) => {
     const { name, value } = event.target;
@@ -68,16 +69,16 @@ function ReviewForm(): JSX.Element | null {
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-                      To submit review please make sure to set{''}
+        To submit review please make sure to set{''}
           <span className="reviews__star">rating</span> and describe
-                      your stay with at least{''}
+        your stay with at least{''}
           <b className="reviews__text-amount">50 characters</b>.
         </p>
         <button
           className="reviews__submit form__submit button"
           type="submit"
         >
-                      Submit
+        Submit
         </button>
       </div>
     </form>

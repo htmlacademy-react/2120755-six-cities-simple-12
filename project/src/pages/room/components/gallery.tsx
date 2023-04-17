@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
-import { InitialState } from '@customTypes/store';
+import { offerToShowImagesSelector } from 'store/reducers/chosenOffer';
 
 function Gallery(): JSX.Element | null {
-  const imagesCollection = useSelector((state: InitialState) => state.offerToShow?.images);
+  const imagesCollection = useSelector(offerToShowImagesSelector);
   enum PhotosCount {
     Start = 0,
     End = 6,

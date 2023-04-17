@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux';
 import Card from '@components/card';
-import { InitialState } from '@customTypes/store';
+import { offersNearbySelector } from 'store/reducers/chosenOffer';
 
 function Suggestions(): JSX.Element {
-  const offersNearby = useSelector((state: InitialState) => state.offersNearby);
+  const offersNearby = useSelector(offersNearbySelector);
+
   return (
     <div className="container">
       <section className="near-places places">

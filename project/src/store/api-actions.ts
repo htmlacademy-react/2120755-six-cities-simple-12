@@ -1,86 +1,84 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { loadOffers, findOfferById, findOfferNearby, findOfferReviews, checkAuthorization, loadUserData, changeLoadingStatus } from './action';
 import { ApiRoutes } from '@utils/const';
 import { saveToken, removeToken } from '@utils/token';
 import { Offer, Review, ReviewObject, LoginData, UserData} from '@customTypes/index';
 
-function createAsyncThunkTeamplate<TargetType>() {
+function createAsyncThunkTeamplate<ResultType, TargetType>() {
   return createAsyncThunk<
-  void,
+  ResultType,
   TargetType,
   {extra: AxiosInstance}
   >;
 }
 
-export const checkAuthAction = createAsyncThunkTeamplate<undefined>()(
+export const checkAuthAction = createAsyncThunkTeamplate<UserData, undefined>()(
   'GET to /login',
   async (_arg, {dispatch, extra: api}) => {
-    try {
-      const {data} = await api.get<UserData>(ApiRoutes.login);
-      dispatch(checkAuthorization(true));
-      dispatch(loadUserData(data));
-    } catch {
-      dispatch(checkAuthorization(false));
-    }
+    const {data} = await api.get<UserData>(ApiRoutes.login);
+    return data;
   },
 );
 
-export const login = createAsyncThunkTeamplate<LoginData>()(
+export const login = createAsyncThunkTeamplate<UserData, LoginData>()(
   'POST to /login',
-  async ({email, password}, {dispatch, extra: api}) => {
+  async ({email, password}, {extra: api}) => {
     const {data} = await api.post<UserData>(ApiRoutes.login, {email, password});
     saveToken(data.token);
-    dispatch(loadUserData(data));
-    dispatch(checkAuthorization(true));
+    return data;
   },
 );
 
-export const logout = createAsyncThunkTeamplate<undefined>()(
+export const logout = createAsyncThunkTeamplate<void, undefined>()(
   'DELETE to /login',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, {extra: api}) => {
     await api.delete(ApiRoutes.logout);
     removeToken();
-    dispatch(checkAuthorization(false));
   },
 );
 
-export const fetchOffers = createAsyncThunkTeamplate<undefined>()(
+export const fetchOffers = createAsyncThunkTeamplate<Offer[], undefined>()(
   'GET to /hotels',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, {extra: api}) => {
     const {data} = await api.get<Offer[]>(ApiRoutes.offers);
-    dispatch(loadOffers(data));
+    return data;
   },
 );
 
-export const fetchOfferData = createAsyncThunkTeamplate<number>()(
+export const fetchOfferData = createAsyncThunkTeamplate<Offer| undefined, number | undefined>()(
   'GET to /hotels/:id',
-  async (id, { dispatch, extra: api }) => {
+  async (id, {extra: api}) => {
+    if (id === undefined) {
+      return undefined;
+    }
     const {data} = await api.get<Offer>(`${ApiRoutes.offer}${id}`);
-    dispatch(findOfferById(data));
-    dispatch(changeLoadingStatus(true));
+    return data;
   });
 
-export const fetchOffersNearby = createAsyncThunkTeamplate<number>()(
+export const fetchOffersNearby = createAsyncThunkTeamplate<Offer[]| undefined, number | undefined>()(
   'GET to /hotels/:id/nearby',
-  async (id, { dispatch, extra: api }) => {
+  async (id, {extra: api}) => {
+    if (id === undefined) {
+      return undefined;
+    }
     const {data} = await api.get<Offer[]>(`${ApiRoutes.offer}${id}/nearby`);
-    dispatch(findOfferNearby(data));
+    return data;
   });
 
-export const fetchOffersReviews = createAsyncThunkTeamplate<number>()(
+export const fetchOffersReviews = createAsyncThunkTeamplate<ReviewObject[] | undefined, number | undefined>()(
   'GET to /comments/:id',
-  async (id, { dispatch, extra: api }) => {
+  async (id, {extra: api}) => {
+    if (id === undefined) {
+      return undefined;
+    }
     const {data} = await api.get<ReviewObject[]>(`${ApiRoutes.offerReview}${id}`);
-    dispatch(findOfferReviews(data));
+    return data;
   });
 
-export const postReview = createAsyncThunkTeamplate<Review>()(
+export const postReview = createAsyncThunkTeamplate<ReviewObject[], Review>()(
   'POST to /comments/:id',
-  async ({comment, rating, id}: Review, {dispatch, extra: api}) => {
+  async ({comment, rating, id}: Review, {extra: api}) => {
     const {data} = await api.post<ReviewObject[]>(`${ApiRoutes.offerReview}${id}`, {comment, rating});
-    dispatch(findOfferReviews(data));
+    return data;
   },
 );
-
-
