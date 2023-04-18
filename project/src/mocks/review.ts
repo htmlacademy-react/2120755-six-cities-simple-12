@@ -1,4 +1,3 @@
-// Как ревью привязать к предложению, я не понимаю.
 import { ReviewObject} from '@customTypes/index';
 
 export const mockReviewList: [ReviewObject, ...ReviewObject[]] = [
