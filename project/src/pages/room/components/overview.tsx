@@ -4,7 +4,7 @@ import { offerToShowSelector } from 'store/reducers/chosenOffer';
 function Overview(): JSX.Element | null {
   const roomData = useSelector(offerToShowSelector);
 
-  if (roomData === undefined) {
+  if (roomData === undefined || roomData === null) {
     return null;
   }
 

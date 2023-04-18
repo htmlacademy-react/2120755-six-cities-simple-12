@@ -24,19 +24,19 @@ function Room() {
     dispatch(fetchOffersReviews(offerId));
     dispatch(fetchOfferData(offerId));
     return () => {
-      // Срабатывает и не дает загрузить предожение. Выкидывает в 404 т.к. предложение undefined
-      // eslint-disable-next-line no-console
-      console.log('clean');
       dispatch(cleanOfferToShowState());
       dispatch(cleanOffersNearbyState());
       dispatch(cleanofferReviewsState());
+      // dispatch(cleanOfferLoadingState());
     };
   }, [dispatch, offerId]);
 
   // eslint-disable-next-line no-console
   console.log(isLoaded, offerToDisplay);
 
-  if (isLoaded && offerToDisplay === undefined) {
+
+  // Если открыть предложение, далее ввести некорректный айди, выйти на шлавную и быстро отрыть предложение то будет 404.
+  if (isLoaded && offerToDisplay === null) {
     return <Navigate to="not-found"/>;
   }
 

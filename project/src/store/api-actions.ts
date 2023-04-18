@@ -45,14 +45,16 @@ export const fetchOffers = createAsyncThunkTeamplate<Offer[], undefined>()(
   },
 );
 
-export const fetchOfferData = createAsyncThunkTeamplate<Offer | undefined, number>()(
+export const fetchOfferData = createAsyncThunkTeamplate<Offer | null, number>()(
   'GET to /hotels/:id',
   async (id, {extra: api}) => {
+    // eslint-disable-next-line no-console
+    console.log('Запрос');
     try {
       const {data} = await api.get<Offer>(`${ApiRoutes.offer}${id}`);
       return data;}
     catch {
-      return undefined;
+      return null;
     }
   });
 

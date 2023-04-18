@@ -28,6 +28,8 @@ export const chosenOfferSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchOfferData.fulfilled, (state: ChosenOfferState, action) => {
+        // eslint-disable-next-line no-console
+        console.log(action.payload);
         state.offerToShow = action.payload;
       })
       .addCase(fetchOffersNearby.fulfilled, (state: ChosenOfferState, action) => {
@@ -50,7 +52,7 @@ const selectOffersToMark = (state: InitialState) => state.chosenOffer.hoveredOff
 
 const offerToShowSelector = createDraftSafeSelector(
   selectOfferToShow,
-  (offerToShow: Offer | undefined) => offerToShow
+  (offerToShow: Offer | undefined | null) => offerToShow
 );
 
 const offersNearbySelector = createDraftSafeSelector(
@@ -70,7 +72,7 @@ const offerToMarkSelector = createDraftSafeSelector(
 
 const offerToShowImagesSelector = createDraftSafeSelector(
   selectOfferToShow,
-  (offerToShow: Offer | undefined) => offerToShow?.images
+  (offerToShow: Offer | undefined | null) => offerToShow?.images
 );
 
 export const { markOfferOnCard, cleanOfferToShowState, cleanOffersNearbyState, cleanofferReviewsState } = chosenOfferSlice.actions;

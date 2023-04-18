@@ -18,7 +18,7 @@ export type OffersState = {
 }
 
 export type ChosenOfferState = {
-  offerToShow: Offer | undefined;
+  offerToShow: Offer | undefined | null;
   offersNearby: Offer[] | undefined;
   offerReviews: ReviewObject[] | undefined;
   hoveredOffer: Offer | undefined;

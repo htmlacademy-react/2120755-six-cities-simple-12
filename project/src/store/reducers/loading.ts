@@ -8,11 +8,18 @@ export const loadingSlice = createSlice({
     isLoaded: false,
     isOfferLoaded: false,
   },
-  reducers: {},
+  reducers: {
+    cleanOfferLoadingState: (state: LoadingState) => {
+      state.isOfferLoaded = false;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchOffers.fulfilled, (state: LoadingState) => {
         state.isLoaded = true;
+      })
+      .addCase(fetchOfferData.pending, (state: LoadingState) => {
+        state.isOfferLoaded = false;
       })
       .addCase(fetchOfferData.fulfilled, (state: LoadingState) => {
         state.isOfferLoaded = true;
@@ -32,5 +39,5 @@ const loadingOfferStatusSelector = createDraftSafeSelector(
   selectOfferLoadingStatus,
   (isLoaded: boolean) => isLoaded
 );
-
+export const { cleanOfferLoadingState } = loadingSlice.actions;
 export { loadingStatusSelector, loadingOfferStatusSelector };
