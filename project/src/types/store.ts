@@ -3,6 +3,7 @@ import { Offer, ReviewObject, UserData } from './index';
 
 export type LoadingState = {
   isLoaded: boolean;
+  isOfferLoaded:boolean;
 }
 
 export type AuthorizationState = {

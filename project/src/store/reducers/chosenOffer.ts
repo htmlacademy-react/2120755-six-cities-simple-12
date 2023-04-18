@@ -14,6 +14,15 @@ export const chosenOfferSlice = createSlice({
   reducers: {
     markOfferOnCard: (state: ChosenOfferState, action: PayloadAction<Offer>) => {
       state.hoveredOffer = action.payload;
+    },
+    cleanOfferToShowState: (state: ChosenOfferState) => {
+      state.offerToShow = undefined;
+    },
+    cleanOffersNearbyState: (state: ChosenOfferState) => {
+      state.offersNearby = undefined;
+    },
+    cleanofferReviewsState: (state: ChosenOfferState) => {
+      state.offerReviews = undefined;
     }
   },
   extraReducers: (builder) => {
@@ -64,5 +73,5 @@ const offerToShowImagesSelector = createDraftSafeSelector(
   (offerToShow: Offer | undefined) => offerToShow?.images
 );
 
-export const { markOfferOnCard } = chosenOfferSlice.actions;
+export const { markOfferOnCard, cleanOfferToShowState, cleanOffersNearbyState, cleanofferReviewsState } = chosenOfferSlice.actions;
 export { offerToShowSelector, offersNearbySelector, offersReviewsSelector, offerToMarkSelector, offerToShowImagesSelector };

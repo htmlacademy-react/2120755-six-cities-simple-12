@@ -7,8 +7,8 @@ import Suggestions from './components/suggestions';
 import Overview from './components/overview';
 import ReviewList from './components/reviewsList';
 import Map from '@components/map';
-import { offerToShowSelector } from 'store/reducers/chosenOffer';
-import { loadingStatusSelector } from 'store/reducers/loading';
+import { offerToShowSelector, cleanOfferToShowState, cleanOffersNearbyState, cleanofferReviewsState } from 'store/reducers/chosenOffer';
+import { loadingOfferStatusSelector } from 'store/reducers/loading';
 import { fetchOfferData, fetchOffersNearby, fetchOffersReviews } from 'store/api-actions';
 import { AppDispatch } from '@customTypes/store';
 
@@ -17,28 +17,24 @@ function Room() {
   const urlParams = useParams();
   const offerId = Number(urlParams.id);
   const offerToDisplay = useSelector(offerToShowSelector);
-  const isLoaded = useSelector(loadingStatusSelector);
-
-  // eslint-disable-next-line no-console
-  console.log(isLoaded);
-
-  // eslint-disable-next-line no-console
-  console.log(offerToDisplay);
+  const isLoaded = useSelector(loadingOfferStatusSelector);
 
   useEffect(() => {
     dispatch(fetchOffersNearby(offerId));
     dispatch(fetchOffersReviews(offerId));
     dispatch(fetchOfferData(offerId));
     return () => {
-      dispatch(fetchOfferData(undefined));
-      dispatch(fetchOffersNearby(undefined));
-      dispatch(fetchOffersReviews(undefined));
+      // Срабатывает и не дает загрузить предожение. Выкидывает в 404 т.к. предложение undefined
+      // eslint-disable-next-line no-console
+      console.log('clean');
+      dispatch(cleanOfferToShowState());
+      dispatch(cleanOffersNearbyState());
+      dispatch(cleanofferReviewsState());
     };
   }, [dispatch, offerId]);
 
-  if (!isLoaded || offerToDisplay === undefined) {
-    return <Spinner/>;
-  }
+  // eslint-disable-next-line no-console
+  console.log(isLoaded, offerToDisplay);
 
   if (isLoaded && offerToDisplay === undefined) {
     return <Navigate to="not-found"/>;
@@ -46,19 +42,23 @@ function Room() {
 
   return (
     <main className="page__main page__main--property">
-      <section className="property">
-        <div className="property__container container">
-          <Gallery />
-          <div className="property__wrapper">
-            <Overview />
-            <ReviewList />
-          </div>
-        </div>
-        <section className="property__map map">
-          <Map />
-        </section>
-      </section>
-      <Suggestions />
+      { isLoaded ?
+        <>
+          <section className="property">
+            <div className="property__container container">
+              <Gallery />
+              <div className="property__wrapper">
+                <Overview />
+                <ReviewList />
+              </div>
+            </div>
+            <section className="property__map map">
+              <Map />
+            </section>
+          </section>
+          <Suggestions />
+        </>
+        : <Spinner/> }
     </main>
   );
 }

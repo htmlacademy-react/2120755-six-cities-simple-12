@@ -45,32 +45,27 @@ export const fetchOffers = createAsyncThunkTeamplate<Offer[], undefined>()(
   },
 );
 
-export const fetchOfferData = createAsyncThunkTeamplate<Offer| undefined, number | undefined>()(
+export const fetchOfferData = createAsyncThunkTeamplate<Offer | undefined, number>()(
   'GET to /hotels/:id',
   async (id, {extra: api}) => {
-    if (id === undefined) {
+    try {
+      const {data} = await api.get<Offer>(`${ApiRoutes.offer}${id}`);
+      return data;}
+    catch {
       return undefined;
     }
-    const {data} = await api.get<Offer>(`${ApiRoutes.offer}${id}`);
-    return data;
   });
 
-export const fetchOffersNearby = createAsyncThunkTeamplate<Offer[]| undefined, number | undefined>()(
+export const fetchOffersNearby = createAsyncThunkTeamplate<Offer[]| undefined, number>()(
   'GET to /hotels/:id/nearby',
   async (id, {extra: api}) => {
-    if (id === undefined) {
-      return undefined;
-    }
     const {data} = await api.get<Offer[]>(`${ApiRoutes.offer}${id}/nearby`);
     return data;
   });
 
-export const fetchOffersReviews = createAsyncThunkTeamplate<ReviewObject[] | undefined, number | undefined>()(
+export const fetchOffersReviews = createAsyncThunkTeamplate<ReviewObject[] | undefined, number>()(
   'GET to /comments/:id',
   async (id, {extra: api}) => {
-    if (id === undefined) {
-      return undefined;
-    }
     const {data} = await api.get<ReviewObject[]>(`${ApiRoutes.offerReview}${id}`);
     return data;
   });

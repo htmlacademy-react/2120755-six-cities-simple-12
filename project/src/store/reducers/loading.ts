@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice, createDraftSafeSelector } from '@reduxjs/toolkit';
+import { createSlice, createDraftSafeSelector } from '@reduxjs/toolkit';
 import { fetchOffers, fetchOfferData } from 'store/api-actions';
 import { LoadingState, InitialState } from '@customTypes/store';
 
@@ -6,38 +6,31 @@ export const loadingSlice = createSlice({
   name: 'loading',
   initialState: {
     isLoaded: false,
+    isOfferLoaded: false,
   },
-  reducers: {
-    changeLoadingStatus: (state: LoadingState, action: PayloadAction<boolean>) => {
-      state.isLoaded = action.payload;
-    }
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchOffers.fulfilled, (state: LoadingState) => {
         state.isLoaded = true;
       })
-      .addCase(fetchOffers.rejected, (state: LoadingState) => {
-        state.isLoaded = true;
-      })
-      .addCase(fetchOfferData.pending, (state: LoadingState) => {
-        state.isLoaded = false;
-      })
-      .addCase(fetchOfferData.rejected, (state: LoadingState) => {
-        state.isLoaded = true;
-      })
       .addCase(fetchOfferData.fulfilled, (state: LoadingState) => {
-        state.isLoaded = true;
+        state.isOfferLoaded = true;
       });
   },
 });
 
 const selectLoadingStatus = (state: InitialState) => state.loading.isLoaded;
+const selectOfferLoadingStatus = (state: InitialState) => state.loading.isOfferLoaded;
 
 const loadingStatusSelector = createDraftSafeSelector(
   selectLoadingStatus,
   (isLoaded: boolean) => isLoaded
 );
 
-export const { changeLoadingStatus } = loadingSlice.actions;
-export { loadingStatusSelector };
+const loadingOfferStatusSelector = createDraftSafeSelector(
+  selectOfferLoadingStatus,
+  (isLoaded: boolean) => isLoaded
+);
+
+export { loadingStatusSelector, loadingOfferStatusSelector };
