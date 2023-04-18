@@ -18,11 +18,11 @@ function Overview(): JSX.Element | null {
       </div>
       <div className="property__rating rating">
         <div className="property__stars rating__stars">
-          <span style={{width: `${100 * (roomData.rating / 5)}%`}}></span>
+          <span style={{width: `${100 * (Math.round(roomData.rating) / 5)}%`}}></span>
           <span className="visually-hidden">Rating</span>
         </div>
         <span className="property__rating-value rating__value">
-          {roomData.rating}
+          {Math.round(roomData.rating)}
         </span>
       </div>
       <ul className="property__features">

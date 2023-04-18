@@ -19,6 +19,12 @@ function Room() {
   const offerToDisplay = useSelector(offerToShowSelector);
   const isLoaded = useSelector(loadingStatusSelector);
 
+  // eslint-disable-next-line no-console
+  console.log(isLoaded);
+
+  // eslint-disable-next-line no-console
+  console.log(offerToDisplay);
+
   useEffect(() => {
     dispatch(fetchOffersNearby(offerId));
     dispatch(fetchOffersReviews(offerId));
@@ -30,12 +36,12 @@ function Room() {
     };
   }, [dispatch, offerId]);
 
-  if (isLoaded && offerToDisplay === undefined) {
-    <Navigate to="not-found"/>;
-  }
-
   if (!isLoaded || offerToDisplay === undefined) {
     return <Spinner/>;
+  }
+
+  if (isLoaded && offerToDisplay === undefined) {
+    return <Navigate to="not-found"/>;
   }
 
   return (

@@ -17,8 +17,14 @@ export const loadingSlice = createSlice({
       .addCase(fetchOffers.fulfilled, (state: LoadingState) => {
         state.isLoaded = true;
       })
+      .addCase(fetchOffers.rejected, (state: LoadingState) => {
+        state.isLoaded = true;
+      })
       .addCase(fetchOfferData.pending, (state: LoadingState) => {
         state.isLoaded = false;
+      })
+      .addCase(fetchOfferData.rejected, (state: LoadingState) => {
+        state.isLoaded = true;
       })
       .addCase(fetchOfferData.fulfilled, (state: LoadingState) => {
         state.isLoaded = true;
@@ -35,4 +41,3 @@ const loadingStatusSelector = createDraftSafeSelector(
 
 export const { changeLoadingStatus } = loadingSlice.actions;
 export { loadingStatusSelector };
-
