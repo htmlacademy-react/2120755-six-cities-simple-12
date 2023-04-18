@@ -1,5 +1,7 @@
 import { PayloadAction, createDraftSafeSelector, createSlice } from '@reduxjs/toolkit';
 import { fetchOffers } from 'store/api-actions';
+import { shuffleCities } from '@utils/sort-functions';
+import { citiesData } from '@utils/data';
 import { priceLowToHigh, priceHighToLow, topRaiting, idLowToHigh } from '@utils/sort-functions';
 import { InitialState, OffersState } from '@customTypes/store';
 import { Offer } from '@customTypes/index';
@@ -29,6 +31,9 @@ export const OffersSlice = createSlice({
     },
     changeCity: (state: OffersState, action: PayloadAction<string>) => {
       state.city = action.payload;
+    },
+    choseRandomCity: (state: OffersState) => {
+      state.city = shuffleCities(citiesData)[Math.floor(Math.random() * shuffleCities(citiesData).length)];
     }
   },
   extraReducers: (builder) => {
@@ -67,5 +72,5 @@ const offersOfTargetCitySelector = createDraftSafeSelector(
 );
 
 
-export const { changeSortType, changeCity } = OffersSlice.actions;
+export const { changeSortType, changeCity, choseRandomCity } = OffersSlice.actions;
 export { offersSelector, citySelector, sortTypeSelector, offersOfTargetCitySelector};

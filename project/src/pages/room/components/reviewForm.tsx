@@ -11,15 +11,27 @@ function ReviewForm(): JSX.Element | null {
   const urlParams = useParams();
   const offerId = Number(urlParams.id);
   const [reviewData, setFormData] = useState({comment: '', rating: '', id: offerId});
+  const [selectedRating, setSelectedRating] = useState('');
+  const formIsValidToSubmit = reviewData.comment.length > 50 && reviewData.rating !== '';
   const authorized = useSelector(authorizationSelector);
 
   const formFillHandle = (event: ChangeEvent<{ value: string; name: string }>) => {
     const { name, value } = event.target;
     setFormData({ ...reviewData, [name]: value });
+    if (name === 'rating') {
+      setSelectedRating(value);
+    }
   };
+
+  const resetForm = () => {
+    setFormData({ comment: '', rating: '', id: offerId });
+    setSelectedRating('');
+  };
+
   const formSubmitHandle = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     dispatch(postReview(reviewData));
+    resetForm();
   };
 
   if (!authorized) {
@@ -27,61 +39,68 @@ function ReviewForm(): JSX.Element | null {
   }
 
   return (
-    <form className="reviews__form form" action="#" method="post"
+    <form className="reviews__form form"
+      action="#"
+      method="post"
       onSubmit={formSubmitHandle}
     >
       <label
         className="reviews__label form__label"
         htmlFor="review"
       >
-                    Your review
+        Your review
       </label>
       <div className="reviews__rating-form form__rating">
-        {
-          [Object.entries(rating).reverse().map(([key, value]) => (
-            <Fragment key={value}>
-              <input
-                className="form__rating-input visually-hidden"
-                name="rating"
-                value={key}
-                id={`${key}-stars`}
-                type="radio"
-                onChange={formFillHandle}
-              />
-              <label
-                htmlFor={`${key}-stars`}
-                className="reviews__rating-label form__rating-label"
-                title={value}
-              >
-                <svg className="form__star-image" width="37" height="33">
-                  <use xlinkHref="#icon-star" ></use>
-                </svg>
-              </label>
-            </Fragment>))]
-        }
+        {[Object.entries(rating).reverse().map(([key, value]) => (
+          <Fragment key={value}>
+            <input
+              className="form__rating-input visually-hidden"
+              name="rating"
+              value={key}
+              id={`${key}-stars`}
+              type="radio"
+              checked={selectedRating === key}
+              onChange={formFillHandle}
+            />
+            <label
+              htmlFor={`${key}-stars`}
+              className="reviews__rating-label form__rating-label"
+              title={value}
+            >
+              <svg className="form__star-image" width="37" height="33">
+                <use xlinkHref="#icon-star"></use>
+              </svg>
+            </label>
+          </Fragment>
+        ))]}
       </div>
       <textarea
         className="reviews__textarea form__textarea"
         id="comment"
         name="comment"
+        value={reviewData.comment}
+        minLength={50}
+        maxLength={300}
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={formFillHandle}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-        To submit review please make sure to set{''}
+          To submit review please make sure to set{' '}
           <span className="reviews__star">rating</span> and describe
-        your stay with at least{''}
+          your stay with at least{' '}
           <b className="reviews__text-amount">50 characters</b>.
         </p>
         <button
           className="reviews__submit form__submit button"
           type="submit"
+          disabled={!formIsValidToSubmit}
         >
-        Submit
+          Submit
         </button>
       </div>
     </form>
-  );}
+  );
+}
 
 export default ReviewForm;
