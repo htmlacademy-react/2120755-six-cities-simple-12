@@ -1,18 +1,19 @@
 import { PayloadAction, createDraftSafeSelector, createSlice } from '@reduxjs/toolkit';
-import { fetchOffers } from 'store/api-actions';
-import { shuffleCities } from '@utils/sort-functions';
-import { citiesData } from '@utils/data';
+import { fetchOffers } from '../api-actions';
+import { getRandomCity } from '@utils/sort-functions';
 import { priceLowToHigh, priceHighToLow, topRaiting, idLowToHigh } from '@utils/sort-functions';
 import { InitialState, OffersState } from '@customTypes/store';
 import { Offer } from '@customTypes/index';
 
+const offersInitialState: OffersState = {
+  city: 'Paris',
+  sortType: 'Popular',
+  offers: [],
+};
+
 export const OffersSlice = createSlice({
   name: 'offers',
-  initialState: {
-    city: 'Paris',
-    sortType: 'Popular',
-    offers: [],
-  },
+  initialState: offersInitialState,
   reducers: {
     changeSortType: (state: OffersState, action: PayloadAction<string>) => {
       state.sortType = action.payload;
@@ -33,16 +34,13 @@ export const OffersSlice = createSlice({
       state.city = action.payload;
     },
     choseRandomCity: (state: OffersState) => {
-      state.city = shuffleCities(citiesData)[Math.floor(Math.random() * shuffleCities(citiesData).length)];
+      state.city = getRandomCity();
     }
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchOffers.fulfilled, (state: OffersState, action) => {
         state.offers = action.payload;
-      })
-      .addCase(changeCity, (state: OffersState, action) => {
-        state.city = action.payload;
       });
   },
 });
@@ -70,7 +68,6 @@ const offersOfTargetCitySelector = createDraftSafeSelector(
   selectOffers, selectCity,
   (offers: Offer[] | undefined, chosenCity: string) => offers?.filter(({city}) => city.name === chosenCity)
 );
-
 
 export const { changeSortType, changeCity, choseRandomCity } = OffersSlice.actions;
 export { offersSelector, citySelector, sortTypeSelector, offersOfTargetCitySelector};

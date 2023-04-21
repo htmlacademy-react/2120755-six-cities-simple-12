@@ -7,7 +7,7 @@ import Suggestions from './components/suggestions';
 import Overview from './components/overview';
 import ReviewList from './components/reviewsList';
 import Map from '@components/map';
-import { offerToShowSelector, cleanOfferToShowState, cleanOffersNearbyState, cleanofferReviewsState } from 'store/reducers/chosenOffer';
+import { offerToShowSelector, cleanOfferToShowData } from 'store/reducers/chosenOffer';
 import { loadingOfferStatusSelector } from 'store/reducers/loading';
 import { fetchOfferData, fetchOffersNearby, fetchOffersReviews } from 'store/api-actions';
 import { AppDispatch } from '@customTypes/store';
@@ -24,9 +24,7 @@ function Room() {
     dispatch(fetchOffersReviews(offerId));
     dispatch(fetchOfferData(offerId));
     return () => {
-      dispatch(cleanOfferToShowState());
-      dispatch(cleanOffersNearbyState());
-      dispatch(cleanofferReviewsState());
+      dispatch(cleanOfferToShowData());
     };
   }, [dispatch, offerId]);
 

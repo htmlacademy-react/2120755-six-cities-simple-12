@@ -1,4 +1,10 @@
-import { CityData, Offer, ReviewObject } from '@customTypes/index';
+import { citiesData } from '@utils/data';
+import { Offer, ReviewObject } from '@customTypes/index';
+
+enum citiesCount {
+  Start = 0,
+  End = 5,
+}
 
 export function priceHighToLow(a: Offer, b: Offer) {
   return Math.sign(b.price - a.price);
@@ -22,31 +28,6 @@ export function dateNewToOld(a: ReviewObject, b: ReviewObject) {
   return Math.sign(dateB - dateA);
 }
 
-function copyArray(source: string[] , array: string[] | undefined) {
-  let index = -1;
-  const length = source.length;
-
-  array || (array = new Array(length));
-  while (++index < length) {
-    array[index] = source[index];
-  }
-  return array;
-}
-
-export function shuffleCities(cityData: CityData) {
-  const array = Object.keys(cityData);
-  const length = array === null ? 0 : array.length;
-  if (!length) {
-    return [];
-  }
-  let index = -1;
-  const lastIndex = length - 1;
-  const result = copyArray(array, array);
-  while (++index < length) {
-    const rand = index + Math.floor(Math.random() * (lastIndex - index + 1));
-    const value = result[rand];
-    result[rand] = result[index];
-    result[index] = value;
-  }
-  return result;
+export function getRandomCity() {
+  return Object.keys(citiesData)[Math.round(Math.random() * (citiesCount.End - citiesCount.Start) + citiesCount.Start)];
 }

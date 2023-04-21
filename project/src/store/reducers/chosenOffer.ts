@@ -1,5 +1,5 @@
 import { PayloadAction, createDraftSafeSelector, createSlice } from '@reduxjs/toolkit';
-import { fetchOfferData, fetchOffersNearby, fetchOffersReviews, postReview } from 'store/api-actions';
+import { fetchOfferData, fetchOffersNearby, fetchOffersReviews, postReview } from '../api-actions';
 import { ChosenOfferState, InitialState } from '@customTypes/store';
 import { Offer, ReviewObject } from '@customTypes/index';
 
@@ -15,15 +15,11 @@ export const chosenOfferSlice = createSlice({
     markOfferOnCard: (state: ChosenOfferState, action: PayloadAction<Offer>) => {
       state.hoveredOffer = action.payload;
     },
-    cleanOfferToShowState: (state: ChosenOfferState) => {
+    cleanOfferToShowData: (state: ChosenOfferState) => {
       state.offerToShow = undefined;
-    },
-    cleanOffersNearbyState: (state: ChosenOfferState) => {
       state.offersNearby = undefined;
-    },
-    cleanofferReviewsState: (state: ChosenOfferState) => {
       state.offerReviews = undefined;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -73,5 +69,5 @@ const offerToShowImagesSelector = createDraftSafeSelector(
   (offerToShow: Offer | undefined | null) => offerToShow?.images
 );
 
-export const { markOfferOnCard, cleanOfferToShowState, cleanOffersNearbyState, cleanofferReviewsState } = chosenOfferSlice.actions;
+export const { markOfferOnCard, cleanOfferToShowData } = chosenOfferSlice.actions;
 export { offerToShowSelector, offersNearbySelector, offersReviewsSelector, offerToMarkSelector, offerToShowImagesSelector };

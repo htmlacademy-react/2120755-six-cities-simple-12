@@ -27,7 +27,7 @@ describe('Reducer: authorization', () => {
       .toEqual({ authorized: false, userData: undefined});
   });
   it('should update authorization state to "false" and userData to "underfined" if response recived from logout', () => {
-    expect(authorizationSlice.reducer(state, {type: logout.fulfilled.type}))
+    expect(authorizationSlice.reducer({ authorized: false, userData: mockUserData}, {type: logout.fulfilled.type}))
       .toEqual({ authorized: false, userData: undefined});
   });
 });
