@@ -27,15 +27,9 @@ function Room() {
       dispatch(cleanOfferToShowState());
       dispatch(cleanOffersNearbyState());
       dispatch(cleanofferReviewsState());
-      // dispatch(cleanOfferLoadingState());
     };
   }, [dispatch, offerId]);
 
-  // eslint-disable-next-line no-console
-  console.log(isLoaded, offerToDisplay);
-
-
-  // Если открыть предложение, далее ввести некорректный айди, выйти на шлавную и быстро отрыть предложение то будет 404.
   if (isLoaded && offerToDisplay === null) {
     return <Navigate to="not-found"/>;
   }

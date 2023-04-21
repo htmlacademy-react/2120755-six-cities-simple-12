@@ -1,5 +1,5 @@
 import { createSlice, createDraftSafeSelector } from '@reduxjs/toolkit';
-import { checkAuthAction, login, logout } from 'store/api-actions';
+import { checkAuthAction, login, logout } from '../api-actions';
 import { AuthorizationState } from '@customTypes/store';
 import { InitialState } from '@customTypes/store';
 import { UserData } from '@customTypes/index';
@@ -29,6 +29,7 @@ export const authorizationSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state: AuthorizationState) => {
         state.authorized = false;
+        state.userData = undefined;
       });
   },
 });

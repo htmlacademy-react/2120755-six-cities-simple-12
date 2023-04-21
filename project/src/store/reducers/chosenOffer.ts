@@ -28,8 +28,6 @@ export const chosenOfferSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchOfferData.fulfilled, (state: ChosenOfferState, action) => {
-        // eslint-disable-next-line no-console
-        console.log(action.payload);
         state.offerToShow = action.payload;
       })
       .addCase(fetchOffersNearby.fulfilled, (state: ChosenOfferState, action) => {

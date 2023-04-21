@@ -1,5 +1,5 @@
 import { createSlice, createDraftSafeSelector } from '@reduxjs/toolkit';
-import { fetchOffers, fetchOfferData } from 'store/api-actions';
+import { fetchOffers, fetchOfferData } from '../api-actions';
 import { LoadingState, InitialState } from '@customTypes/store';
 
 export const loadingSlice = createSlice({
@@ -9,9 +9,6 @@ export const loadingSlice = createSlice({
     isOfferLoaded: false,
   },
   reducers: {
-    cleanOfferLoadingState: (state: LoadingState) => {
-      state.isOfferLoaded = false;
-    }
   },
   extraReducers: (builder) => {
     builder
@@ -39,5 +36,5 @@ const loadingOfferStatusSelector = createDraftSafeSelector(
   selectOfferLoadingStatus,
   (isLoaded: boolean) => isLoaded
 );
-export const { cleanOfferLoadingState } = loadingSlice.actions;
+
 export { loadingStatusSelector, loadingOfferStatusSelector };
