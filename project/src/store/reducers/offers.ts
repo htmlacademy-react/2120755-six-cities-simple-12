@@ -1,7 +1,7 @@
 import { PayloadAction, createDraftSafeSelector, createSlice } from '@reduxjs/toolkit';
 import { fetchOffers } from '../api-actions';
 import { getRandomCity } from '@utils/sort-functions';
-import { priceLowToHigh, priceHighToLow, topRaiting, idLowToHigh } from '@utils/sort-functions';
+import { sortPriceHighToLow, sortPriceLowToHigh, sortTopRaiting, sortIdLowToHigh } from '@utils/sort-functions';
 import { InitialState, OffersState } from '@customTypes/store';
 import { Offer } from '@customTypes/index';
 
@@ -18,16 +18,16 @@ export const OffersSlice = createSlice({
     changeSortType: (state, action: PayloadAction<string>) => {
       state.sortType = action.payload;
       if (action.payload === 'Price: high to low') {
-        state.offers = state.offers?.sort(priceHighToLow);
+        state.offers = state.offers?.sort(sortPriceHighToLow);
       }
       if (action.payload === 'Price: low to high') {
-        state.offers = state.offers?.sort(priceLowToHigh);
+        state.offers = state.offers?.sort(sortPriceLowToHigh);
       }
       if (action.payload === 'Top rated first') {
-        state.offers = state.offers?.sort(topRaiting);
+        state.offers = state.offers?.sort(sortTopRaiting);
       }
       if (action.payload === 'Popular') {
-        state.offers = state.offers?.sort(idLowToHigh);
+        state.offers = state.offers?.sort(sortIdLowToHigh);
       }
     },
     changeCity: (state, action: PayloadAction<string>) => {

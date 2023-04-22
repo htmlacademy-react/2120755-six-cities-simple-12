@@ -31,5 +31,4 @@ offers: OffersState;
 chosenOffer: ChosenOfferState;
 }
 
-export type State = typeof store.getState;
 export type AppDispatch = typeof store.dispatch;

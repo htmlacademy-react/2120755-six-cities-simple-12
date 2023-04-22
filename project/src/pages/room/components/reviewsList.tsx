@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import ReviewForm from './reviewForm';
 import Review from './reviews';
 import { offersReviewsSelector } from 'store/reducers/chosenOffer';
-import { dateNewToOld } from '@utils/sort-functions';
+import { sortDatesNewToOld } from '@utils/sort-functions';
 
 function ReviewList(): JSX.Element | null {
   const reviewList = useSelector(offersReviewsSelector);
@@ -21,7 +21,7 @@ function ReviewList(): JSX.Element | null {
       Reviews &middot; <span className="reviews__amount">{reviewList.length}</span>
       </h2>
       <ul className="reviews__list">
-        {[...reviewList].sort(dateNewToOld).slice(ReviewsCount.Start, ReviewsCount.End).map((review) => <Review key={review.id} reviewData={review}/>)}
+        {[...reviewList].sort(sortDatesNewToOld).slice(ReviewsCount.Start, ReviewsCount.End).map((review) => <Review key={review.id} reviewData={review}/>)}
       </ul>
       <ReviewForm />
     </section>

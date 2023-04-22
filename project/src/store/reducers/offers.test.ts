@@ -1,6 +1,6 @@
 import { OffersSlice, changeSortType, changeCity, choseRandomCity } from './offers';
 import { fetchOffers } from '../api-actions';
-import { priceHighToLow, priceLowToHigh, topRaiting, idLowToHigh } from '@utils/sort-functions';
+import { sortPriceHighToLow, sortPriceLowToHigh, sortTopRaiting, sortIdLowToHigh } from '@utils/sort-functions';
 import { mockOffersList } from '../../mocks/offers';
 
 const state = {
@@ -23,7 +23,7 @@ describe('Reducer: offers', () => {
       .toEqual({
         city: 'Paris',
         sortType: 'Price: high to low',
-        offers: state.offers.sort(priceHighToLow),
+        offers: state.offers.sort(sortPriceHighToLow),
       });
   });
   it('should update sortType state to "Price: high to low" and sort offers with "priceLowToHigh" sort function', () => {
@@ -31,7 +31,7 @@ describe('Reducer: offers', () => {
       .toEqual({
         city: 'Paris',
         sortType: 'Price: low to high',
-        offers: state.offers.sort(priceLowToHigh),
+        offers: state.offers.sort(sortPriceLowToHigh),
       });
   });
   it('should update sortType state to "Top rated first" and sort offers with "Top rated first" sort function', () => {
@@ -39,7 +39,7 @@ describe('Reducer: offers', () => {
       .toEqual({
         city: 'Paris',
         sortType: 'Top rated first',
-        offers: state.offers.sort(topRaiting),
+        offers: state.offers.sort(sortTopRaiting),
       });
   });
   it('should update sortType state to "Popular" and sort offers with "idLowToHigh" sort function', () => {
@@ -47,7 +47,7 @@ describe('Reducer: offers', () => {
       .toEqual({
         city: 'Paris',
         sortType: 'Popular',
-        offers: state.offers.sort(idLowToHigh),
+        offers: state.offers.sort(sortIdLowToHigh),
       });
   });
   it('should update city state to chosenCity from action payload', () => {
