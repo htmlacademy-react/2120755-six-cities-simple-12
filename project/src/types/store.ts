@@ -3,6 +3,7 @@ import { Offer, ReviewObject, UserData } from './index';
 
 export type LoadingState = {
   isLoaded: boolean;
+  isOfferLoaded:boolean;
 }
 
 export type AuthorizationState = {
@@ -17,7 +18,7 @@ export type OffersState = {
 }
 
 export type ChosenOfferState = {
-  offerToShow: Offer | undefined;
+  offerToShow: Offer | undefined | null;
   offersNearby: Offer[] | undefined;
   offerReviews: ReviewObject[] | undefined;
   hoveredOffer: Offer | undefined;

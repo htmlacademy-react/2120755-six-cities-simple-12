@@ -3,6 +3,7 @@ import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import Header from '@components/header';
+import { choseRandomCity, citySelector } from 'store/reducers/offers';
 import { authorizationSelector } from 'store/reducers/authorization';
 import { login } from 'store/api-actions';
 import { AppDispatch } from '@customTypes/store';
@@ -15,7 +16,12 @@ function Login({currentPath}: LoginProps): JSX.Element {
   const dispatch: AppDispatch = useDispatch();
   const [loginData, setLoginData] = useState({email: '', password: ''});
   const authorized = useSelector(authorizationSelector);
+  const randomCity = useSelector(citySelector);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(choseRandomCity());
+  });
 
   function handleLoginData(event: ChangeEvent<{ value: string; name: string }>) {
     const { name, value } = event.target;
@@ -87,7 +93,7 @@ function Login({currentPath}: LoginProps): JSX.Element {
           <section className="locations locations--login locations--current">
             <div className="locations__item" >
               <Link to='/' className="locations__item-link">
-                <span>Amsterdam</span>
+                <span>{randomCity}</span>
               </Link>
             </div>
           </section>

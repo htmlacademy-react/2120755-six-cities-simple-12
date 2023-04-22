@@ -7,8 +7,8 @@ import Suggestions from './components/suggestions';
 import Overview from './components/overview';
 import ReviewList from './components/reviewsList';
 import Map from '@components/map';
-import { offerToShowSelector } from 'store/reducers/chosenOffer';
-import { loadingStatusSelector } from 'store/reducers/loading';
+import { offerToShowSelector, cleanOfferToShowData } from 'store/reducers/chosenOffer';
+import { loadingOfferStatusSelector } from 'store/reducers/loading';
 import { fetchOfferData, fetchOffersNearby, fetchOffersReviews } from 'store/api-actions';
 import { AppDispatch } from '@customTypes/store';
 
@@ -17,42 +17,40 @@ function Room() {
   const urlParams = useParams();
   const offerId = Number(urlParams.id);
   const offerToDisplay = useSelector(offerToShowSelector);
-  const isLoaded = useSelector(loadingStatusSelector);
+  const isLoaded = useSelector(loadingOfferStatusSelector);
 
   useEffect(() => {
     dispatch(fetchOffersNearby(offerId));
     dispatch(fetchOffersReviews(offerId));
     dispatch(fetchOfferData(offerId));
     return () => {
-      dispatch(fetchOfferData(undefined));
-      dispatch(fetchOffersNearby(undefined));
-      dispatch(fetchOffersReviews(undefined));
+      dispatch(cleanOfferToShowData());
     };
   }, [dispatch, offerId]);
 
-  if (isLoaded && offerToDisplay === undefined) {
-    <Navigate to="not-found"/>;
-  }
-
-  if (!isLoaded || offerToDisplay === undefined) {
-    return <Spinner/>;
+  if (isLoaded && offerToDisplay === null) {
+    return <Navigate to="not-found"/>;
   }
 
   return (
     <main className="page__main page__main--property">
-      <section className="property">
-        <div className="property__container container">
-          <Gallery />
-          <div className="property__wrapper">
-            <Overview />
-            <ReviewList />
-          </div>
-        </div>
-        <section className="property__map map">
-          <Map />
-        </section>
-      </section>
-      <Suggestions />
+      { isLoaded ?
+        <>
+          <section className="property">
+            <div className="property__container container">
+              <Gallery />
+              <div className="property__wrapper">
+                <Overview />
+                <ReviewList />
+              </div>
+            </div>
+            <section className="property__map map">
+              <Map />
+            </section>
+          </section>
+          <Suggestions />
+        </>
+        : <Spinner/> }
     </main>
   );
 }

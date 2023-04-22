@@ -1,33 +1,40 @@
 import { PayloadAction, createDraftSafeSelector, createSlice } from '@reduxjs/toolkit';
-import { fetchOfferData, fetchOffersNearby, fetchOffersReviews, postReview } from 'store/api-actions';
+import { fetchOfferData, fetchOffersNearby, fetchOffersReviews, postReview } from '../api-actions';
 import { ChosenOfferState, InitialState } from '@customTypes/store';
 import { Offer, ReviewObject } from '@customTypes/index';
 
+const chosenOffersInitialState: ChosenOfferState = {
+  offerToShow: undefined,
+  offersNearby: undefined,
+  offerReviews: undefined,
+  hoveredOffer: undefined,
+};
+
 export const chosenOfferSlice = createSlice({
   name: 'chosenOffer',
-  initialState: {
-    offerToShow: undefined,
-    offersNearby: undefined,
-    offerReviews: undefined,
-    hoveredOffer: undefined,
-  },
+  initialState: chosenOffersInitialState,
   reducers: {
-    markOfferOnCard: (state: ChosenOfferState, action: PayloadAction<Offer>) => {
+    markOfferOnCard: (state, action: PayloadAction<Offer>) => {
       state.hoveredOffer = action.payload;
-    }
+    },
+    cleanOfferToShowData: (state) => {
+      state.offerToShow = undefined;
+      state.offersNearby = undefined;
+      state.offerReviews = undefined;
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchOfferData.fulfilled, (state: ChosenOfferState, action) => {
+      .addCase(fetchOfferData.fulfilled, (state, action) => {
         state.offerToShow = action.payload;
       })
-      .addCase(fetchOffersNearby.fulfilled, (state: ChosenOfferState, action) => {
+      .addCase(fetchOffersNearby.fulfilled, (state, action) => {
         state.offersNearby = action.payload;
       })
-      .addCase(fetchOffersReviews.fulfilled, (state: ChosenOfferState, action) => {
+      .addCase(fetchOffersReviews.fulfilled, (state, action) => {
         state.offerReviews = action.payload;
       })
-      .addCase(postReview.fulfilled, (state: ChosenOfferState, action) => {
+      .addCase(postReview.fulfilled, (state, action) => {
         state.offerReviews = action.payload;
       });
   },
@@ -41,7 +48,7 @@ const selectOffersToMark = (state: InitialState) => state.chosenOffer.hoveredOff
 
 const offerToShowSelector = createDraftSafeSelector(
   selectOfferToShow,
-  (offerToShow: Offer | undefined) => offerToShow
+  (offerToShow: Offer | undefined | null) => offerToShow
 );
 
 const offersNearbySelector = createDraftSafeSelector(
@@ -61,8 +68,8 @@ const offerToMarkSelector = createDraftSafeSelector(
 
 const offerToShowImagesSelector = createDraftSafeSelector(
   selectOfferToShow,
-  (offerToShow: Offer | undefined) => offerToShow?.images
+  (offerToShow: Offer | undefined | null) => offerToShow?.images
 );
 
-export const { markOfferOnCard } = chosenOfferSlice.actions;
+export const { markOfferOnCard, cleanOfferToShowData } = chosenOfferSlice.actions;
 export { offerToShowSelector, offersNearbySelector, offersReviewsSelector, offerToMarkSelector, offerToShowImagesSelector };

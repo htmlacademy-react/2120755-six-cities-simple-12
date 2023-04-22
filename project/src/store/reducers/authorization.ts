@@ -1,34 +1,37 @@
 import { createSlice, createDraftSafeSelector } from '@reduxjs/toolkit';
-import { checkAuthAction, login, logout } from 'store/api-actions';
+import { checkAuthAction, login, logout } from '../api-actions';
 import { AuthorizationState } from '@customTypes/store';
 import { InitialState } from '@customTypes/store';
 import { UserData } from '@customTypes/index';
 
+const initialAuthorizationStateState: AuthorizationState = {
+  authorized: false,
+  userData: undefined,
+};
+
 export const authorizationSlice = createSlice({
   name: 'authorization',
-  initialState: {
-    authorized: false,
-    userData: undefined,
-  },
+  initialState: initialAuthorizationStateState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(checkAuthAction.fulfilled, (state: AuthorizationState, action) => {
+      .addCase(checkAuthAction.fulfilled, (state, action) => {
         state.userData = action.payload;
         state.authorized = true;
       })
-      .addCase(checkAuthAction.rejected, (state: AuthorizationState) => {
+      .addCase(checkAuthAction.rejected, (state) => {
         state.authorized = false;
       })
-      .addCase(login.fulfilled, (state: AuthorizationState, action) => {
+      .addCase(login.fulfilled, (state, action) => {
         state.userData = action.payload;
         state.authorized = true;
       })
-      .addCase(login.rejected, (state: AuthorizationState) => {
+      .addCase(login.rejected, (state) => {
         state.authorized = false;
       })
-      .addCase(logout.fulfilled, (state: AuthorizationState) => {
+      .addCase(logout.fulfilled, (state) => {
         state.authorized = false;
+        state.userData = undefined;
       });
   },
 });

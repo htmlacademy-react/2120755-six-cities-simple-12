@@ -12,10 +12,10 @@ function createAsyncThunkTeamplate<ResultType, TargetType>() {
   >;
 }
 
-export const checkAuthAction = createAsyncThunkTeamplate<UserData, undefined>()(
+export const checkAuthAction = createAsyncThunkTeamplate<UserData | undefined, undefined>()(
   'GET to /login',
-  async (_arg, {dispatch, extra: api}) => {
-    const {data} = await api.get<UserData>(ApiRoutes.login);
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<UserData>(ApiRoutes.Login);
     return data;
   },
 );
@@ -23,7 +23,7 @@ export const checkAuthAction = createAsyncThunkTeamplate<UserData, undefined>()(
 export const login = createAsyncThunkTeamplate<UserData, LoginData>()(
   'POST to /login',
   async ({email, password}, {extra: api}) => {
-    const {data} = await api.post<UserData>(ApiRoutes.login, {email, password});
+    const {data} = await api.post<UserData>(ApiRoutes.Login, {email, password});
     saveToken(data.token);
     return data;
   },
@@ -32,7 +32,7 @@ export const login = createAsyncThunkTeamplate<UserData, LoginData>()(
 export const logout = createAsyncThunkTeamplate<void, undefined>()(
   'DELETE to /login',
   async (_arg, {extra: api}) => {
-    await api.delete(ApiRoutes.logout);
+    await api.delete(ApiRoutes.Logout);
     removeToken();
   },
 );
@@ -40,45 +40,40 @@ export const logout = createAsyncThunkTeamplate<void, undefined>()(
 export const fetchOffers = createAsyncThunkTeamplate<Offer[], undefined>()(
   'GET to /hotels',
   async (_arg, {extra: api}) => {
-    const {data} = await api.get<Offer[]>(ApiRoutes.offers);
+    const {data} = await api.get<Offer[]>(ApiRoutes.Offers);
     return data;
   },
 );
 
-export const fetchOfferData = createAsyncThunkTeamplate<Offer| undefined, number | undefined>()(
+export const fetchOfferData = createAsyncThunkTeamplate<Offer | null, number>()(
   'GET to /hotels/:id',
   async (id, {extra: api}) => {
-    if (id === undefined) {
-      return undefined;
+    try {
+      const {data} = await api.get<Offer>(`${ApiRoutes.Offer}${id}`);
+      return data;}
+    catch {
+      return null;
     }
-    const {data} = await api.get<Offer>(`${ApiRoutes.offer}${id}`);
-    return data;
   });
 
-export const fetchOffersNearby = createAsyncThunkTeamplate<Offer[]| undefined, number | undefined>()(
+export const fetchOffersNearby = createAsyncThunkTeamplate<Offer[]| undefined, number>()(
   'GET to /hotels/:id/nearby',
   async (id, {extra: api}) => {
-    if (id === undefined) {
-      return undefined;
-    }
-    const {data} = await api.get<Offer[]>(`${ApiRoutes.offer}${id}/nearby`);
+    const {data} = await api.get<Offer[]>(`${ApiRoutes.Offer}${id}/nearby`);
     return data;
   });
 
-export const fetchOffersReviews = createAsyncThunkTeamplate<ReviewObject[] | undefined, number | undefined>()(
+export const fetchOffersReviews = createAsyncThunkTeamplate<ReviewObject[] | undefined, number>()(
   'GET to /comments/:id',
   async (id, {extra: api}) => {
-    if (id === undefined) {
-      return undefined;
-    }
-    const {data} = await api.get<ReviewObject[]>(`${ApiRoutes.offerReview}${id}`);
+    const {data} = await api.get<ReviewObject[]>(`${ApiRoutes.OfferReview}${id}`);
     return data;
   });
 
 export const postReview = createAsyncThunkTeamplate<ReviewObject[], Review>()(
   'POST to /comments/:id',
   async ({comment, rating, id}: Review, {extra: api}) => {
-    const {data} = await api.post<ReviewObject[]>(`${ApiRoutes.offerReview}${id}`, {comment, rating});
+    const {data} = await api.post<ReviewObject[]>(`${ApiRoutes.OfferReview}${id}/1`, {comment, rating});
     return data;
   },
 );
