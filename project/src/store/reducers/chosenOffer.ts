@@ -3,19 +3,21 @@ import { fetchOfferData, fetchOffersNearby, fetchOffersReviews, postReview } fro
 import { ChosenOfferState, InitialState } from '@customTypes/store';
 import { Offer, ReviewObject } from '@customTypes/index';
 
+const chosenOffersInitialState: ChosenOfferState = {
+  offerToShow: undefined,
+  offersNearby: undefined,
+  offerReviews: undefined,
+  hoveredOffer: undefined,
+};
+
 export const chosenOfferSlice = createSlice({
   name: 'chosenOffer',
-  initialState: {
-    offerToShow: undefined,
-    offersNearby: undefined,
-    offerReviews: undefined,
-    hoveredOffer: undefined,
-  },
+  initialState: chosenOffersInitialState,
   reducers: {
-    markOfferOnCard: (state: ChosenOfferState, action: PayloadAction<Offer>) => {
+    markOfferOnCard: (state, action: PayloadAction<Offer>) => {
       state.hoveredOffer = action.payload;
     },
-    cleanOfferToShowData: (state: ChosenOfferState) => {
+    cleanOfferToShowData: (state) => {
       state.offerToShow = undefined;
       state.offersNearby = undefined;
       state.offerReviews = undefined;
@@ -23,16 +25,16 @@ export const chosenOfferSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchOfferData.fulfilled, (state: ChosenOfferState, action) => {
+      .addCase(fetchOfferData.fulfilled, (state, action) => {
         state.offerToShow = action.payload;
       })
-      .addCase(fetchOffersNearby.fulfilled, (state: ChosenOfferState, action) => {
+      .addCase(fetchOffersNearby.fulfilled, (state, action) => {
         state.offersNearby = action.payload;
       })
-      .addCase(fetchOffersReviews.fulfilled, (state: ChosenOfferState, action) => {
+      .addCase(fetchOffersReviews.fulfilled, (state, action) => {
         state.offerReviews = action.payload;
       })
-      .addCase(postReview.fulfilled, (state: ChosenOfferState, action) => {
+      .addCase(postReview.fulfilled, (state, action) => {
         state.offerReviews = action.payload;
       });
   },

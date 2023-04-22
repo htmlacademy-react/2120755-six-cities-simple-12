@@ -15,7 +15,7 @@ export const OffersSlice = createSlice({
   name: 'offers',
   initialState: offersInitialState,
   reducers: {
-    changeSortType: (state: OffersState, action: PayloadAction<string>) => {
+    changeSortType: (state, action: PayloadAction<string>) => {
       state.sortType = action.payload;
       if (action.payload === 'Price: high to low') {
         state.offers = state.offers?.sort(priceHighToLow);
@@ -30,16 +30,16 @@ export const OffersSlice = createSlice({
         state.offers = state.offers?.sort(idLowToHigh);
       }
     },
-    changeCity: (state: OffersState, action: PayloadAction<string>) => {
+    changeCity: (state, action: PayloadAction<string>) => {
       state.city = action.payload;
     },
-    choseRandomCity: (state: OffersState) => {
+    choseRandomCity: (state) => {
       state.city = getRandomCity();
     }
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchOffers.fulfilled, (state: OffersState, action) => {
+      .addCase(fetchOffers.fulfilled, (state, action) => {
         state.offers = action.payload;
       });
   },

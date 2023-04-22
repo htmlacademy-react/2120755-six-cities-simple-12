@@ -2,23 +2,25 @@ import { createSlice, createDraftSafeSelector } from '@reduxjs/toolkit';
 import { fetchOffers, fetchOfferData } from '../api-actions';
 import { LoadingState, InitialState } from '@customTypes/store';
 
+const loadingInitialState: LoadingState = {
+  isLoaded: false,
+  isOfferLoaded: false,
+};
+
 export const loadingSlice = createSlice({
   name: 'loading',
-  initialState: {
-    isLoaded: false,
-    isOfferLoaded: false,
-  },
+  initialState: loadingInitialState,
   reducers: {
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchOffers.fulfilled, (state: LoadingState) => {
+      .addCase(fetchOffers.fulfilled, (state) => {
         state.isLoaded = true;
       })
-      .addCase(fetchOfferData.pending, (state: LoadingState) => {
+      .addCase(fetchOfferData.pending, (state) => {
         state.isOfferLoaded = false;
       })
-      .addCase(fetchOfferData.fulfilled, (state: LoadingState) => {
+      .addCase(fetchOfferData.fulfilled, (state) => {
         state.isOfferLoaded = true;
       });
   },

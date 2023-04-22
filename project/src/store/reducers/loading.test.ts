@@ -1,8 +1,9 @@
 import { loadingSlice } from './loading';
 import { fetchOffers, fetchOfferData } from '../api-actions';
 
+const state = {isLoaded: false, isOfferLoaded: false};
+
 describe('Reducer: loading', () => {
-  const state = {isLoaded: false, isOfferLoaded: false};
   it('without additional parameters should return initial state', () => {
     expect(loadingSlice.reducer(void 0, {type: 'UNKNOWN_ACTION'}))
       .toEqual({isLoaded: false, isOfferLoaded: false});
