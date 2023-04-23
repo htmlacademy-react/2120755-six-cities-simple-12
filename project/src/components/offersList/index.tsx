@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { memo } from 'react';
 import Card from '@components/card';
-import Sort from '@components/sort/sort';
+import Sort from '@components/sort';
 import { citySelector, offersOfTargetCitySelector } from 'store/reducers/offers';
 
 function OffersList(): JSX.Element | null {

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Navigate } from 'react-router-dom';
-import Spinner from '@components/spinner/spinner';
+import Spinner from '@components/spinner';
 import Gallery from './components/gallery';
 import Suggestions from './components/suggestions';
 import Overview from './components/overview';

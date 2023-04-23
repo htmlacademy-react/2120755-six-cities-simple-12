@@ -73,7 +73,7 @@ export const fetchOffersReviews = createAsyncThunkTeamplate<ReviewObject[] | und
 export const postReview = createAsyncThunkTeamplate<ReviewObject[], Review>()(
   'POST to /comments/:id',
   async ({comment, rating, id}: Review, {extra: api}) => {
-    const {data} = await api.post<ReviewObject[]>(`${ApiRoutes.OfferReview}${id}/1`, {comment, rating});
+    const {data} = await api.post<ReviewObject[]>(`${ApiRoutes.OfferReview}${id}`, {comment, rating});
     return data;
   },
 );

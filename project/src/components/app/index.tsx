@@ -5,7 +5,7 @@ import Main from '@pages/main';
 import Header from '../header';
 import Login from '@pages/login';
 import Room from '@pages/room';
-import NotFoundPage from '@pages/notFound';
+import NotFoundPage from '@pages/not-found';
 import { checkAuthAction, fetchOffers } from 'store/api-actions';
 import { AppDispatch } from '@customTypes/store';
 
@@ -19,7 +19,7 @@ function App(): JSX.Element {
   }, [dispatch]);
 
   return (
-    <>
+    <body className="page page--gray page--main">
       {location.pathname !== '/login' ? <Header currentLocation={location.pathname}/> : null}
       <Routes>
         <Route path="/login" element={<Login currentPath={location.pathname}/>} />
@@ -27,7 +27,7 @@ function App(): JSX.Element {
         <Route path="/offer/:id" element={<Room/>} />
         <Route path="*" element={<NotFoundPage/>} />
       </Routes>
-    </>
+    </body>
   );
 }
 

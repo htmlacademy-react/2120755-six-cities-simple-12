@@ -21,7 +21,7 @@ function Login({currentPath}: LoginProps): JSX.Element {
 
   useEffect(() => {
     dispatch(choseRandomCity());
-  });
+  }, [dispatch]);
 
   function handleLoginData(event: ChangeEvent<{ value: string; name: string }>) {
     const { name, value } = event.target;
@@ -31,7 +31,7 @@ function Login({currentPath}: LoginProps): JSX.Element {
   function validatePassword (password: string) {
     const minLength = 2;
     const pattern = /^(?=.*[A-Za-z])(?=.*\d).+$/;
-    if (password.length === minLength && password.match(pattern)) {
+    if (password.length > minLength && password.match(pattern)) {
       return true;
     }
     else {

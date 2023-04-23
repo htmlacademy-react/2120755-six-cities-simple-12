@@ -1,6 +1,6 @@
 import { authorizationSlice } from './authorization';
 import { checkAuthAction, login, logout } from '../api-actions';
-import { mockUserData } from '../../mocks/userData';
+import { mockUserData } from '../../mocks/user-data';
 
 const userData = mockUserData;
 const state = { authorized: false, userData: undefined};

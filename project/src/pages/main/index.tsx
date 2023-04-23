@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 import EmptyMain from './empty-main';
-import OffersList from '@components/offersList/OffersList';
+import OffersList from '@components/offersList';
 import Navigation from '@components/navigation';
 import Map from '@components/map';
-import Spinner from '@components/spinner/spinner';
+import Spinner from '@components/spinner';
 import { loadingStatusSelector } from 'store/reducers/loading';
 import { offersSelector } from 'store/reducers/offers';
 import { citiesData } from '@utils/data';
