@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import EmptyMain from './empty-main';
-import OffersList from '@components/offersList';
+import OffersList from '@components/offers-list';
 import Navigation from '@components/navigation';
 import Map from '@components/map';
 import Spinner from '@components/spinner';
