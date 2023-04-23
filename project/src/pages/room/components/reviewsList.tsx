@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import ReviewForm from './reviewForm';
+import ReviewForm from './review-form';
 import Review from './reviews';
 import { offersReviewsSelector } from 'store/reducers/chosenOffer';
 import { sortDatesNewToOld } from '@utils/sort-functions';

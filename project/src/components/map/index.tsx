@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import useMap from '@hooks/useMap';
+import useMap from '@hooks/use-map';
 import { citySelector, offersSelector } from 'store/reducers/offers';
 import { offerToMarkSelector, offerToShowSelector, offersNearbySelector } from 'store/reducers/chosenOffer';
 import { citiesData } from '@utils/data';
@@ -66,8 +66,8 @@ function Map (): JSX.Element {
     <section style={
       {
         height: '100%',
-        width: `${window.location.pathname.includes('/offer/') ? '1144px' : '100%'}`,
-        margin: `${window.location.pathname.includes('/offer/') ? 'auto' : ''}`}
+        width: '100%',
+      }
     }
     ref={mapRef}
     />);

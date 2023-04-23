@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import App from '@components/app/app';
+import App from '@components/app';
 import { store } from './store';
 
 const root = ReactDOM.createRoot(

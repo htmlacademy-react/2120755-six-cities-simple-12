@@ -1,6 +1,6 @@
 import { chosenOfferSlice, markOfferOnCard, cleanOfferToShowData } from './chosenOffer';
 import { fetchOfferData, fetchOffersNearby, fetchOffersReviews, postReview } from '../api-actions';
-import { mockOfferToShow, mockOffersNearby, mockReviewList } from '../../mocks/offerToShowData';
+import { mockOfferToShow, mockOffersNearby, mockReviewList } from '../../mocks/offer-to-show-data';
 
 
 const state = {

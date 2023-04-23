@@ -11,6 +11,7 @@ function ReviewForm(): JSX.Element | null {
   const urlParams = useParams();
   const offerId = Number(urlParams.id);
   const [reviewData, setFormData] = useState({comment: '', rating: '', id: offerId});
+  const [formDisabled, setFormDisabled] = useState(false);
   const [selectedRating, setSelectedRating] = useState('');
   const formIsValidToSubmit = reviewData.comment.length > 50 && reviewData.rating !== '';
   const authorized = useSelector(authorizationSelector);
@@ -30,8 +31,10 @@ function ReviewForm(): JSX.Element | null {
 
   const formSubmitHandle = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+    setFormDisabled(true);
     dispatch(postReview(reviewData));
     resetForm();
+    setFormDisabled(false);
   };
 
   if (!authorized) {
@@ -61,6 +64,7 @@ function ReviewForm(): JSX.Element | null {
               type="radio"
               checked={selectedRating === key}
               onChange={formFillHandle}
+              disabled={formDisabled}
             />
             <label
               htmlFor={`${key}-stars`}
@@ -83,6 +87,7 @@ function ReviewForm(): JSX.Element | null {
         maxLength={300}
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={formFillHandle}
+        disabled={formDisabled}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
